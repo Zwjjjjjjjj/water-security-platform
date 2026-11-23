@@ -1,0 +1,52 @@
+:root {
+  --ws-accent: #22e4ee; --ws-line: #1875a1; --ws-text: #e1f7ff;
+  --ws-muted: #8fb9cc; --ws-warning: #ffd54a; --ws-ok: #3ef3a3;
+  /* 侧栏背景加深。
+   *
+   * 【为什么要加深】
+   * 侧栏是浮在中央显示区**之上**的（z-index 4），
+   * 而中央显示区铺满整个 1920px 宽的面板 ——
+   * 底图的厂房、山体这些亮色内容会从侧栏的半透明背景里透出来，
+   * 与侧栏文字叠在一起，既干扰阅读，也像是「底图穿帮」。
+   *
+   * 这里把底色不透明度提到接近不透明（.97 / .96），
+   * 同时保留一点点渐变，避免面板看起来像一块死板的纯色。 */
+  --ws-panel: linear-gradient(135deg,rgba(3,30,56,.985),rgba(1,12,26,.975));
+  --ws-font: "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", sans-serif;
+  --ws-left-width: 460px; --ws-right-width: 460px;
+}
+.ws-panel { position:relative; border:1px solid var(--ws-line); border-radius:10px;
+  background:var(--ws-panel); box-shadow:inset 0 0 22px #0075b52b,0 0 9px #00caff24; color:var(--ws-text); }
+.ws-panel:before {content:"";position:absolute;inset:-1px;pointer-events:none;border-radius:10px;
+ background:linear-gradient(var(--ws-accent),var(--ws-accent)) top left/35px 2px no-repeat,
+ linear-gradient(var(--ws-accent),var(--ws-accent)) top left/2px 35px no-repeat,
+ linear-gradient(var(--ws-accent),var(--ws-accent)) bottom right/35px 2px no-repeat,
+ linear-gradient(var(--ws-accent),var(--ws-accent)) bottom right/2px 35px no-repeat;opacity:.65;}
+.ws-panel-title {margin:0 0 14px;padding:11px 15px;font:600 25px/1.35 var(--ws-font);letter-spacing:2px;
+ border-bottom:1px solid #2db9e343; background:linear-gradient(90deg,#07659e83,transparent);text-shadow:0 0 10px #03a8ff8c;}
+.ws-panel-title small {font-size:15px;line-height:1.4;font-weight:400;letter-spacing:0;}
+.ws-panel-content {padding:0 16px 16px;}
+.ws-button {cursor:pointer;color:var(--ws-text);font:500 19px var(--ws-font);border:1px solid #1886b1;
+ border-radius:6px;padding:10px 17px;background:linear-gradient(#073f63,#041c33);transition:border-color .2s,box-shadow .2s,background .2s;}
+.ws-button:hover,.ws-button:focus-visible {border-color:#29f2f2;box-shadow:0 0 14px #10d7ed55;outline:none;}
+.ws-button[aria-pressed="true"],.ws-button--primary {background:linear-gradient(#08759a,#00485d);border-color:#19efff;box-shadow:inset 0 0 12px #00dbff63,0 0 12px #03d9f044;}
+.ws-tag {display:inline-block;padding:2px 9px;border:1px solid #18c9ca;border-radius:5px;background:#0037389c;color:#74f2eb;font-size:16px;white-space:nowrap;}
+.ws-label {position:absolute;pointer-events:none;white-space:nowrap;transform:translate(-50%,-100%);color:#e6ffff;font:18px var(--ws-font);padding:4px 11px;border:1px solid #25cddf;background:#021b2ed9;border-radius:3px;box-shadow:0 0 12px #04e5ff40;}
+.ws-label--warning {color:#ffdc68;border-color:#ffce3f;}
+.ws-scene {position:relative;width:100%;aspect-ratio:1920/700;overflow:hidden;background:#02182a;font-family:var(--ws-font);}
+.ws-scene-background,.ws-scene-overlay {position:absolute;inset:0;width:100%;height:100%;}
+.ws-scene-background {object-fit:fill;pointer-events:none;}
+.ws-scene-overlay {overflow:visible;}
+.ws-track {fill:none;stroke:#13f4eb;stroke-width:3;stroke-dasharray:12 9;filter:drop-shadow(0 0 4px #02eaff);}
+.ws-track--source {stroke:#2994ff;stroke-width:1.8;stroke-dasharray:4 8;opacity:.65;filter:none;}
+.ws-track--underwater {stroke:#ffcf3c;stroke-dasharray:3 10;}
+.ws-sweep {transform-box:fill-box;transform-origin:0% 50%;animation:ws-sweep 5s ease-in-out infinite alternate;}
+.ws-wave {animation:ws-wave 3s ease-in-out infinite;}
+.ws-flow {animation:ws-flow 2s linear infinite;}
+.ws-pulse {animation:ws-pulse 2s ease-in-out infinite;}
+.ws-scene[data-paused="true"] .ws-motion {animation-play-state:paused;}
+@keyframes ws-sweep {from{opacity:.35;transform:scaleY(.65)}to{opacity:.9;transform:scaleY(1.15)}}
+@keyframes ws-wave {0%,100%{opacity:.25}50%{opacity:.85}}
+@keyframes ws-flow {to{stroke-dashoffset:-42}}
+@keyframes ws-pulse {0%,100%{opacity:.35}50%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.ws-sweep,.ws-wave,.ws-flow,.ws-pulse{animation:none!important}.ws-button{transition:none}}

@@ -1,0 +1,60 @@
+{
+  "source_id": "mtdsp2_ais_20250312101233",
+  "source_type": "ais",
+  "session_id": "mtdsp-20250312101233",
+  "data_root": "data/mtdsp2",
+  "frame_id": "wgs84",
+  "speed_unit": "K",
+  "speed_unit_source": "csv_header_declared",
+  "timezone_known": false,
+  "timezone_name": null,
+  "position_jump_max_speed_mps": 15.0,
+  "position_quantization": {
+    "longitude": {
+      "resolution_deg": 0.001,
+      "basis": "verified_csv_decimal_places",
+      "confident": true
+    },
+    "latitude": {
+      "resolution_deg": 0.0001,
+      "basis": "verified_csv_decimal_places",
+      "confident": true
+    }
+  },
+  "field_mapping": {
+    "mmsi": "MMSI",
+    "longitude": "经度(°)",
+    "latitude": "纬度(°)",
+    "time": "时间",
+    "speed": "速度(kn)",
+    "heading": "船艏向(°)",
+    "course": "对地航向(°)",
+    "navigation_status": "航行状态",
+    "relative_view": "相对视角(°)",
+    "attitude": "姿态信息",
+    "wave_height": "浪高(m)",
+    "bearing": "方位角(°)",
+    "distance": "距离(m)"
+  },
+  "provenance": {
+    "program": "海上目标数据共享计划（MTDSP）——海上目标多源观测数据集",
+    "publisher": "海军航空大学",
+    "doi": "10.12000/JR25001",
+    "package_name": "20250312101233_2003_AT_413203610_1.zip",
+    "package_meaning": {
+      "20250312101233": "采集时间 2025-03-12 10:12:33",
+      "2003": "雷达设备编号（2002=可见光/TV，2003=红外/Inf，ST=搜救船）",
+      "AT": "目标类型（AIS 目标）",
+      "413203610": "目标 MMSI",
+      "1": "组号"
+    },
+    "collection_site": "烟台第一海水浴场"
+  },
+  "notes": [
+    "补充数据集（2025-03-12）的 AIS 轨迹，5 个 MMSI：412332820(30条) / 412355160(575条) / 412450000(38条) / 413203610(6条) / 413383930(11条)。",
+    "【重要】时间覆盖与雷达窗口（10:12:33-10:17:43）重叠的只有 3 个目标：413203610(6条)、412332820(2条)、413383930(2条)；412355160 的 575 条在 06:46-09:02、412450000 在 06:06-09:34，均早于雷达窗口约 1-4 小时。跨源比对必须逐 MMSI 核对时间重叠。",
+    "【重要】AIS 报速与实际接近速度不一致：413203610 报速 9.0-9.3 kn，但由距离变化率反算的实际接近速度为 8.73→5.72 kn（航向 160°→121° 持续右转减速）。跨源比对必须用速度矢量投影到视线方向，不能用报速直接外推距离。",
+    "经纬度列量化：经度 0.001°（≈88 m）、纬度 0.0001°（≈11 m）。用经纬度反算的方位本身带 ±1.3° 量化噪声，做几何自洽检验必须走极坐标路径。",
+    "时间字符串不含时区信息，未确认前不默认使用北京时间或服务器时区，state_time_utc 留空。"
+  ]
+}

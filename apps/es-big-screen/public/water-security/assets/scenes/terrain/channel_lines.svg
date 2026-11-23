@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <path d="M80 850C400 850 420 570 680 510S1080 400 1500 120" fill="none" stroke="#4dcddb" stroke-opacity=".22" stroke-width="150"/>
+  <path d="M80 775C350 775 420 500 660 440S1050 325 1460 60M80 925C450 925 420 640 700 580S1110 475 1540 180" fill="none" stroke="#6ce5e8" stroke-opacity=".7" stroke-width="2" stroke-dasharray="14 12"/>
+  <path d="M80 850C400 850 420 570 680 510S1080 400 1500 120" fill="none" stroke="#abdbe2" stroke-opacity=".5" stroke-width="1.5" stroke-dasharray="25 9 4 9"/>
+</svg>

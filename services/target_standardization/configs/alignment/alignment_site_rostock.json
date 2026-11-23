@@ -1,0 +1,70 @@
+{
+  "alignment_config_id": "alignment_site_rostock_default_v1",
+  "parameter_version": "known_params_v1",
+  "site_frame": {
+    "frame_id": "site_enu_rostock",
+    "datum": "WGS84",
+    "origin_latitude_deg": 54.108200,
+    "origin_longitude_deg": 12.056800,
+    "origin_height_m": 0.0,
+    "description": "现场局部 ENU，原点取雷达站位置"
+  },
+  "radar_station": {
+    "station_latitude_deg": 54.108200,
+    "station_longitude_deg": 12.056800,
+    "station_height_m": 0.0,
+    "install_heading_deg": 0.0,
+    "reference_point_offset_east_m": 0.0,
+    "reference_point_offset_north_m": 0.0,
+    "reference_point_offset_up_m": 0.0,
+    "magnetic_variation_deg": null
+  },
+  "sources": [
+    {
+      "source_id": "sim_radar",
+      "source_type": "radar",
+      "local_id_field": "target_number",
+      "time": {
+        "known_clock_offset_s": 0.0,
+        "time_resolution_s": 0.01,
+        "use_state_time_utc": true,
+        "fallback_to_receive_time": true
+      },
+      "encoding": {
+        "distance_lsb": 0.001,
+        "distance_unit": "nautical_mile",
+        "bearing_lsb_deg": 0.01
+      },
+      "error_model": {
+        "position_noise_std_m": 0.0,
+        "quantization_lsb_deg": 0.0,
+        "noise_sigma_multiplier": 3.0
+      }
+    },
+    {
+      "source_id": "sim_ais",
+      "source_type": "ais",
+      "local_id_field": "mmsi",
+      "time": {
+        "known_clock_offset_s": 0.0,
+        "time_resolution_s": 1.0,
+        "use_state_time_utc": true,
+        "fallback_to_receive_time": true
+      },
+      "encoding": {
+        "position_lsb_deg": 0.0000016666666666666667,
+        "decoded_position_lsb_deg": 0.00001
+      },
+      "error_model": {
+        "position_noise_std_m": 0.0,
+        "quantization_lsb_deg": 0.0,
+        "noise_sigma_multiplier": 3.0
+      }
+    }
+  ],
+  "output_time_step_s": 1.0,
+  "max_interpolation_gap_s": 10.0,
+  "interpolation_mode": "enu_first",
+  "own_ship_heading_deg": null,
+  "time_grid_start_seconds_of_day": 54000.0
+}

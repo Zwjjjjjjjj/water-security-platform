@@ -1,0 +1,67 @@
+{
+  "source_id": "mtdsp_ais_20250305103638",
+  "source_type": "ais",
+  "session_id": "mtdsp-20250305103638",
+  "data_root": "data/mtdsp",
+  "frame_id": "wgs84",
+  "speed_unit": "K",
+  "speed_unit_source": "csv_header_declared",
+  "timezone_known": false,
+  "timezone_name": null,
+  "position_jump_max_speed_mps": 15.0,
+  "position_quantization": {
+    "longitude": {
+      "resolution_deg": 0.001,
+      "basis": "verified_csv_decimal_places",
+      "confident": true
+    },
+    "latitude": {
+      "resolution_deg": 0.0001,
+      "basis": "verified_csv_decimal_places",
+      "confident": true
+    }
+  },
+  "field_mapping": {
+    "mmsi": "MMSI",
+    "longitude": "经度(°)",
+    "latitude": "纬度(°)",
+    "time": "时间",
+    "speed": "速度(kn)",
+    "heading": "船艏向(°)",
+    "course": "对地航向(°)",
+    "navigation_status": "航行状态",
+    "relative_view": "相对视角(°)",
+    "attitude": "姿态信息",
+    "wave_height": "浪高(m)",
+    "bearing": "方位角(°)",
+    "distance": "距离(m)"
+  },
+  "provenance": {
+    "program": "海上目标数据共享计划（MTDSP）——海上目标多源观测数据集",
+    "publisher": "海军航空大学",
+    "editors": ["刘宁波", "王国庆", "董云龙", "关键", "李佳", "张子豪"],
+    "doi": "10.12000/JR25001",
+    "reference": "刘宁波, 李佳, 王国庆, 等. 雷达对海探测试验与目标特性数据获取——海上目标多源观测数据集[J]. 雷达学报(中英文), 待出版. doi: 10.12000/JR25001.",
+    "contact": ["lnb198300@163.com", "gqwang80@126.com"],
+    "license": "免费用于教学、科研；成果中须引用或致谢；禁止私自用于商业目的",
+    "package_name": "20250305103638_2003_AT_413203610_1.zip",
+    "package_meaning": {
+      "20250305103638": "采集时间 2025-03-05 10:36:38",
+      "2003": "雷达设备编号（2002=可见光/TV，2003=红外/Inf，ST=搜救船）",
+      "AT": "目标类型（AIS 目标）",
+      "413203610": "目标 MMSI",
+      "1": "组号"
+    },
+    "collection_site": "烟台第一海水浴场",
+    "dataset_scope": "7 类海上目标 × 4 组 = 28 个 ZIP，总量约 42 GB；本包为其中 1 组"
+  },
+  "notes": [
+    "CSV 为 UTF-8 with BOM、CRLF，表头与字段名已核验。",
+    "时间原值形如 2025-03-05 10:38:21，秒级精度，未使用 Excel 的分钟级显示。",
+    "时间字符串不含时区信息，未确认前不默认使用北京时间或服务器时区，state_time_utc 留空。",
+    "量化分辨率依据已核验的 CSV 小数位：经度 0.001 度（多数记录）、纬度 0.0001 度（多数记录）；少数记录小数位更少，属截断而非更粗量化。",
+    "【已核实，原'定义未确认'的说明作废】方位角(°)与距离(m) 是雷达站对同一目标测得的真方位极坐标：与本行经纬度经同站址 ENU 换算后，260 条样本方位差中位 0.026°、径向差中位 -0.99 m（静止目标），且方位差最大 0.818° 在设备波束宽度 1.2° 之内。",
+    "该组 AIS 数据存在两个互不重叠的采集时段（09:29-09:43 与 10:35-12:44），各 MMSI 覆盖差异大，跨源时间配对必须逐 MMSI 核对时间重叠。",
+    "雷达站位置以设备记录值为准（IF/IQ 脉冲头元数据 37.53297, 121.4202）；由 AIS 双重表达反算标定得 37.53297, 121.41990（经度偏东约 26.5 m），折半交叉验证确认非过拟合。标定值精度更高，但设备记录值是设备自述，二者差异应保留追溯。"
+  ]
+}

@@ -1,0 +1,1176 @@
+{
+  "meta": {
+    "schema_version": "1.0",
+    "data_mode": "simulated",
+    "session_id": "zjg-demo-001",
+    "duration_ms": 120000,
+    "coordinate_frame_id": "demo_scene_enu",
+    "position_unit": "m",
+    "time_unit": "ms",
+    "coordinate_note": "人为设定的演示坐标，不对应真实站址。depth_m=null；水下绘制高度仅为剖面示意。",
+    "viewport": {
+      "width": 1920,
+      "height": 700,
+      "waterline_v": 0.568
+    },
+    "projection": {
+      "surface": {
+        "u0": 0.25,
+        "v0": 0.53,
+        "u_per_east_m": 0.0005,
+        "v_per_north_m": -0.0005
+      },
+      "underwater": {
+        "u0": 0.4,
+        "v0": 0.73,
+        "u_per_east_m": 0.0005,
+        "v_per_north_m": 0.0004
+      }
+    },
+    "source": "generated_demo_not_field_measurements"
+  },
+  "source_id": "S01",
+  "data_mode": "synthetic",
+  "pixel_origin": "top_left",
+  "bbox_format": "x_y_width_height",
+  "frames": [
+    {
+      "frame_id": "S01_000",
+      "time_ms": 0,
+      "image_url": "assets/sonar/frames/s01_000.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_001",
+      "time_ms": 2000,
+      "image_url": "assets/sonar/frames/s01_001.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_002",
+      "time_ms": 4000,
+      "image_url": "assets/sonar/frames/s01_002.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_003",
+      "time_ms": 6000,
+      "image_url": "assets/sonar/frames/s01_003.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_004",
+      "time_ms": 8000,
+      "image_url": "assets/sonar/frames/s01_004.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_005",
+      "time_ms": 10000,
+      "image_url": "assets/sonar/frames/s01_005.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_006",
+      "time_ms": 12000,
+      "image_url": "assets/sonar/frames/s01_006.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_007",
+      "time_ms": 14000,
+      "image_url": "assets/sonar/frames/s01_007.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_008",
+      "time_ms": 16000,
+      "image_url": "assets/sonar/frames/s01_008.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_009",
+      "time_ms": 18000,
+      "image_url": "assets/sonar/frames/s01_009.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_010",
+      "time_ms": 20000,
+      "image_url": "assets/sonar/frames/s01_010.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_011",
+      "time_ms": 22000,
+      "image_url": "assets/sonar/frames/s01_011.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_012",
+      "time_ms": 24000,
+      "image_url": "assets/sonar/frames/s01_012.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_013",
+      "time_ms": 26000,
+      "image_url": "assets/sonar/frames/s01_013.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            196.14,
+            127.05,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_014",
+      "time_ms": 28000,
+      "image_url": "assets/sonar/frames/s01_014.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            197.61,
+            126.48,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_015",
+      "time_ms": 30000,
+      "image_url": "assets/sonar/frames/s01_015.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            199.11,
+            126.18,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_016",
+      "time_ms": 32000,
+      "image_url": "assets/sonar/frames/s01_016.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            200.65,
+            126.15,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_017",
+      "time_ms": 34000,
+      "image_url": "assets/sonar/frames/s01_017.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            202.21,
+            126.39,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_018",
+      "time_ms": 36000,
+      "image_url": "assets/sonar/frames/s01_018.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            203.78,
+            126.91,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_019",
+      "time_ms": 38000,
+      "image_url": "assets/sonar/frames/s01_019.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            205.37,
+            127.68,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_020",
+      "time_ms": 40000,
+      "image_url": "assets/sonar/frames/s01_020.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            206.96,
+            128.71,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_021",
+      "time_ms": 42000,
+      "image_url": "assets/sonar/frames/s01_021.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            208.54,
+            129.97,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_022",
+      "time_ms": 44000,
+      "image_url": "assets/sonar/frames/s01_022.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            210.12,
+            131.46,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_023",
+      "time_ms": 46000,
+      "image_url": "assets/sonar/frames/s01_023.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            211.69,
+            133.16,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_024",
+      "time_ms": 48000,
+      "image_url": "assets/sonar/frames/s01_024.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            213.24,
+            135.05,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_025",
+      "time_ms": 50000,
+      "image_url": "assets/sonar/frames/s01_025.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            214.76,
+            137.1,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_026",
+      "time_ms": 52000,
+      "image_url": "assets/sonar/frames/s01_026.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            216.26,
+            139.3,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_027",
+      "time_ms": 54000,
+      "image_url": "assets/sonar/frames/s01_027.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            217.72,
+            141.61,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_028",
+      "time_ms": 56000,
+      "image_url": "assets/sonar/frames/s01_028.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            219.15,
+            144.02,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_029",
+      "time_ms": 58000,
+      "image_url": "assets/sonar/frames/s01_029.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            220.54,
+            146.49,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_030",
+      "time_ms": 60000,
+      "image_url": "assets/sonar/frames/s01_030.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            221.9,
+            149.0,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_031",
+      "time_ms": 62000,
+      "image_url": "assets/sonar/frames/s01_031.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            223.22,
+            151.52,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_032",
+      "time_ms": 64000,
+      "image_url": "assets/sonar/frames/s01_032.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            224.5,
+            154.02,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_033",
+      "time_ms": 66000,
+      "image_url": "assets/sonar/frames/s01_033.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            225.75,
+            156.48,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_034",
+      "time_ms": 68000,
+      "image_url": "assets/sonar/frames/s01_034.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            226.96,
+            158.87,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_035",
+      "time_ms": 70000,
+      "image_url": "assets/sonar/frames/s01_035.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            228.14,
+            161.15,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_036",
+      "time_ms": 72000,
+      "image_url": "assets/sonar/frames/s01_036.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            229.29,
+            163.31,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_037",
+      "time_ms": 74000,
+      "image_url": "assets/sonar/frames/s01_037.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            230.42,
+            165.33,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_038",
+      "time_ms": 76000,
+      "image_url": "assets/sonar/frames/s01_038.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            231.53,
+            167.18,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_039",
+      "time_ms": 78000,
+      "image_url": "assets/sonar/frames/s01_039.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            232.63,
+            168.84,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_040",
+      "time_ms": 80000,
+      "image_url": "assets/sonar/frames/s01_040.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            233.72,
+            170.29,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_041",
+      "time_ms": 82000,
+      "image_url": "assets/sonar/frames/s01_041.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            234.81,
+            171.53,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_042",
+      "time_ms": 84000,
+      "image_url": "assets/sonar/frames/s01_042.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            235.91,
+            172.53,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_043",
+      "time_ms": 86000,
+      "image_url": "assets/sonar/frames/s01_043.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            237.02,
+            173.3,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_044",
+      "time_ms": 88000,
+      "image_url": "assets/sonar/frames/s01_044.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            238.14,
+            173.81,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_045",
+      "time_ms": 90000,
+      "image_url": "assets/sonar/frames/s01_045.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            239.29,
+            174.08,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_046",
+      "time_ms": 92000,
+      "image_url": "assets/sonar/frames/s01_046.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            240.47,
+            174.09,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_047",
+      "time_ms": 94000,
+      "image_url": "assets/sonar/frames/s01_047.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            241.68,
+            173.85,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_048",
+      "time_ms": 96000,
+      "image_url": "assets/sonar/frames/s01_048.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            242.93,
+            173.36,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_049",
+      "time_ms": 98000,
+      "image_url": "assets/sonar/frames/s01_049.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            244.23,
+            172.64,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_050",
+      "time_ms": 100000,
+      "image_url": "assets/sonar/frames/s01_050.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            245.58,
+            171.69,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_051",
+      "time_ms": 102000,
+      "image_url": "assets/sonar/frames/s01_051.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            246.98,
+            170.53,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_052",
+      "time_ms": 104000,
+      "image_url": "assets/sonar/frames/s01_052.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            248.44,
+            169.17,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_053",
+      "time_ms": 106000,
+      "image_url": "assets/sonar/frames/s01_053.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            249.95,
+            167.63,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_054",
+      "time_ms": 108000,
+      "image_url": "assets/sonar/frames/s01_054.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            251.52,
+            165.94,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_055",
+      "time_ms": 110000,
+      "image_url": "assets/sonar/frames/s01_055.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            253.14,
+            164.1,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_056",
+      "time_ms": 112000,
+      "image_url": "assets/sonar/frames/s01_056.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            254.82,
+            162.16,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_057",
+      "time_ms": 114000,
+      "image_url": "assets/sonar/frames/s01_057.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            256.55,
+            160.12,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_058",
+      "time_ms": 116000,
+      "image_url": "assets/sonar/frames/s01_058.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            258.34,
+            158.02,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_059",
+      "time_ms": 118000,
+      "image_url": "assets/sonar/frames/s01_059.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            260.17,
+            155.88,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    },
+    {
+      "frame_id": "S01_060",
+      "time_ms": 120000,
+      "image_url": "assets/sonar/frames/s01_060.png",
+      "width_px": 480,
+      "height_px": 360,
+      "detections": [
+        {
+          "target_id": "U001",
+          "bbox_xywh": [
+            262.04,
+            153.74,
+            38,
+            35
+          ],
+          "label": "U001 · 模拟目标"
+        }
+      ],
+      "data_mode": "synthetic",
+      "is_real_sonar": false
+    }
+  ]
+}

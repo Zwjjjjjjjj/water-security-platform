@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  微型潜航器（Midget Submarine）占位素材 · 胖鱼形
+  ------------------------------------------------------------------
+  【用途】水下目标 U003（现驻防波堤外围外海）的贴图。
+  【替换方式】把同名 PNG（建议 1536×1024 透明底）放到
+              public/water-security/assets/sprites/midget_sub.png，
+              然后把 targets.json 里 U003 的 sprite 改成
+              "assets/sprites/midget_sub.png" 即可无缝替换。
+  【朝向】默认朝右（+x），SceneUnderwaterV2 会按艏向旋转它。
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 150" width="300" height="150">
+  <defs>
+    <linearGradient id="msBody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffd97a"/>
+      <stop offset="45%" stop-color="#d98f2b"/>
+      <stop offset="100%" stop-color="#7a4a10"/>
+    </linearGradient>
+    <radialGradient id="msGlass" cx="0.5" cy="0.4" r="0.6">
+      <stop offset="0%" stop-color="#bff3ff" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#1b6f8c" stop-opacity="0.9"/>
+    </radialGradient>
+  </defs>
+
+  <!-- 尾部十字舵 -->
+  <g fill="#b06f1c" stroke="#ffdca0" stroke-width="2.5">
+    <path d="M 56 58 L 20 36 L 20 80 L 56 86 Z"/>
+    <path d="M 56 92 L 20 114 L 20 70 L 56 64 Z"/>
+  </g>
+
+  <!-- 主体 -->
+  <path d="M 52 75
+           C 52 46, 104 30, 168 30
+           C 232 30, 278 50, 286 75
+           C 278 100, 232 120, 168 120
+           C 104 120, 52 104, 52 75 Z"
+        fill="url(#msBody)" stroke="#ffdfa6" stroke-width="3"/>
+
+  <!-- 观察窗 -->
+  <ellipse cx="236" cy="70" rx="26" ry="21" fill="url(#msGlass)" stroke="#ffe0ab" stroke-width="3"/>
+  <ellipse cx="230" cy="64" rx="9" ry="7" fill="#eafcff" opacity="0.85"/>
+
+  <!-- 艏部探照灯 -->
+  <circle cx="278" cy="75" r="9" fill="#fff6d8" stroke="#e8b551" stroke-width="2.5"/>
+  <path d="M 288 66 L 300 52 L 300 98 L 288 84 Z" fill="#fff3c4" opacity="0.32"/>
+
+  <!-- 顶部潜望镜 -->
+  <path d="M 150 32 L 150 14 L 176 14" fill="none" stroke="#ffdfa6" stroke-width="3.5" stroke-linecap="round"/>
+
+  <!-- 侧向推进器舱 -->
+  <ellipse cx="106" cy="104" rx="26" ry="11" fill="#8a5413" stroke="#ffdca0" stroke-width="2.5"/>
+  <circle cx="106" cy="104" r="5" fill="#ffdfa6" opacity="0.85"/>
+</svg>

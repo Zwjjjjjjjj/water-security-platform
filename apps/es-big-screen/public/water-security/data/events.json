@@ -1,0 +1,56 @@
+{
+ "meta": {
+  "schema_version": "1.0",
+  "data_mode": "field",
+  "session_id": "yantai-0305-413203610",
+  "duration_ms": 302000,
+  "coordinate_frame_id": "site_enu_yantai"
+ },
+ "items": [
+  {
+   "event_id": "EV000",
+   "time_ms": 0,
+   "level": "info",
+   "title": "回放开始",
+   "description": "雷达首帧 10:35:38，主目标 MMSI 413203610 已建链。",
+   "target_id": "T001",
+   "data_mode": "field"
+  },
+  {
+   "event_id": "EV001",
+   "time_ms": 60000,
+   "level": "info",
+   "title": "光电可关联时段",
+   "description": "10:36:38 起雷达/光电/AIS 三源可对照。",
+   "target_id": "T001",
+   "data_mode": "field"
+  },
+  {
+   "event_id": "EV002",
+   "time_ms": 103000,
+   "level": "info",
+   "title": "AIS 首次更新",
+   "description": "10:38:21 AIS 413203610 首次报告，雷达为 AIS 快照关联。",
+   "target_id": "T001",
+   "data_mode": "field"
+  },
+  {
+   "event_id": "EV003",
+   "time_ms": 280000,
+   "level": "info",
+   "title": "多目标汇聚",
+   "description": "10:40:18 起 412283000 等伴随目标进入。",
+   "target_id": "T002",
+   "data_mode": "field"
+  },
+  {
+   "event_id": "EV004",
+   "time_ms": 302000,
+   "level": "info",
+   "title": "回放结束",
+   "description": "雷达窗 10:35:38→10:40:40，可拖动回看。",
+   "target_id": null,
+   "data_mode": "field"
+  }
+ ]
+}

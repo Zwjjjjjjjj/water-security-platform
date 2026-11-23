@@ -1,0 +1,192 @@
+{
+  "meta": {
+    "schema_version": "1.0",
+    "data_mode": "field",
+    "session_id": "yantai-0305-413203610",
+    "duration_ms": 302000,
+    "coordinate_frame_id": "site_enu_yantai",
+    "position_unit": "m",
+    "time_unit": "ms",
+    "coordinate_note": "烟台站心ENU，原点37.53297,121.4199(WGS84标定值)。雷达/AIS 03-05包真值，相对时基t0=2025-03-05 10:35:38(local)。",
+    "viewport": {
+      "width": 1920,
+      "height": 700,
+      "waterline_v": 0.568
+    },
+    "projection": {
+      "surface": {
+        "u0": 0.5,
+        "v0": 0.95,
+        "u_per_east_m": 0.00015,
+        "v_per_north_m": -0.00012
+      },
+      "underwater": {
+        "u0": 0.5,
+        "v0": 0.95,
+        "u_per_east_m": 0.00015,
+        "v_per_north_m": -0.00012
+      }
+    },
+    "origin": {
+      "lat": 37.53297,
+      "lon": 121.4199
+    },
+    "source": "target_standardization mtdsp_0305 alignment"
+  },
+  "items": [
+    {
+      "global_track_id": "T001",
+      "name": "船舶 T001 · MMSI 413203610",
+      "target_type": "船舶",
+      "domain": "surface",
+      "sources": [
+        "R01",
+        "A01"
+      ],
+      "association_status": "confirmed",
+      "active_from_ms": 0,
+      "active_until_ms": 302000,
+      "sprite": "assets/sprites/cargo_ship.png",
+      "sprite_width_design_px": 150,
+      "latitude_deg": null,
+      "longitude_deg": null,
+      "depth_m": null,
+      "data_mode": "field",
+      "mmsi": "413203610"
+    },
+    {
+      "global_track_id": "T002",
+      "name": "船舶 T002 · MMSI 412283000",
+      "target_type": "船舶",
+      "domain": "surface",
+      "sources": [
+        "R01",
+        "A01"
+      ],
+      "association_status": "confirmed",
+      "active_from_ms": 13000,
+      "active_until_ms": 302000,
+      "sprite": "assets/sprites/cargo_ship.png",
+      "sprite_width_design_px": 120,
+      "latitude_deg": null,
+      "longitude_deg": null,
+      "depth_m": null,
+      "data_mode": "field",
+      "mmsi": "412283000"
+    },
+    {
+      "global_track_id": "T003",
+      "name": "船舶 T003 · MMSI 413301480",
+      "target_type": "船舶",
+      "domain": "surface",
+      "sources": [
+        "R01"
+      ],
+      "association_status": "single_source",
+      "active_from_ms": 77000,
+      "active_until_ms": 302000,
+      "sprite": "assets/sprites/cargo_ship.png",
+      "sprite_width_design_px": 120,
+      "latitude_deg": null,
+      "longitude_deg": null,
+      "depth_m": null,
+      "data_mode": "field",
+      "mmsi": "413301480"
+    },
+    {
+      "global_track_id": "T004",
+      "name": "船舶 T004 · MMSI 1",
+      "target_type": "船舶",
+      "domain": "surface",
+      "sources": [
+        "R01"
+      ],
+      "association_status": "single_source",
+      "active_from_ms": 0,
+      "active_until_ms": 302000,
+      "sprite": "assets/sprites/cargo_ship.png",
+      "sprite_width_design_px": 120,
+      "latitude_deg": null,
+      "longitude_deg": null,
+      "depth_m": null,
+      "data_mode": "field",
+      "mmsi": "1"
+    },
+    {
+      "global_track_id": "T005",
+      "name": "船舶 T005 · MMSI 412752690",
+      "target_type": "船舶",
+      "domain": "surface",
+      "sources": [
+        "R01"
+      ],
+      "association_status": "single_source",
+      "active_from_ms": 60000,
+      "active_until_ms": 77000,
+      "sprite": "assets/sprites/cargo_ship.png",
+      "sprite_width_design_px": 120,
+      "latitude_deg": null,
+      "longitude_deg": null,
+      "depth_m": null,
+      "data_mode": "field",
+      "mmsi": "412752690"
+    },
+    {
+      "global_track_id": "U001",
+      "name": "水下目标 U001 · 蛙人",
+      "target_type": "蛙人（演示）",
+      "domain": "underwater",
+      "sources": [
+        "S01"
+      ],
+      "association_status": "single_source",
+      "active_from_ms": 0,
+      "active_until_ms": 302000,
+      "sprite": "assets/sprites/diver.png",
+      "sprite_width_design_px": 170,
+      "latitude_deg": null,
+      "longitude_deg": null,
+      "depth_m": null,
+      "data_mode": "simulated",
+      "mmsi": null
+    },
+    {
+      "global_track_id": "U002",
+      "name": "水下目标 U002 · 无人潜航器",
+      "target_type": "无人潜航器 UUV（演示）",
+      "domain": "underwater",
+      "sources": [
+        "S01"
+      ],
+      "association_status": "single_source",
+      "active_from_ms": 0,
+      "active_until_ms": 302000,
+      "sprite": "assets/sprites/rov_top.png",
+      "sprite_width_design_px": 210,
+      "latitude_deg": null,
+      "longitude_deg": null,
+      "depth_m": null,
+      "data_mode": "simulated",
+      "mmsi": null
+    },
+    {
+      "global_track_id": "U003",
+      "name": "水下目标 U003 · 微型潜航器",
+      "target_type": "微型潜航器（演示）",
+      "domain": "underwater",
+      "sources": [
+        "S01"
+      ],
+      "association_status": "single_source",
+      "active_from_ms": 20000,
+      "active_until_ms": 302000,
+      "sprite": "assets/sprites/rov_top.png",
+      "sprite_width_design_px": 150,
+      "latitude_deg": null,
+      "longitude_deg": null,
+      "depth_m": null,
+      "data_mode": "simulated",
+      "mmsi": null
+    }
+  ]
+}

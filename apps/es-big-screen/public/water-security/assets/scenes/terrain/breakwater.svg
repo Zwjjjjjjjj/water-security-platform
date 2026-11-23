@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="320" viewBox="0 0 900 320">
+  <defs><pattern id="stone" width="24" height="20" patternUnits="userSpaceOnUse"><path d="M1 4L10 0L19 7L16 17L5 19Z" fill="#566572" stroke="#304352" stroke-width="1"/><path d="M18 17L23 12" stroke="#85939b"/></pattern></defs>
+  <path d="M20 280V80Q20 30 70 30H800L875 90L850 125L790 85H85V280Z" fill="url(#stone)"/>
+  <path d="M45 280V80Q45 57 75 57H793L855 105" fill="none" stroke="#a2abb1" stroke-width="18"/>
+  <path d="M45 280V80Q45 57 75 57H793L855 105" fill="none" stroke="#566879" stroke-width="8"/>
+  <path d="M45 260V83Q45 57 75 57H785" fill="none" stroke="#b8d5d7" stroke-opacity=".45" stroke-dasharray="9 15"/>
+</svg>

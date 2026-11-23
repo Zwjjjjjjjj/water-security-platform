@@ -1,0 +1,99 @@
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+venv/
+.venv/
+env/
+ENV/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.hypothesis/
+
+# ===== Node / 前端 =====
+node_modules/
+dist/
+dist-ssr/
+.vite/
+*.local
+.eslintcache
+.cache/
+.yarn/cache
+.yarn/install-state.gz
+.pnpm-store/
+*.tsbuildinfo
+
+# ===== 运行输出 / 生成物 =====
+# 各服务的输出目录（可由脚本重新生成）
+output/
+outputs/
+outputs_*/
+out/
+result/
+results/
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# 开发期截图落地目录
+.dev-shots/
+.dev-backup/
+
+# 帧缓存 / 抽取中间产物（体积大且可重建）
+_glf_cache/
+frames/
+frames_u8.bin
+*.bin
+
+# ===== 数据与模型大文件 =====
+# 原始数据集与训练权重不入库，改用脚本或 Release / LFS 管理
+*.pth
+*.pt
+*.onnx
+*.ckpt
+*.h5
+*.pkl
+*.npy
+*.npz
+*.parquet
+*.glf
+*.zip
+*.tar.gz
+*.7z
+
+# ===== IDE / 系统 =====
+.vscode/*
+!.vscode/extensions.json
+!.vscode/vue3.2.code-snippets
+.idea/
+.DS_Store
+Thumbs.db
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ===== 密钥与本地环境 =====
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials.json
+service-account*.json

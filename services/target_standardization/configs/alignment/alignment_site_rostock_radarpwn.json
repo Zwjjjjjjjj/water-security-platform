@@ -1,0 +1,89 @@
+{
+  "alignment_config_id": "alignment_site_rostock_radarpwn_v1",
+  "parameter_version": "radarpwn_v1",
+  "site_frame": {
+    "frame_id": "site_enu_rostock",
+    "datum": "WGS84",
+    "origin_latitude_deg": 54.1082,
+    "origin_longitude_deg": 12.0568,
+    "origin_height_m": 0.0,
+    "description": "RadarPWN 现场局部 ENU，原点取本船（RadarRostock-Benign-03）位置，来自 NMEA RMC/GLL 报文自解算位置"
+  },
+  "radar_station": {
+    "station_latitude_deg": 54.1082,
+    "station_longitude_deg": 12.0568,
+    "station_height_m": 0.0,
+    "install_heading_deg": null,
+    "reference_point_offset_east_m": 0.0,
+    "reference_point_offset_north_m": 0.0,
+    "reference_point_offset_up_m": 0.0,
+    "magnetic_variation_deg": null
+  },
+  "sources": [
+    {
+      "source_id": "radarpwn_radar_rostock_benign_03",
+      "source_type": "radar",
+      "time": {
+        "known_clock_offset_s": 0.0,
+        "time_resolution_s": 0.1,
+        "time_quantum_s": 0.0,
+        "known_quantum_bias_s": 0.0,
+        "use_state_time_utc": true,
+        "fallback_to_receive_time": true,
+        "use_relative_time_base": false,
+        "reference_local_datetime": null
+      },
+      "encoding": {
+        "distance_lsb": 0.1,
+        "distance_unit": "nm",
+        "bearing_lsb_deg": 0.1,
+        "position_lsb_deg": null,
+        "decoded_position_lsb_deg": null
+      },
+      "error_model": {
+        "position_noise_std_m": 0.0,
+        "quantization_lsb_deg": 0.0,
+        "noise_sigma_multiplier": 3.0
+      },
+      "local_id_field": "local_track_id",
+      "notes": {
+        "station": "TTM 的距离与方位是相对**本船**（雷达载体）的，RadarPWN 是机载雷达场景，站址即本船位置。",
+        "time": "TTM 只有日内秒（time_of_day），日期由 ZDA 报文提供（simulation_date_binding=zda_date），PCAP 记录时间 2022 年与 ZDA 声明的 2019-09-30 仿真日期是两条时间线。"
+      }
+    },
+    {
+      "source_id": "radarpwn_ais_rostock_benign_03",
+      "source_type": "ais_vdm",
+      "time": {
+        "known_clock_offset_s": 0.0,
+        "time_resolution_s": 0.1,
+        "time_quantum_s": 0.0,
+        "known_quantum_bias_s": 0.0,
+        "use_state_time_utc": true,
+        "fallback_to_receive_time": true,
+        "use_relative_time_base": false,
+        "reference_local_datetime": null
+      },
+      "encoding": {
+        "distance_lsb": null,
+        "distance_unit": null,
+        "bearing_lsb_deg": null,
+        "position_lsb_deg": null,
+        "decoded_position_lsb_deg": null
+      },
+      "error_model": {
+        "position_noise_std_m": 0.0,
+        "quantization_lsb_deg": 0.0,
+        "noise_sigma_multiplier": 3.0
+      },
+      "local_id_field": "local_track_id",
+      "notes": {
+        "time": "AIS 位置时刻来自报文内的 UTC（VDM 的第 5 字段），与 TTM 的 ZDA 仿真日期绑定后同处 2019-09-30 时间线。"
+      }
+    }
+  ],
+  "output_time_step_s": 1.0,
+  "max_interpolation_gap_s": 10.0,
+  "own_ship_heading_deg": null,
+  "time_grid_start_seconds_of_day": 54000.0
+}

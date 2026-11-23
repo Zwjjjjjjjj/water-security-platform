@@ -1,0 +1,112 @@
+{
+ "meta": {
+  "schema_version": "1.0",
+  "data_mode": "field",
+  "session_id": "yantai-0305-413203610",
+  "duration_ms": 302000,
+  "coordinate_frame_id": "site_enu_yantai",
+  "position_unit": "m",
+  "time_unit": "ms",
+  "coordinate_note": "烟台站心ENU，原点37.53297,121.4199(WGS84标定值)。雷达/AIS 03-05包真值，相对时基t0=2025-03-05 10:35:38(local)。",
+  "viewport": {
+   "width": 1920,
+   "height": 700,
+   "waterline_v": 0.568
+  },
+  "projection": {
+   "surface": {
+    "u0": 0.5,
+    "v0": 0.95,
+    "u_per_east_m": 0.00015,
+    "v_per_north_m": -0.00012
+   },
+   "underwater": {
+    "u0": 0.5,
+    "v0": 0.95,
+    "u_per_east_m": 0.00015,
+    "v_per_north_m": -0.00012
+   }
+  },
+  "origin": {
+   "lat": 37.53297,
+   "lon": 121.4199
+  },
+  "source": "target_standardization mtdsp_0305 alignment"
+ },
+ "items": [
+  {
+   "source_id": "R01",
+   "label": "雷达 R01",
+   "kind": "radar",
+   "status": "active",
+   "state_label": "在用",
+   "view_u": 0.5,
+   "view_v": 0.95,
+   "coverage": {
+    "radius_m": 6000,
+    "bearing_deg": 95,
+    "angle_deg": 48
+   },
+   "lat": 37.53297,
+   "lon": 121.4199
+  },
+  {
+   "source_id": "A01",
+   "label": "AIS A01",
+   "kind": "ais",
+   "status": "active",
+   "state_label": "在用",
+   "view_u": 0.52,
+   "view_v": 0.9,
+   "coverage": null,
+   "lat": 37.53297,
+   "lon": 121.4199
+  },
+  {
+   "source_id": "S01",
+   "label": "声纳 S01",
+   "kind": "sonar",
+   "status": "active",
+   "state_label": "在用",
+   "view_u": 0.53,
+   "view_v": 0.565,
+   "coverage": {
+    "range_m": 80,
+    "angle_deg": 100
+   },
+   "display_nodes": [
+    {
+     "id": "S01-1",
+     "view_u": 0.4,
+     "view_v": 0.568
+    },
+    {
+     "id": "S01-2",
+     "view_u": 0.53,
+     "view_v": 0.565
+    },
+    {
+     "id": "S01-3",
+     "view_u": 0.66,
+     "view_v": 0.557
+    }
+   ],
+   "note": "保留演示声纳联动"
+  },
+  {
+   "source_id": "E01",
+   "label": "光电 E01",
+   "kind": "camera",
+   "status": "active",
+   "state_label": "在用",
+   "view_u": 0.505,
+   "view_v": 0.93,
+   "coverage": {
+    "range_m": 3000,
+    "angle_deg": 32
+   },
+   "lat": 37.53297,
+   "lon": 121.4199
+  }
+ ]
+}

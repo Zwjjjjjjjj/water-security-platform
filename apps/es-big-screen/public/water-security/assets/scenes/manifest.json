@@ -1,0 +1,1088 @@
+{
+  "version": 3,
+  "scene": "阳江风格概念场景",
+  "georeferenced": false,
+  "units": "m",
+  "length_semantics": "示意模板尺寸，非数据集目标真实船长",
+  "assets": [
+    {
+      "id": "cargo_90m_top",
+      "category": "ships",
+      "label": "90米通用货轮",
+      "length_m": 90,
+      "beam_m": 16,
+      "view": "top",
+      "file": "public/water-security/assets/scenes/ships/cargo_90m_top.png",
+      "url": "/water-security/assets/scenes/ships/cargo_90m_top.png",
+      "width_px": 1024,
+      "height_px": 1536,
+      "mode": "RGBA",
+      "file_bytes": 1689790,
+      "sha256": "0f2ff6eb20b03f760dc5b4b024e64fcc5b4933c60a1fea050358eff77e9a64dd",
+      "transparent": true,
+      "alpha_nonzero_bbox_px": [
+        0,
+        31,
+        970,
+        1536
+      ],
+      "opaque_bbox_px": [
+        348,
+        43,
+        677,
+        1509
+      ],
+      "opaque_bbox_threshold": 250,
+      "opaque_bbox_review": "alpha轮廓估计；未按具体船体水线标定",
+      "anchor_uv": [
+        0.50048828125,
+        0.5052083333333334
+      ],
+      "bow_direction": "image_up",
+      "body_fraction_xy": [
+        0.3212890625,
+        0.9544270833333334
+      ]
+    },
+    {
+      "id": "tanker_140m_top",
+      "category": "ships",
+      "label": "140米油轮",
+      "length_m": 140,
+      "beam_m": 23,
+      "view": "top",
+      "file": "public/water-security/assets/scenes/ships/tanker_140m_top.png",
+      "url": "/water-security/assets/scenes/ships/tanker_140m_top.png",
+      "width_px": 1024,
+      "height_px": 1536,
+      "mode": "RGBA",
+      "file_bytes": 1723615,
+      "sha256": "3b3f4dbecf6bbc72a4c48a921ae4a6409f870aaffc0a5bde376aa07f0b6a2a1c",
+      "transparent": true,
+      "alpha_nonzero_bbox_px": [
+        0,
+        8,
+        1023,
+        1536
+      ],
+      "opaque_bbox_px": [
+        354,
+        45,
+        666,
+        1491
+      ],
+      "opaque_bbox_threshold": 250,
+      "opaque_bbox_review": "alpha轮廓估计；未按具体船体水线标定",
+      "anchor_uv": [
+        0.498046875,
+        0.5
+      ],
+      "bow_direction": "image_up",
+      "body_fraction_xy": [
+        0.3046875,
+        0.94140625
+      ]
+    },
+    {
+      "id": "container_160m_top",
+      "category": "ships",
+      "label": "160米集装箱船",
+      "length_m": 160,
+      "beam_m": 25,
+      "view": "top",
+      "file": "public/water-security/assets/scenes/ships/container_160m_top.png",
+      "url": "/water-security/assets/scenes/ships/container_160m_top.png",
+      "width_px": 1024,
+      "height_px": 1536,
+      "mode": "RGBA",
+      "file_bytes": 1729833,
+      "sha256": "3d4c70df5408ecf417556c3def64743eb2fe83173f02a4f0dc66e06d98d8f17b",
+      "transparent": true,
+      "alpha_nonzero_bbox_px": [
+        0,
+        0,
+        1010,
+        1536
+      ],
+      "opaque_bbox_px": [
+        356,
+        72,
+        666,
+        1497
+      ],
+      "opaque_bbox_threshold": 250,
+      "opaque_bbox_review": "alpha轮廓估计；未按具体船体水线标定",
+      "anchor_uv": [
+        0.4990234375,
+        0.5107421875
+      ],
+      "bow_direction": "image_up",
+      "body_fraction_xy": [
+        0.302734375,
+        0.927734375
+      ]
+    },
+    {
+      "id": "bulk_180m_top",
+      "category": "ships",
+      "label": "180米散货船",
+      "length_m": 180,
+      "beam_m": 30,
+      "view": "top",
+      "file": "public/water-security/assets/scenes/ships/bulk_180m_top.png",
+      "url": "/water-security/assets/scenes/ships/bulk_180m_top.png",
+      "width_px": 1024,
+      "height_px": 1536,
+      "mode": "RGBA",
+      "file_bytes": 1576406,
+      "sha256": "1bd306d24e62706d86ff0d6d3eb07ddffa8462d7521cb70308fe03fc9b614b5c",
+      "transparent": true,
+      "alpha_nonzero_bbox_px": [
+        0,
+        0,
+        1008,
+        1516
+      ],
+      "opaque_bbox_px": [
+        368,
+        56,
+        657,
+        1506
+      ],
+      "opaque_bbox_threshold": 250,
+      "opaque_bbox_review": "alpha轮廓估计；未按具体船体水线标定",
+      "anchor_uv": [
+        0.50048828125,
+        0.5084635416666666
+      ],
+      "bow_direction": "image_up",
+      "body_fraction_xy": [
+        0.2822265625,
+        0.9440104166666666
+      ]
+    },
+    {
+      "id": "roro_180m_top",
+      "category": "ships",
+      "label": "180米客滚船",
+      "length_m": 180,
+      "beam_m": 28,
+      "view": "top",
+      "file": "public/water-security/assets/scenes/ships/roro_180m_top.png",
+      "url": "/water-security/assets/scenes/ships/roro_180m_top.png",
+      "width_px": 1024,
+      "height_px": 1536,
+      "mode": "RGBA",
+      "file_bytes": 1624713,
+      "sha256": "e2969b076919fe2f21caba0436694d12040be9973f0ed243441992ebf5d53df1",
+      "transparent": true,
+      "alpha_nonzero_bbox_px": [
+        33,
+        23,
+        1010,
+        1536
+      ],
+      "opaque_bbox_px": [
+        350,
+        45,
+        676,
+        1491
+      ],
+      "opaque_bbox_threshold": 250,
+      "opaque_bbox_review": "alpha轮廓估计；未按具体船体水线标定",
+      "anchor_uv": [
+        0.5009765625,
+        0.5
+      ],
+      "bow_direction": "image_up",
+      "body_fraction_xy": [
+        0.318359375,
+        0.94140625
+      ]
+    },
+    {
+      "id": "tug_32m_top",
+      "category": "ships",
+      "label": "32米拖轮",
+      "length_m": 32,
+      "beam_m": 11,
+      "view": "top",
+      "file": "public/water-security/assets/scenes/ships/tug_32m_top.png",
+      "url": "/water-security/assets/scenes/ships/tug_32m_top.png",
+      "width_px": 1024,
+      "height_px": 1536,
+      "mode": "RGBA",
+      "file_bytes": 2256147,
+      "sha256": "5bc188f12bd553e9482a09dd1303da817f66ea15b9b841c63d8d546730e6d7cc",
+      "transparent": true,
+      "alpha_nonzero_bbox_px": [
+        0,
+        19,
+        1012,
+        1532
+      ],
+      "opaque_bbox_px": [
+        170,
+        93,
+        853,
+        1449
+      ],
+      "opaque_bbox_threshold": 250,
+      "opaque_bbox_review": "alpha轮廓估计；未按具体船体水线标定",
+      "anchor_uv": [
+        0.49951171875,
+        0.501953125
+      ],
+      "bow_direction": "image_up",
+      "body_fraction_xy": [
+        0.6669921875,
+        0.8828125
+      ]
+    },
+    {
+      "id": "fishing_24m_top",
+      "category": "ships",
+      "label": "24米渔船",
+      "length_m": 24,
+      "beam_m": 6,
+      "view": "top",
+      "file": "public/water-security/assets/scenes/ships/fishing_24m_top.png",
+      "url": "/water-security/assets/scenes/ships/fishing_24m_top.png",
+      "width_px": 1024,
+      "height_px": 1536,
+      "mode": "RGBA",
+      "file_bytes": 2036811,
+      "sha256": "5c7552a59c831d5dfade24ad6b80e89ae94e54e7652bbe0562e26e3c9ecd9fa0",
+      "transparent": true,
+      "alpha_nonzero_bbox_px": [
+        0,
+        17,
+        1010,
+        1536
+      ],
+      "opaque_bbox_px": [
+        301,
+        49,
+        724,
+        1490
+      ],
+      "opaque_bbox_threshold": 250,
+      "opaque_bbox_review": "alpha轮廓估计；未按具体船体水线标定",
+      "anchor_uv": [
+        0.50048828125,
+        0.5009765625
+      ],
+      "bow_direction": "image_up",
+      "body_fraction_xy": [
+        0.4130859375,
+        0.9381510416666666
+      ]
+    },
+    {
+      "id": "engineering_60m_top",
+      "category": "ships",
+      "label": "60米工程船",
+      "length_m": 60,
+      "beam_m": 15,
+      "view": "top",
+      "file": "public/water-security/assets/scenes/ships/engineering_60m_top.png",
+      "url": "/water-security/assets/scenes/ships/engineering_60m_top.png",
+      "width_px": 1024,
+      "height_px": 1536,
+      "mode": "RGBA",
+      "file_bytes": 1780727,
+      "sha256": "50fe7c11a088ae4bab9784d49ffd9d1cdfebd1b4e39e82d7af2ae0f98631a2d1",
+      "transparent": true,
+      "alpha_nonzero_bbox_px": [
+        0,
+        8,
+        1010,
+        1536
+      ],
+      "opaque_bbox_px": [
+        289,
+        74,
+        736,
+        1466
+      ],
+      "opaque_bbox_threshold": 250,
+      "opaque_bbox_review": "alpha轮廓估计；未按具体船体水线标定",
+      "anchor_uv": [
+        0.50048828125,
+        0.5013020833333334
+      ],
+      "bow_direction": "image_up",
+      "body_fraction_xy": [
+        0.4365234375,
+        0.90625
+      ]
+    },
+    {
+      "id": "nuclear_island_top",
+      "label": "核岛·正俯视",
+      "category": "npp",
+      "view": "top",
+      "footprint_length_m": 80,
+      "footprint_width_m": 80,
+      "optional_generic": false,
+      "file": "public/water-security/assets/scenes/npp/nuclear_island_top.png",
+      "url": "/water-security/assets/scenes/npp/nuclear_island_top.png",
+      "width_px": 1254,
+      "height_px": 1254,
+      "mode": "RGBA",
+      "file_bytes": 1475282,
+      "sha256": "33fe4bfb780ccc9c2c0d8eca1994d59d2117646ee4d55b81f28c174d2bf882b6",
+      "transparent": true,
+      "alpha_nonzero_bbox_px": [
+        0,
+        23,
+        1149,
+        1232
+      ],
+      "opaque_bbox_px": [
+        73,
+        175,
+        1143,
+        1074
+      ],
+      "opaque_bbox_threshold": 250,
+      "opaque_bbox_review": "alpha轮廓估计；未按具体船体水线标定",
+      "anchor_uv": [
+        0.48484848484848486,
+        0.8564593301435407
+      ]
+    },
+    {
+      "id": "nuclear_island_iso",
+      "label": "核岛·45度",
+      "category": "npp",
+      "view": "iso",
+      "footprint_length_m": 80,
+      "footprint_width_m": 80,
+      "optional_generic": false,
+      "file": "public/water-security/assets/scenes/npp/nuclear_island_iso.png",
+      "url": "/water-security/assets/scenes/npp/nuclear_island_iso.png",
+      "width_px": 1254,
+      "height_px": 1254,
+      "mode": "RGBA",
+      "file_bytes": 1629248,
+      "sha256": "8411031f32889c8baf5a008016df5d004dfcf948d69e864ffc02329326e46407",
+      "transparent": true,
+      "alpha_nonzero_bbox_px": [
+        0,
+        0,
+        1224,
+        1254
+      ],
+      "opaque_bbox_px": [
+        108,
+        140,
+        1180,
+        1132
+      ],
+      "opaque_bbox_threshold": 250,
+      "opaque_bbox_review": "alpha轮廓估计；未按具体船体水线标定",
+      "anchor_uv": [
+        0.5135566188197768,
+        0.9027113237639554
+      ]
+    },
+    {
+      "id": "conventional_island_top",
+      "label": "常规岛厂房·正俯视",
+      "category": "npp",
+      "view": "top",
+      "footprint_length_m": 180,
+      "footprint_width_m": 65,
+      "optional_generic": false,
+      "file": "public/water-security/assets/scenes/npp/conventional_island_top.png",
+      "url": "/water-security/assets/scenes/npp/conventional_island_top.png",
+      "width_px": 1254,
+      "height_px": 1254,
+      "mode": "RGBA",
+      "file_bytes": 915400,
+      "sha256": "c56360b9ab0a120c61ae048df14bcbed06607a22b59131341967e7d5853597ed",
+      "transparent": true,
+      "alpha_nonzero_bbox_px": [
+        45,
+        36,
+        1208,
+        1180
+      ],
+      "opaque_bbox_px": [
+        53,
+        412,
+        1202,
+        895
+      ],
+      "opaque_bbox_threshold": 250,
+      "opaque_bbox_review": "alpha轮廓估计；未按具体船体水线标定",
+      "anchor_uv": [
+        0.5003987240829346,
+        0.7137161084529505
+      ]
+    },
+    {
+      "id": "conventional_island_iso",
+      "label": "常规岛厂房·45度",
+      "category": "npp",
+      "view": "iso",
+      "footprint_length_m": 180,
+      "footprint_width_m": 65,
+      "optional_generic": false,
+      "file": "public/water-security/assets/scenes/npp/conventional_island_iso.png",
+      "url": "/water-security/assets/scenes/npp/conventional_island_iso.png",
+      "width_px": 1254,
+      "height_px": 1254,
+      "mode": "RGBA",
+      "file_bytes": 1678343,
+      "sha256": "1a8eb87524fd816a180c0a23795b50097d07809d4e9200cbe164563e5ec1c2a3",
+      "transparent": true,
+      "alpha_nonzero_bbox_px": [
+        40,
+        213,
+        1227,
+        1205
+      ],
+      "opaque_bbox_px": [
+        48,
+        266,
+        1223,
+        1158
+      ],
+      "opaque_bbox_threshold": 250,
+      "opaque_bbox_review": "alpha轮廓估计；未按具体船体水线标定",
+      "anchor_uv": [
+        0.5067783094098883,
+        0.9234449760765551
+      ]
+    },
+    {
+      "id": "containment_dome_top",
+      "label": "安全壳穹顶·正俯视",
+      "category": "npp",
+      "view": "top",
+      "footprint_length_m": 45,
+      "footprint_width_m": 45,
+      "optional_generic": false,
+      "file": "public/water-security/assets/scenes/npp/containment_dome_top.png",
+      "url": "/water-security/assets/scenes/npp/containment_dome_top.png",
+      "width_px": 1254,
+      "height_px": 1254,
+      "mode": "RGBA",
+      "file_bytes": 1776342,
+      "sha256": "80badab93d61e8be93896d2741ade4fdf413633de531a9b6b7f53a58c0263d4b",
+      "transparent": true,
+      "alpha_nonzero_bbox_px": [
+        110,
+        69,
+        1142,
+        1158
+      ],
+      "opaque_bbox_px": [
+        114,
+        114,
+        1136,
+        1148
+      ],
+      "opaque_bbox_threshold": 250,
+      "opaque_bbox_review": "alpha轮廓估计；未按具体船体水线标定",
+      "anchor_uv": [
+        0.4984051036682616,
+        0.9154704944178629
+      ]
+    },
+    {
+      "id": "cooling_tower_top",
+      "label": "通用冷却塔·正俯视",
+      "category": "npp",
+      "view": "top",
+      "footprint_length_m": 70,
+      "footprint_width_m": 70,
+      "optional_generic": true,
+      "file": "public/water-security/assets/scenes/npp/cooling_tower_top.png",
+      "url": "/water-security/assets/scenes/npp/cooling_tower_top.png",
+      "width_px": 1254,
+      "height_px": 1254,
+      "mode": "RGBA",
+      "file_bytes": 2103093,
+      "sha256": "f73faa5a69b0303ebffc864fbe166ef26a9a14e6afb6ad25a1c4a151409e300d",
+      "transparent": true,
+      "alpha_nonzero_bbox_px": [
+        0,
+        20,
+        1226,
+        1238
+      ],
+      "opaque_bbox_px": [
+        84,
+        77,
+        1171,
+        1182
+      ],
+      "opaque_bbox_threshold": 250,
+      "opaque_bbox_review": "alpha轮廓估计；未按具体船体水线标定",
+      "anchor_uv": [
+        0.5003987240829346,
+        0.9425837320574163
+      ]
+    },
+    {
+      "id": "cooling_tower_iso",
+      "label": "通用冷却塔·45度",
+      "category": "npp",
+      "view": "iso",
+      "footprint_length_m": 70,
+      "footprint_width_m": 70,
+      "optional_generic": true,
+      "file": "public/water-security/assets/scenes/npp/cooling_tower_iso.png",
+      "url": "/water-security/assets/scenes/npp/cooling_tower_iso.png",
+      "width_px": 1254,
+      "height_px": 1254,
+      "mode": "RGBA",
+      "file_bytes": 1668532,
+      "sha256": "bef88a917698fab7ef1541a0f2f29ac77702ecabf456546ff32330ff046d67ad",
+      "transparent": true,
+      "alpha_nonzero_bbox_px": [
+        0,
+        21,
+        1234,
+        1254
+      ],
+      "opaque_bbox_px": [
+        184,
+        44,
+        1071,
+        1216
+      ],
+      "opaque_bbox_threshold": 250,
+      "opaque_bbox_review": "alpha轮廓估计；未按具体船体水线标定",
+      "anchor_uv": [
+        0.5003987240829346,
+        0.9696969696969697
+      ]
+    },
+    {
+      "id": "chimney_top",
+      "label": "通用烟囱·正俯视",
+      "category": "npp",
+      "view": "top",
+      "footprint_length_m": 18,
+      "footprint_width_m": 18,
+      "optional_generic": true,
+      "file": "public/water-security/assets/scenes/npp/chimney_top.png",
+      "url": "/water-security/assets/scenes/npp/chimney_top.png",
+      "width_px": 1254,
+      "height_px": 1254,
+      "mode": "RGBA",
+      "file_bytes": 1666863,
+      "sha256": "224222d2f0edf3ec75b854bb58b4a22749b4a4e40ae86703333fac94c32ff857",
+      "transparent": true,
+      "alpha_nonzero_bbox_px": [
+        0,
+        47,
+        1218,
+        1254
+      ],
+      "opaque_bbox_px": [
+        232,
+        162,
+        1020,
+        1131
+      ],
+      "opaque_bbox_threshold": 250,
+      "opaque_bbox_review": "alpha轮廓估计；未按具体船体水线标定",
+      "anchor_uv": [
+        0.49920255183413076,
+        0.9019138755980861
+      ]
+    },
+    {
+      "id": "chimney_iso",
+      "label": "通用烟囱·45度",
+      "category": "npp",
+      "view": "iso",
+      "footprint_length_m": 18,
+      "footprint_width_m": 18,
+      "optional_generic": true,
+      "file": "public/water-security/assets/scenes/npp/chimney_iso.png",
+      "url": "/water-security/assets/scenes/npp/chimney_iso.png",
+      "width_px": 1254,
+      "height_px": 1254,
+      "mode": "RGBA",
+      "file_bytes": 498503,
+      "sha256": "79bba5d7899cc72d8743085cb1a44be5e8e0d45abcff4b99381ef59e12caaf25",
+      "transparent": true,
+      "alpha_nonzero_bbox_px": [
+        0,
+        0,
+        1226,
+        1229
+      ],
+      "opaque_bbox_px": [
+        493,
+        60,
+        761,
+        1209
+      ],
+      "opaque_bbox_threshold": 250,
+      "opaque_bbox_review": "alpha轮廓估计；未按具体船体水线标定",
+      "anchor_uv": [
+        0.5,
+        0.9641148325358851
+      ]
+    },
+    {
+      "id": "power_pylon_iso",
+      "label": "输电铁塔·45度",
+      "category": "npp",
+      "view": "iso",
+      "footprint_length_m": 24,
+      "footprint_width_m": 24,
+      "optional_generic": false,
+      "file": "public/water-security/assets/scenes/npp/power_pylon_iso.png",
+      "url": "/water-security/assets/scenes/npp/power_pylon_iso.png",
+      "width_px": 1254,
+      "height_px": 1254,
+      "mode": "RGBA",
+      "file_bytes": 1193347,
+      "sha256": "2027ab05a8944ad3cfe10e5f2c8d2990973cd8c1a491e983d0f2ab40938e3034",
+      "transparent": true,
+      "alpha_nonzero_bbox_px": [
+        31,
+        9,
+        1230,
+        1234
+      ],
+      "opaque_bbox_px": [
+        326,
+        43,
+        925,
+        1224
+      ],
+      "opaque_bbox_threshold": 250,
+      "opaque_bbox_review": "alpha轮廓估计；未按具体船体水线标定",
+      "anchor_uv": [
+        0.4988038277511962,
+        0.9760765550239234
+      ]
+    },
+    {
+      "id": "power_pylon_top",
+      "label": "输电铁塔·正俯视",
+      "category": "npp",
+      "view": "top",
+      "footprint_length_m": 24,
+      "footprint_width_m": 24,
+      "optional_generic": false,
+      "file": "public/water-security/assets/scenes/npp/power_pylon_top.png",
+      "url": "/water-security/assets/scenes/npp/power_pylon_top.png",
+      "width_px": 1254,
+      "height_px": 1254,
+      "mode": "RGBA",
+      "file_bytes": 1358504,
+      "sha256": "de2bc69656225deb5b9c8a09e00b05e1bf19563f67db2f6b480219dbba4d7524",
+      "transparent": true,
+      "alpha_nonzero_bbox_px": [
+        0,
+        23,
+        1246,
+        1254
+      ],
+      "opaque_bbox_px": [
+        78,
+        184,
+        1176,
+        1069
+      ],
+      "opaque_bbox_threshold": 250,
+      "opaque_bbox_review": "alpha轮廓估计；未按具体船体水线标定",
+      "anchor_uv": [
+        0.5,
+        0.8524720893141946
+      ]
+    },
+    {
+      "id": "switchyard_iso",
+      "label": "开关站构架·45度",
+      "category": "npp",
+      "view": "iso",
+      "footprint_length_m": 90,
+      "footprint_width_m": 55,
+      "optional_generic": false,
+      "file": "public/water-security/assets/scenes/npp/switchyard_iso.png",
+      "url": "/water-security/assets/scenes/npp/switchyard_iso.png",
+      "width_px": 1254,
+      "height_px": 1254,
+      "mode": "RGBA",
+      "file_bytes": 1406962,
+      "sha256": "5bb8262921d42e252f6ca309357dfe1e70e29258c0c2cd0e50ffbe103ee489e5",
+      "transparent": true,
+      "alpha_nonzero_bbox_px": [
+        33,
+        49,
+        1224,
+        1230
+      ],
+      "opaque_bbox_px": [
+        76,
+        129,
+        1138,
+        1099
+      ],
+      "opaque_bbox_threshold": 250,
+      "opaque_bbox_review": "alpha轮廓估计；未按具体船体水线标定",
+      "anchor_uv": [
+        0.4840510366826156,
+        0.8763955342902712
+      ]
+    },
+    {
+      "id": "switchyard_top",
+      "label": "开关站构架·正俯视",
+      "category": "npp",
+      "view": "top",
+      "footprint_length_m": 90,
+      "footprint_width_m": 55,
+      "optional_generic": false,
+      "file": "public/water-security/assets/scenes/npp/switchyard_top.png",
+      "url": "/water-security/assets/scenes/npp/switchyard_top.png",
+      "width_px": 1254,
+      "height_px": 1254,
+      "mode": "RGBA",
+      "file_bytes": 1819019,
+      "sha256": "53e3a9c55fec2227a0d69f25df2792f6963c8fb28c25c5f609f12f0d68e2a15e",
+      "transparent": true,
+      "alpha_nonzero_bbox_px": [
+        0,
+        17,
+        1224,
+        1254
+      ],
+      "opaque_bbox_px": [
+        68,
+        276,
+        1185,
+        1028
+      ],
+      "opaque_bbox_threshold": 250,
+      "opaque_bbox_review": "alpha轮廓估计；未按具体船体水线标定",
+      "anchor_uv": [
+        0.4996012759170654,
+        0.8197767145135566
+      ]
+    },
+    {
+      "id": "storage_tank_iso",
+      "label": "储罐·45度",
+      "category": "npp",
+      "view": "iso",
+      "footprint_length_m": 25,
+      "footprint_width_m": 25,
+      "optional_generic": false,
+      "file": "public/water-security/assets/scenes/npp/storage_tank_iso.png",
+      "url": "/water-security/assets/scenes/npp/storage_tank_iso.png",
+      "width_px": 1254,
+      "height_px": 1254,
+      "mode": "RGBA",
+      "file_bytes": 1765491,
+      "sha256": "4b4a43a9066385ce69779fbeac45a476dba76fc68963464a8ed183fdae529e30",
+      "transparent": true,
+      "alpha_nonzero_bbox_px": [
+        0,
+        53,
+        1202,
+        1254
+      ],
+      "opaque_bbox_px": [
+        149,
+        138,
+        1103,
+        1153
+      ],
+      "opaque_bbox_threshold": 250,
+      "opaque_bbox_review": "alpha轮廓估计；未按具体船体水线标定",
+      "anchor_uv": [
+        0.49920255183413076,
+        0.919457735247209
+      ]
+    },
+    {
+      "id": "radar_tower_iso",
+      "label": "雷达塔·45度",
+      "category": "sprites",
+      "view": "iso",
+      "footprint_length_m": 12,
+      "footprint_width_m": 12,
+      "file": "public/water-security/assets/scenes/sprites/radar_tower_iso.png",
+      "url": "/water-security/assets/scenes/sprites/radar_tower_iso.png",
+      "width_px": 1254,
+      "height_px": 1254,
+      "mode": "RGBA",
+      "file_bytes": 1203657,
+      "sha256": "071201dcfa271be1c182f3020e56f003cf5180be6ae3ad42d74f96fd8796ad91",
+      "transparent": true,
+      "alpha_nonzero_bbox_px": [
+        0,
+        13,
+        1230,
+        1254
+      ],
+      "opaque_bbox_px": [
+        306,
+        78,
+        943,
+        1237
+      ],
+      "opaque_bbox_threshold": 250,
+      "opaque_bbox_review": "alpha轮廓估计；未按具体船体水线标定",
+      "anchor_uv": [
+        0.49800637958532695,
+        0.9864433811802232
+      ]
+    },
+    {
+      "id": "sonar_head_iso",
+      "label": "声纳探头·45度",
+      "category": "sprites",
+      "view": "iso",
+      "footprint_length_m": 0.5,
+      "footprint_width_m": 0.4,
+      "file": "public/water-security/assets/scenes/sprites/sonar_head_iso.png",
+      "url": "/water-security/assets/scenes/sprites/sonar_head_iso.png",
+      "width_px": 1254,
+      "height_px": 1254,
+      "mode": "RGBA",
+      "file_bytes": 1380139,
+      "sha256": "dda916dc9d1e5a1ee700706f7afecdfb0a6c9241ad512ecabf053b265e2ab432",
+      "transparent": true,
+      "alpha_nonzero_bbox_px": [
+        0,
+        27,
+        1238,
+        1220
+      ],
+      "opaque_bbox_px": [
+        111,
+        238,
+        1145,
+        1135
+      ],
+      "opaque_bbox_threshold": 250,
+      "opaque_bbox_review": "alpha轮廓估计；未按具体船体水线标定",
+      "anchor_uv": [
+        0.5007974481658692,
+        0.905103668261563
+      ]
+    },
+    {
+      "id": "optical_camera_iso",
+      "label": "光电云台·45度",
+      "category": "sprites",
+      "view": "iso",
+      "footprint_length_m": 1.2,
+      "footprint_width_m": 0.8,
+      "file": "public/water-security/assets/scenes/sprites/optical_camera_iso.png",
+      "url": "/water-security/assets/scenes/sprites/optical_camera_iso.png",
+      "width_px": 1254,
+      "height_px": 1254,
+      "mode": "RGBA",
+      "file_bytes": 1316531,
+      "sha256": "b05db72b8219d8e7c6c9744af96a4412e67d7f18a6d7a44ddb8682761fd4a227",
+      "transparent": true,
+      "alpha_nonzero_bbox_px": [
+        0,
+        9,
+        1220,
+        1254
+      ],
+      "opaque_bbox_px": [
+        105,
+        66,
+        1060,
+        1219
+      ],
+      "opaque_bbox_threshold": 250,
+      "opaque_bbox_review": "alpha轮廓估计；未按具体船体水线标定",
+      "anchor_uv": [
+        0.46451355661881977,
+        0.9720893141945773
+      ]
+    },
+    {
+      "id": "npp_campus_top",
+      "category": "npp",
+      "label": "核电园区·正俯视底图",
+      "view": "top",
+      "file": "public/water-security/assets/scenes/npp/npp_campus_top.png",
+      "url": "/water-security/assets/scenes/npp/npp_campus_top.png",
+      "width_px": 1536,
+      "height_px": 1024,
+      "mode": "RGB",
+      "file_bytes": 2742859,
+      "sha256": "d418905c36bda7885a29dc8ae0a34d3bfb4ade225672647dfc84a185972f7ad6",
+      "transparent": false,
+      "world_bounds_enu": null
+    },
+    {
+      "id": "harbor_basin_top",
+      "category": "terrain",
+      "label": "港池与航道·正俯视底图",
+      "view": "top",
+      "file": "public/water-security/assets/scenes/terrain/harbor_basin_top.png",
+      "url": "/water-security/assets/scenes/terrain/harbor_basin_top.png",
+      "width_px": 1536,
+      "height_px": 1024,
+      "mode": "RGB",
+      "file_bytes": 2440415,
+      "sha256": "6a75a258ed59c849d411ddb66d9bf8877fa6396f886a53bfd5f9d6512d519df7",
+      "transparent": false,
+      "world_bounds_enu": null
+    },
+    {
+      "id": "sea_albedo_tile",
+      "category": "terrain",
+      "label": "海面颜色贴图·平铺候选",
+      "view": "texture",
+      "file": "public/water-security/assets/scenes/terrain/sea_albedo_tile.png",
+      "url": "/water-security/assets/scenes/terrain/sea_albedo_tile.png",
+      "width_px": 1254,
+      "height_px": 1254,
+      "mode": "RGB",
+      "file_bytes": 2000154,
+      "sha256": "150f197f11ffbff364aab7c37c88c2006c4843e8574a3852a5450391be97a416",
+      "transparent": false,
+      "tile_edge_mae_rgb": {
+        "left_right": 3.29,
+        "top_bottom": 3.75
+      },
+      "tileability": "生成式平铺候选，尚未做材质引擎无缝验证"
+    },
+    {
+      "id": "sea_normal_tile",
+      "category": "terrain",
+      "label": "海面切线法线·视觉候选",
+      "view": "texture",
+      "file": "public/water-security/assets/scenes/terrain/sea_normal_tile.png",
+      "url": "/water-security/assets/scenes/terrain/sea_normal_tile.png",
+      "width_px": 1254,
+      "height_px": 1254,
+      "mode": "RGB",
+      "file_bytes": 1501393,
+      "sha256": "47330dd4c621322350a7fa2642994863a41a1a3d58a843ab10069306daa5e0c5",
+      "transparent": false,
+      "tile_edge_mae_rgb": {
+        "left_right": 2.71,
+        "top_bottom": 4.3
+      },
+      "tileability": "生成式平铺候选，尚未做材质引擎无缝验证"
+    },
+    {
+      "id": "ship_wake",
+      "category": "terrain",
+      "label": "船尾泡沫尾迹·透明",
+      "view": "top",
+      "file": "public/water-security/assets/scenes/terrain/ship_wake.png",
+      "url": "/water-security/assets/scenes/terrain/ship_wake.png",
+      "width_px": 1024,
+      "height_px": 1536,
+      "mode": "RGBA",
+      "file_bytes": 1671281,
+      "sha256": "2bd926602a51ed79325307662c1e38a15bd8ee761e635e69a3e594961fb46941",
+      "transparent": true,
+      "alpha_nonzero_bbox_px": [
+        0,
+        3,
+        1024,
+        1536
+      ],
+      "opaque_bbox_px": [
+        381,
+        214,
+        698,
+        900
+      ],
+      "opaque_bbox_threshold": 250,
+      "opaque_bbox_review": "alpha轮廓估计；未按具体船体水线标定",
+      "anchor_uv": [
+        0.52685546875,
+        0.5859375
+      ]
+    },
+    {
+      "id": "steam_plume",
+      "category": "terrain",
+      "label": "白色蒸汽羽流·透明",
+      "view": "iso",
+      "optional_generic": true,
+      "file": "public/water-security/assets/scenes/terrain/steam_plume.png",
+      "url": "/water-security/assets/scenes/terrain/steam_plume.png",
+      "width_px": 1024,
+      "height_px": 1536,
+      "mode": "RGBA",
+      "file_bytes": 1481880,
+      "sha256": "4b5f62372125db2c8a42ff4c6119fdda40d959c970252ccce17b495166f617f8",
+      "transparent": true,
+      "alpha_nonzero_bbox_px": [
+        0,
+        0,
+        1023,
+        1536
+      ],
+      "opaque_bbox_px": [
+        233,
+        431,
+        720,
+        1485
+      ],
+      "opaque_bbox_threshold": 250,
+      "opaque_bbox_review": "alpha轮廓估计；未按具体船体水线标定",
+      "anchor_uv": [
+        0.46533203125,
+        0.966796875
+      ]
+    },
+    {
+      "id": "breakwater",
+      "label": "防波堤·矢量模板",
+      "category": "terrain",
+      "view": "top",
+      "transparent": true,
+      "format": "SVG",
+      "file": "public/water-security/assets/scenes/terrain/breakwater.svg",
+      "url": "/water-security/assets/scenes/terrain/breakwater.svg",
+      "width_px": 900,
+      "height_px": 320,
+      "georeferenced": false,
+      "world_bounds_enu": null
+    },
+    {
+      "id": "channel_lines",
+      "label": "航道线·矢量模板",
+      "category": "terrain",
+      "view": "top",
+      "transparent": true,
+      "format": "SVG",
+      "file": "public/water-security/assets/scenes/terrain/channel_lines.svg",
+      "url": "/water-security/assets/scenes/terrain/channel_lines.svg",
+      "width_px": 1600,
+      "height_px": 1000,
+      "georeferenced": false,
+      "world_bounds_enu": null
+    },
+    {
+      "id": "berth_lines",
+      "label": "泊位线·矢量模板",
+      "category": "terrain",
+      "view": "top",
+      "transparent": true,
+      "format": "SVG",
+      "file": "public/water-security/assets/scenes/terrain/berth_lines.svg",
+      "url": "/water-security/assets/scenes/terrain/berth_lines.svg",
+      "width_px": 1000,
+      "height_px": 300,
+      "georeferenced": false,
+      "world_bounds_enu": null
+    }
+  ]
+}

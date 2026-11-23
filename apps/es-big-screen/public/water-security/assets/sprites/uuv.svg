@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  无人潜航器（UUV）占位素材 · 鱼雷/鱼形回体
+  ------------------------------------------------------------------
+  【用途】水下目标 U002 的贴图。
+  【替换方式】把同名 PNG（建议 1536×1024 透明底）放到
+              public/water-security/assets/sprites/uuv.png，
+              然后把 targets.json 里 U002 的 sprite 改成
+              "assets/sprites/uuv.png" 即可无缝替换。
+  【朝向】默认朝右（+x），SceneUnderwaterV2 会按艏向旋转它。
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 150" width="300" height="150">
+  <defs>
+    <linearGradient id="uuvBody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8fd8ef"/>
+      <stop offset="45%" stop-color="#2e9dc4"/>
+      <stop offset="100%" stop-color="#12556f"/>
+    </linearGradient>
+    <radialGradient id="uuvNose" cx="0.75" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#d8f6ff" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#d8f6ff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- 尾推舵（十字翼） -->
+  <g fill="#1b7ea3" stroke="#9fe3f7" stroke-width="2.5">
+    <path d="M 46 58 L 16 40 L 16 78 L 46 84 Z"/>
+    <path d="M 46 92 L 16 110 L 16 72 L 46 66 Z"/>
+    <path d="M 46 66 L 24 30 L 24 66 L 46 78 Z" opacity="0.75"/>
+  </g>
+
+  <!-- 主体（鱼雷形） -->
+  <path d="M 44 75
+           C 44 50, 96 36, 158 36
+           C 222 36, 272 54, 282 75
+           C 272 96, 222 114, 158 114
+           C 96 114, 44 100, 44 75 Z"
+        fill="url(#uuvBody)" stroke="#a9e9fb" stroke-width="3"/>
+
+  <!-- 艏部导流罩高光 -->
+  <ellipse cx="252" cy="75" rx="34" ry="26" fill="url(#uuvNose)"/>
+
+  <!-- 观察窗 / 传感器 -->
+  <ellipse cx="216" cy="70" rx="17" ry="13" fill="#04283a" stroke="#7fe3ff" stroke-width="2.5"/>
+  <ellipse cx="212" cy="67" rx="6" ry="5" fill="#7fe3ff" opacity="0.8"/>
+
+  <!-- 侧向声呐天线 -->
+  <path d="M 150 40 L 150 24 L 168 24" fill="none" stroke="#9fe3f7" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- 尾部螺旋桨 -->
+  <g stroke="#c9f2ff" stroke-width="3" fill="none" opacity="0.9">
+    <path d="M 44 62 A 16 16 0 0 1 44 88"/>
+    <path d="M 38 75 L 52 75"/>
+  </g>
+</svg>

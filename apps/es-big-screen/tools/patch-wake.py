@@ -1,0 +1,401 @@
+#!/usr/bin/env python3
+"""替换 water-effects.ts 的尾迹段，实现符合物理规律的 Kelvin 尾迹。"""
+import re, io, sys
+
+path = 'src/water-security/integration/water-effects.ts'
+src = open(path, encoding='utf-8').read()
+
+start_marker = "/* ------------------------------------------------------------------ *\n * 尾迹\n * ------------------------------------------------------------------ */"
+end_marker = "/* ------------------------------------------------------------------ *\n * 海面微动\n * ------------------------------------------------------------------ */"
+
+i = src.index(start_marker)
+j = src.index(end_marker)
+
+new_block = '''/* ------------------------------------------------------------------ *
+ * 尾迹（Kelvin wake）
+ * ------------------------------------------------------------------ */
+
+/** 尾迹几何类型 */
+export type WakeKind =
+  /** Kelvin 尾迹的 V 字波臂（波峰高光，不是泡沫） */
+  | 'arm'
+  /** 船尾螺旋桨白水（propeller wash） */
+  | 'wash'
+  /** 波臂上的细亮线（强化「波」的读感） */
+  | 'crest'
+
+/**
+ * 一段尾迹。
+ *
+ * 【为什么必须「分段」而不是一条长线】
+ * 真实尾迹的**宽度、透明度沿长度连续变化**：
+ *   · 船尾处最宽最亮（刚被螺旋桨搅起的白水）；
+ *   · 向后逐渐张开（Kelvin 臂以约 17° 半角扩散）但同时**变淡**；
+ *   · 最后消散在海面上。
+ * 一条固定宽度的 polyline 无法表达这种梯度，
+ * 因此尾迹被切成若干**小段**，每段带自己的宽度与不透明度。
+ */
+export interface WakeSegment {
+  /** 尾迹段（图片像素），从船尾向后 */
+  points: PxPolyline
+  /** 线宽（像素） */
+  width: number
+  /** 不透明度（0 ~ 1） */
+  opacity: number
+  /** 几何类型 —— 决定渲染样式（描边 / 柔化 / 高光） */
+  kind: WakeKind
+  /**
+   * 沿段长度的漂移相位（0 ~ 1）。
+   *
+   * 用于让泡沫白点沿尾迹**向后漂移**，模拟泡沫被水流带走。
+   */
+  drift: number
+  /** 动画周期（秒） */
+  period: number
+}
+
+/** 尾迹输入用的历史采样点 */
+export interface WakeSample {
+  /** 东向坐标（米） */
+  e: number
+  /** 北向坐标（米） */
+  n: number
+  /** 相对时刻（毫秒）；用于计算尾迹年龄 */
+  t: number
+}
+
+/** 尾迹生成的物理参数 */
+export interface WakeParams {
+  /** 当前速度（米/秒） */
+  speedMps: number
+  /** 船长（米）—— 决定尾迹的横向尺度 */
+  lengthM: number
+  /** 船宽（米） */
+  beamM: number
+  /** 当前回放时刻（毫秒） */
+  nowMs: number
+  /**
+   * 尾迹寿命（毫秒）。
+   *
+   * 【物理含义】
+   * 尾迹在船离开后仍会存在一段时间，靠扩散与湍流耗散。
+   * 这里取 60 秒：真实尾迹通常在几十秒到几分钟内消散，
+   * 而回放数据集最长只有 5 分钟，60 秒既够真实又不喧宾夺主。
+   */
+  lifeMs?: number
+}
+
+/**
+ * 图片像素 ↔ 米 的换算系数（斜视底图）。
+ *
+ * 【为什么需要一个全局常量】
+ * 尾迹的宽度/长度需要用**米**来表达（船宽、船长），
+ * 但渲染是在**图片像素**里进行的。
+ * 底图 1536px 覆盖 3600m（见 `scenes.config.v2.ts` 的 OBLIQUE_FIT），
+ * 所以 1m ≈ 0.4267 px。
+ *
+ * 这个系数只用于**几何尺度**的估算，
+ * 位置一律走 `enuToImage()` 精确映射，不受此近似影响。
+ */
+export const PX_PER_M = 1536 / 3600
+
+/**
+ * Kelvin 尾迹的半扩散角（度）。
+ *
+ * 【物理依据】
+ * Kelvin 尾迹的波臂以约 19.47° 的半角从船尾向后扩散，
+ * 这是深水线性波理论（Kelvin 尾迹）的经典结论。
+ * 现实中的尾迹通常比理论值略小（15°~19°），
+ * 因为风浪背景与非线性效应会把它抹平。
+ *
+ * 取 17°：比理论值稍小，视觉上更接近真实海面。
+ */
+const KELVIN_HALF_ANGLE_DEG = 17
+
+/**
+ * 尾迹强度的衰减时间常数（秒）。
+ *
+ * 【物理依据】
+ * 尾迹的可见强度按**指数衰减** —— 这是湍流耗散 + 波幅衰减的近似。
+ * 时间常数 22 秒：过了 22 秒，强度降到 1/e ≈ 37%，
+ * 约 60 秒后基本不可见。
+ */
+const WAKE_DECAY_TAU_S = 22
+
+/**
+ * 尾迹强度（0 ~ 1）。
+ *
+ * 【与速度的关系 —— 用户明确要求】
+ *   · 速度快的目标：明显的尾流；
+ *   · 约 0.4 m/s 的目标：只保留很弱的扰动；
+ *   · 静止目标：完全没有尾迹。
+ *
+ * 判据用**米/秒**，而不是「有没有移动」——
+ * 0.4 m/s 的目标其实一直在动，但那个速度下真实水面几乎看不出尾流，
+ * 画出来反而是假信息。
+ *
+ * 【为什么用幂函数而不是线性】
+ * 尾迹的视觉强度与船速的关系是**次线性**的：
+ * 速度翻倍，尾迹宽度只增加约 60%，而不是翻倍。
+ * 用 `t^0.6` 拟合这条曲线。
+ */
+function wakeIntensity(speedMps: number): number {
+  /* 速度门槛：低于 0.8 m/s 不画尾迹 */
+  if (speedMps < 0.8) return 0
+  return Math.min(1, Math.pow((speedMps - 0.8) / 5.2, 0.6))
+}
+
+/**
+ * 由航迹历史生成符合物理规律的尾迹。
+ *
+ * 【与旧版的差异 —— 旧版的问题】
+ * 旧版只画两条固定宽度的折线 + 一条船尾短线，
+ * 无论船多快多慢，尾迹都是「同一种样子」：
+ *   · 不沿长度衰减（整条尾迹一样亮）；
+ *   · 波臂与泡沫混为一谈（看起来像一条白泡沫带）；
+ *   · 尾迹是「贴」在船身上的静态线条，没有泡沫漂移。
+ *
+ * 【新版的做法】
+ *  1. 按**年龄**把历史点分成若干段（每 1.5 秒一段）；
+ *  2. 每段按 Kelvin 半角向两侧张开，宽度随张开量增大、强度按指数衰减；
+ *  3. 船尾处叠加「螺旋桨白水」（wash）—— 更宽、更亮、更短；
+ *  4. 波臂上另加一层细亮线（crest），与白水区分开。
+ *
+ * @param history 历史点列（含时刻）
+ * @param toPx    ENU → 图片像素 的投影函数
+ * @param params  尾迹参数（速度、船型尺寸、当前时刻）
+ */
+export function buildWake(
+  history: WakeSample[],
+  toPx: (e: number, n: number) => [number, number],
+  params: WakeParams,
+): WakeSegment[] {
+  const intensity = wakeIntensity(params.speedMps)
+  if (intensity <= 0) return []
+  if (history.length < 2) return []
+
+  const lifeMs = params.lifeMs ?? 60000
+  const nowMs = params.nowMs
+
+  /* 只保留寿命内的历史点，并按时间升序排列 */
+  const pts = history
+    .filter((p) => Number.isFinite(p.e) && Number.isFinite(p.n) && Number.isFinite(p.t))
+    .filter((p) => nowMs - p.t <= lifeMs && nowMs - p.t >= -1000)
+    .sort((a, b) => a.t - b.t)
+  if (pts.length < 2) return []
+
+  /* 投影到图片像素 */
+  const px = pts.map((p) => toPx(p.e, p.n))
+  if (px.length < 2) return []
+
+  const segs: WakeSegment[] = []
+
+  /* ---- 船尾处：螺旋桨白水 ---- */
+  const sternIdx = px.length - 1
+  const stern = px[sternIdx]
+  const sternPrev = px[Math.max(0, sternIdx - 1)]
+  let sdx = stern[0] - sternPrev[0]
+  let sdy = stern[1] - sternPrev[1]
+  const slen = Math.hypot(sdx, sdy) || 1
+  sdx /= slen
+  sdy /= slen
+
+  /**
+   * 【白水的尺寸依据】
+   * 螺旋桨白水的宽度约为**船宽**的 0.6~1.2 倍（气泡被螺旋桨甩出），
+   * 长度约为**船长**的 0.35 倍（白水随船前进而向后延伸一小段）。
+   */
+  const beamPx = Math.max(3, params.beamM * PX_PER_M)
+  const washLenPx = Math.max(6, params.lengthM * 0.35 * PX_PER_M)
+  const washW = (1.6 + intensity * 4.2) * Math.min(2.2, beamPx / 10)
+  for (let i = 0; i < 3; i++) {
+    const t = i / 2
+    /* 白水从船尾正后方开始，向后快速变淡 */
+    segs.push({
+      points: [
+        [stern[0] - sdx * washLenPx * t * 0.35, stern[1] - sdy * washLenPx * t * 0.35],
+        [stern[0] - sdx * washLenPx * (0.35 + t * 0.65), stern[1] - sdy * washLenPx * (0.35 + t * 0.65)],
+      ],
+      width: washW * (1 - t * 0.55),
+      opacity: (0.30 + intensity * 0.34) * (1 - t * 0.62),
+      kind: 'wash',
+      drift: 0,
+      period: 2.6 + i * 0.35,
+    })
+  }
+
+  /* ---- Kelvin 臂：沿历史轨迹向两侧张开 ---- */
+  /**
+   * 【为什么逐段生成而不是一条长线】
+   * 尾迹的宽度与强度必须**沿长度连续衰减**。
+   * 把历史点按「年龄步长」切成小段，
+   * 每段单独给出宽度/透明度，渲染时自然形成梯度。
+   */
+  const AGE_STEP_MS = 1500
+  let lastBucket = -1
+  const armPts: { px: [number, number]; ageMs: number; heading: [number, number] }[] = []
+
+  for (let i = 0; i < px.length; i++) {
+    const ageMs = nowMs - pts[i].t
+    if (ageMs < 0) continue
+    const bucket = Math.floor(ageMs / AGE_STEP_MS)
+    if (bucket === lastBucket) continue
+    lastBucket = bucket
+
+    /* 该点的前进方向（切向） */
+    const a = px[Math.max(0, i - 1)]
+    const b = px[Math.min(px.length - 1, i + 1)]
+    let dx = b[0] - a[0]
+    let dy = b[1] - a[1]
+    const len = Math.hypot(dx, dy)
+    if (len < 0.001) continue
+    dx /= len
+    dy /= len
+    armPts.push({ px: px[i], ageMs, heading: [dx, dy] })
+  }
+  if (armPts.length < 2) return segs
+
+  /**
+   * 【Kelvin 臂的几何】
+   * 臂的位置：在船的**历史位置**上，沿当时的航向张开。
+   * 张开量 = 「该点到船尾的沿迹距离」× tan(17°)。
+   *
+   * 这样臂的夹角自然等于 Kelvin 半角，
+   * 且随着船前进，臂越来越长 —— 与理论一致。
+   */
+  const tanK = Math.tan((KELVIN_HALF_ANGLE_DEG * Math.PI) / 180)
+
+  for (const side of [-1, 1] as const) {
+    for (let i = 0; i < armPts.length - 1; i++) {
+      const p0 = armPts[i]
+      const p1 = armPts[i + 1]
+
+      /* 该点到船尾的沿迹距离（像素） */
+      const tailDistPx = Math.hypot(p0.px[0] - stern[0], p0.px[1] - stern[1])
+      /* 臂的横向张开量 */
+      const spreadPx = tailDistPx * tanK
+
+      /* 臂的法向（垂直于航向） */
+      const nx = -p0.heading[1] * side
+      const ny = p0.heading[0] * side
+
+      const q0: [number, number] = [p0.px[0] + nx * spreadPx, p0.px[1] + ny * spreadPx]
+      const q1: [number, number] = [p1.px[0] + nx * spreadPx, p1.px[1] + ny * spreadPx]
+
+      /* 强度随年龄指数衰减 */
+      const ageFactor = Math.exp(-(p0.ageMs / 1000) / WAKE_DECAY_TAU_S)
+      if (ageFactor < 0.02) continue
+
+      /* 波臂的宽度：船宽的 1/6 起，随张开略增 */
+      const baseW = Math.max(1.1, (params.beamM * PX_PER_M) / 6)
+      const width = baseW * (0.85 + spreadPx / 90) * (0.6 + intensity * 0.7)
+
+      segs.push({
+        points: [q0, q1],
+        width,
+        opacity: (0.06 + intensity * 0.20) * ageFactor,
+        kind: 'arm',
+        /* 漂移相位沿臂向后递增 —— 泡沫随波臂向船尾方向移动 */
+        drift: (i / armPts.length) * 0.85,
+        period: 3.2 + (i % 5) * 0.22,
+      })
+    }
+  }
+
+  /* ---- 波峰高光：沿臂的细亮线，强化「波」的读感 ---- */
+  /**
+   * 【为什么单独加一层】
+   * Kelvin 臂本质是**波**而不是「泡沫带」。
+   * 泡沫只出现在船尾（wash），
+   * 远离船的臂是**波峰高光** —— 更细、更亮、更短促。
+   * 把两者混为一谈，就会出现「一条长长的白泡沫带」这种假效果。
+   */
+  if (intensity > 0.25) {
+    for (let i = 0; i < armPts.length - 2; i += 2) {
+      const p0 = armPts[i]
+      const p1 = armPts[i + 1]
+      const ageFactor = Math.exp(-(p0.ageMs / 1000) / WAKE_DECAY_TAU_S)
+      if (ageFactor < 0.05) continue
+      const tailDistPx = Math.hypot(p0.px[0] - stern[0], p0.px[1] - stern[1])
+      const spreadPx = tailDistPx * tanK
+      const nx = -p0.heading[1]
+      const ny = p0.heading[0]
+      const q0: [number, number] = [p0.px[0] + nx * spreadPx, p0.px[1] + ny * spreadPx]
+      const q1: [number, number] = [p1.px[0] + nx * spreadPx, p1.px[1] + ny * spreadPx]
+      segs.push({
+        points: [q0, q1],
+        width: 0.9,
+        opacity: (0.05 + intensity * 0.13) * ageFactor,
+        kind: 'crest',
+        drift: 0.5,
+        period: 2.8,
+      })
+    }
+  }
+
+  return segs
+}
+
+/** 尾迹泡沫白点 */
+export interface WakeFoamDot {
+  /** 段索引 */
+  seg: number
+  /** 段内参数位置（0 ~ 1） */
+  t: number
+  /** 动画周期（秒） */
+  period: number
+  /** 相位偏移（秒） */
+  phase: number
+  /** 白点半径（容器像素） */
+  r: number
+  /** 不透明度 */
+  opacity: number
+}
+
+/**
+ * 把尾迹段转成「泡沫白点」序列。
+ *
+ * 【为什么需要】
+ * 尾迹的**几何**是静态的：船在动，尾迹留在原地。
+ * 但真实的泡沫会**沿尾迹向后漂移并消散**，
+ * 否则尾迹看起来像「画在地图上的线」而不是「水上的痕迹」。
+ *
+ * 做法：在每段尾迹上按固定间距撒若干白点，
+ * 每个白点带自己的动画相位 —— 于是白点持续向后流动。
+ *
+ * @param segs 尾迹段（图片像素）
+ */
+export function buildWakeFoam(segs: WakeSegment[]): WakeFoamDot[] {
+  const out: WakeFoamDot[] = []
+  for (let i = 0; i < segs.length; i++) {
+    const s = segs[i]
+    if (s.kind !== 'wash' && s.kind !== 'arm') continue
+    if (s.opacity < 0.05) continue
+    const p0 = s.points[0]
+    const p1 = s.points[s.points.length - 1]
+    const len = Math.hypot(p1[0] - p0[0], p1[1] - p0[1])
+    /* 间距：越小越密，但白点太多会糊成一片 */
+    const spacing = s.kind === 'wash' ? 4.5 : 11
+    const count = Math.min(7, Math.floor(len / spacing))
+    if (count < 1) continue
+    for (let k = 0; k < count; k++) {
+      const t = (k + 0.5) / count
+      out.push({
+        seg: i,
+        t,
+        period: s.period,
+        /* 相位沿段递增 + 段自身的漂移相位 */
+        phase: (t + s.drift) * s.period,
+        r: s.kind === 'wash' ? 1.1 + s.width * 0.16 : 0.7 + s.width * 0.1,
+        opacity: s.opacity * 0.85,
+      })
+    }
+  }
+  return out
+}
+
+'''
+
+src = src[:i] + new_block + src[j:]
+open(path, 'w', encoding='utf-8').write(src)
+print('ok, new length', len(src))

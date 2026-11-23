@@ -1,0 +1,33 @@
+{
+  "source_id": "mtdsp_optical_20250305103638",
+  "source_type": "optical",
+  "session_id": "mtdsp-20250305103638",
+  "data_root": "data/mtdsp",
+  "frame_id": "radar_local_polar",
+  "timezone_known": false,
+  "timezone_name": null,
+  "station_latitude_deg": 37.53297,
+  "station_longitude_deg": 121.4202,
+  "max_range_m": 20000.0,
+  "image_width_px": 1920,
+  "image_height_px": 1080,
+  "provenance": {
+    "program": "海上目标数据共享计划（MTDSP）——海上目标多源观测数据集",
+    "publisher": "海军航空大学",
+    "doi": "10.12000/JR25001",
+    "package_name": "20250305103638_2003_AT_413203610_1.zip",
+    "source_file": "Photo_ScreenShot_Inf|TV_*.txt + *_DLDete.txt"
+  },
+  "notes": [
+    "光电设备 DS-2ZTD816CX-HB/YT（编码 PHK003），与 03-12 包同一套设备，字段结构一致。",
+    "文件名第4/5/6段 = 焦距/俯仰角/中心点方位，与 .txt 元数据的 焦距/俯仰角度(°)/中心点方位(°) 已逐条核对一致（92/92 吻合）。",
+    ".txt 的 目标距离(M) 与 中心点方位(°) 是设备对【主目标】的解算；_DLDete.txt 是画面内全部目标的 AI 检测结果。",
+    "DLDete 字段语义已核验：0=目标序号 1=类型 2=置信度 3-6=检测框(px) 7=匹配编号(0未匹配/1已匹配) 8=测距(整数米) 9=光学目标序号；字段数=7 的行无距离字段，不可作位置观测。",
+    "【重要】.txt 的距离在部分时段直接拷贝 AIS 距离值（03-12 包 120 个中 69 个与某条 AIS 记录精确相等，差<0.01m），其余为光电独立测距。适配器不隐式判定来源，标记为 optical_range_source=unknown，由下游用 AIS 库比对后回填 ais_snapshot/independent_measurement。",
+    "【重要】光电方位与 AIS 方位存在系统性偏差：03-05 包光电中心点方位 13.30° vs 该目标 AIS 极坐标 8.017°，差 +5.28°（同目标 AIS 经纬度反算方位为 7.619°，与其自身极坐标仅差 0.398°）。两个独立日期均出现同量级偏差，属视轴/方位基准偏差，不是随机误差。适配器不隐式补偿（optical_azimuth_bias_applied=false）。",
+    "DLDete 测距存在大量误检（03-05 包 187 行中距离散布至 28km/45-50km/234-350km，而场景真实目标全在 3.6-5.4km），且误检置信度高达 0.81-0.94，无法用置信度区分，只能用距离范围过滤。超出 max_range_m 的记录保留但置 valid_for_spatial_alignment=false 并标记 optical_detection_out_of_range。",
+    "时间取自文件名 14 位时间戳（.jpg 的文件系统时间戳在解压后已丢失原始值，不可依赖）。无时区标记，state_time_utc 留空并标记 timezone_unknown，与 MTDSP AIS CSV / CutDataTarget 保持一致。",
+    "检测记录的方位沿用该时刻设备解算的中心点方位（检测框中心 x 只能给出视场内相对位置，无法单独还原绝对方位）；框内横向偏移单独记录在 optical_box_center_x_px，不据此伪造方位精度。"
+  ],
+  "ais_range_index_dir": "data/mtdsp"
+}

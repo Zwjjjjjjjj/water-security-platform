@@ -1,0 +1,32 @@
+{
+  "source_id": "radarpwn_radar_rostock_benign_03",
+  "source_type": "radar",
+  "session_id": "radarpwn-radarrostock-benign-03-20220603163049",
+  "data_root": "data/radarpwn",
+  "frame_id": "radar_local_polar",
+  "simulation_date_binding": "zda_date",
+  "field_mapping": {
+    "target_number": 0,
+    "distance": 1,
+    "bearing": 2,
+    "bearing_reference": 3,
+    "speed": 4,
+    "course": 5,
+    "course_reference": 6,
+    "cpa_distance": 7,
+    "cpa_time": 8,
+    "speed_distance_units": 9,
+    "distance_unit": 9,
+    "target_name": 10,
+    "tracking_status": 11,
+    "reference_target": 12,
+    "time_of_day": 13,
+    "acquisition_type": 14
+  },
+  "notes": [
+    "索引为 0-based 且不含开头的 $RATTM；手册第 N 字段对应索引 N-1。",
+    "第 10 字段为 Speed/distance units，本数据集为 'N'（距离海里 + 速度节），单位来自报文本身，不做假定。",
+    "速度参考（对地/对水）未在报文中声明，motion_reference 保持未知，不生成 vx、vy。",
+    "PCAP 记录时间为 2022 年记录时钟；ZDA 声明 2019-09-30 仿真日期，两条时间线分开保存。"
+  ]
+}

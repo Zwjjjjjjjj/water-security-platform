@@ -1,0 +1,53 @@
+{
+  "source_dataset": "RadarPWN v1.0.2",
+  "source_record": "https://zenodo.org/records/7188636",
+  "source_archive": "https://zenodo.org/records/7188636/files/radarpwn-1-0-1.zip?download=1",
+  "source_member": "RadarRostock-Benign-03/captures/RadarRostock-Benign-03-20220603163049.pcap.gz",
+  "data_origin": "SIMULATED; not physical radar measurements",
+  "pcap_packets": 295704,
+  "skipped_noninitial_ipv4_fragments": 255995,
+  "incoming_nmea_counts": {
+    "RMC": 403,
+    "ROT": 1208,
+    "GLL": 404,
+    "RSA": 403,
+    "RPM": 804,
+    "GGA": 402,
+    "ZDA": 406,
+    "DTM": 404,
+    "HDT": 810,
+    "DPT": 400,
+    "VDM": 7719,
+    "TTM": 383
+  },
+  "ttm_count": 383,
+  "ttm_checksum_valid": 383,
+  "ttm_local_ids": [
+    "00"
+  ],
+  "ttm_statuses": {
+    "T": 383
+  },
+  "ttm_first": {
+    "capture_time_unix": "1654273908.952602",
+    "capture_time_utc": "2022-06-03T16:31:48.952602+00:00",
+    "sentence_type": "TTM",
+    "checksum_valid": true,
+    "sentence": "$RATTM,00,0.1,9.7,T,4.0,2.7,T,0.0,0.3,N,TGT00,T,,150054.00,A*48"
+  },
+  "ttm_last": {
+    "capture_time_unix": "1654274946.967893",
+    "capture_time_utc": "2022-06-03T16:49:06.967893+00:00",
+    "sentence_type": "TTM",
+    "checksum_valid": true,
+    "sentence": "$RATTM,00,1.2,172.1,T,4.1,4.0,T,0.3,-5.4,N,TGT00,T,,151815.00,A*61"
+  },
+  "ais_sentence_count": 7719,
+  "ais_checksum_valid": 7719,
+  "simulation_date_evidence": [
+    "$RAZDA,150002.00,30,09,2019,00,00*64",
+    "$RAZDA,150004.00,30,09,2019,00,00*62",
+    "$RAZDA,150007.00,30,09,2019,00,00*61"
+  ],
+  "original_pcap_gz_sha256": "8c429274e4252bcdc5cb3693661bba265239571351fe5be690462d9dea975a28"
+}

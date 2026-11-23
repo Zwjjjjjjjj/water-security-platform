@@ -1,0 +1,461 @@
+{
+  "version": "v2",
+  "description": "V2 场景素材清单 —— 对应「写实航拍正俯视」风格的中间显示区。\n每个条目对应参考图中的一个视觉元素；未提供的素材其 file 为 null，渲染时会自动跳过并回退到矢量绘制。",
+  "assets": [
+    {
+      "id": "campus_aerial",
+      "category": "terrain",
+      "label": "核电厂区·写实航拍底图",
+      "view": "top",
+      "required": true,
+      "note": "参考图左上角的厂区：草地、树木、道路、停车场、建筑屋顶的真实航拍俯视图。要求覆盖厂区+岸线+取排水口。",
+      "file": "public/water-security/assets/scenes-v2/terrain/campus_aerial.png",
+      "url": "/water-security/assets/scenes-v2/terrain/campus_aerial.png",
+      "width_px": 1774,
+      "height_px": 887,
+      "transparent": false,
+      "world_bounds_enu": [
+        -2200,
+        3000,
+        1200,
+        4900
+      ],
+      "anchor_hint": "已按设计坐标 1000×500 配准：ENU x -2200~1200, y 3000~4900"
+    },
+    {
+      "id": "sea_surface",
+      "category": "terrain",
+      "label": "海面·颜色贴图（可平铺）",
+      "view": "texture",
+      "required": true,
+      "note": "大面积海域底色。参考图的海面由近岸浅青绿渐变到远海深蓝，需要可平铺且自带色彩层次。",
+      "file": "public/water-security/assets/scenes-v2/terrain/sea_surface.png",
+      "url": "/water-security/assets/scenes-v2/terrain/sea_surface.png",
+      "width_px": 1254,
+      "height_px": 1254,
+      "transparent": false,
+      "tileable": true
+    },
+    {
+      "id": "sea_normal",
+      "category": "terrain",
+      "label": "海面·切线法线贴图",
+      "view": "texture",
+      "required": false,
+      "note": "用于给海面加细微波光与起伏，让大面积海面不平。可选。",
+      "file": "public/water-security/assets/scenes-v2/terrain/sea_normal.png",
+      "url": "/water-security/assets/scenes-v2/terrain/sea_normal.png",
+      "width_px": 1254,
+      "height_px": 1254,
+      "transparent": false,
+      "tileable": true
+    },
+    {
+      "id": "breakwater_tex",
+      "category": "terrain",
+      "label": "防波堤·石砌护岸贴图",
+      "view": "top",
+      "required": true,
+      "note": "参考图中左下与右下两段弧形防波堤：可见块石、混凝土护面、堤顶步道。可平铺的条带贴图最好。",
+      "file": "public/water-security/assets/scenes-v2/terrain/breakwater_tex.png",
+      "url": "/water-security/assets/scenes-v2/terrain/breakwater_tex.png",
+      "width_px": 2172,
+      "height_px": 724,
+      "transparent": false
+    },
+    {
+      "id": "shoreline_tex",
+      "category": "terrain",
+      "label": "岸线·沙滩/礁石带贴图",
+      "view": "top",
+      "required": false,
+      "note": "厂区与海面之间的窄过渡带（浅滩、礁石）。可选，没有则用渐变+波纹模拟。",
+      "file": "public/water-security/assets/scenes-v2/terrain/shoreline_tex.png",
+      "url": "/water-security/assets/scenes-v2/terrain/shoreline_tex.png",
+      "width_px": null,
+      "height_px": null,
+      "transparent": true
+    },
+    {
+      "id": "jetty_tex",
+      "category": "terrain",
+      "label": "码头/取水口结构贴图",
+      "view": "top",
+      "required": false,
+      "note": "参考图右侧伸入海中的取水口栈桥与排放口结构。可选。",
+      "file": "public/water-security/assets/scenes-v2/terrain/jetty_tex.png",
+      "url": "/water-security/assets/scenes-v2/terrain/jetty_tex.png",
+      "width_px": null,
+      "height_px": null,
+      "transparent": true
+    },
+    {
+      "id": "ship_wake",
+      "category": "terrain",
+      "label": "船尾泡沫尾迹·透明",
+      "view": "top",
+      "required": true,
+      "note": "目标船尾部的白色 V 形尾迹。参考图中 T001 船尾有明显的白色航迹水线。",
+      "file": "public/water-security/assets/scenes-v2/terrain/ship_wake.png",
+      "url": "/water-security/assets/scenes-v2/terrain/ship_wake.png",
+      "width_px": 887,
+      "height_px": 1774,
+      "transparent": true,
+      "opaque_bbox_px": [
+        80,
+        111,
+        796,
+        1633
+      ],
+      "visible_length_fraction": 0.8579481397970687,
+      "anchor_uv": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "id": "steam_plume",
+      "category": "terrain",
+      "label": "核岛蒸汽羽流·透明",
+      "view": "top",
+      "required": false,
+      "note": "参考图核岛上空没有明显蒸汽，但真实现场有。可选。",
+      "file": "public/water-security/assets/scenes-v2/terrain/steam_plume.png",
+      "url": "/water-security/assets/scenes-v2/terrain/steam_plume.png",
+      "width_px": 1024,
+      "height_px": 1536,
+      "transparent": true
+    },
+    {
+      "id": "radar_station",
+      "category": "sprites",
+      "label": "雷达站 R01·写实俯视",
+      "view": "top",
+      "required": false,
+      "note": "参考图左下角有一个白色的小型雷达站建筑。",
+      "file": "public/water-security/assets/scenes-v2/sprites/radar_station.png",
+      "url": "/water-security/assets/scenes-v2/sprites/radar_station.png",
+      "width_px": null,
+      "height_px": null,
+      "transparent": true
+    },
+    {
+      "id": "nav_beacon",
+      "category": "sprites",
+      "label": "航标灯桩·写实俯视",
+      "view": "top",
+      "required": true,
+      "note": "参考图右下角有一根红白色航标灯桩（红顶白身）。",
+      "file": "public/water-security/assets/scenes-v2/sprites/nav_beacon.png",
+      "url": "/water-security/assets/scenes-v2/sprites/nav_beacon.png",
+      "width_px": 1254,
+      "height_px": 1254,
+      "transparent": true,
+      "opaque_bbox_px": [
+        151,
+        110,
+        1096,
+        1153
+      ],
+      "visible_length_fraction": 0.8317384370015949,
+      "anchor_uv": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "id": "campus_oblique",
+      "category": "terrain",
+      "label": "森林海岸工业港湾·固定斜俯视背景",
+      "view": "oblique",
+      "required": false,
+      "note": "固定斜俯视背景（已烘焙林地/厂区/码头立体细节）。启用时须关闭正俯视底图、重复建筑与防波堤层，且不可再套 2.5D 倾斜变换。",
+      "file": "public/water-security/assets/scenes-v2/terrain/campus_oblique_v3.png",
+      "url": "/water-security/assets/scenes-v2/terrain/campus_oblique_v3.png",
+      "width_px": 1536,
+      "height_px": 1024,
+      "transparent": false,
+      "world_bounds_enu": null,
+      "anchor_hint": "固定斜视，无 ENU 配准；按图片局部坐标与目标层共用同一缩放/平移容器"
+    },
+    {
+      "id": "ais_shore_station_45",
+      "category": "sprites",
+      "label": "AIS 岸台 A01·斜俯视立牌",
+      "view": "iso",
+      "required": true,
+      "note": "AIS 岸台：双 VHF 竖直天线、GNSS 天线、支架与设备箱。固定 45° 斜俯视，底座锚点用于与水面斜面贴地。",
+      "file": "public/water-security/assets/scenes-v2/sprites/ais_shore_station_45.png",
+      "url": "/water-security/assets/scenes-v2/sprites/ais_shore_station_45.png",
+      "width_px": 1024,
+      "height_px": 1536,
+      "transparent": true,
+      "opaque_bbox_px": [
+        241,
+        42,
+        757,
+        1525
+      ],
+      "ground_anchor_uv": [
+        0.489,
+        0.985
+      ],
+      "anchor_uv": [
+        0.5,
+        0.985
+      ],
+      "display_height_px": 92,
+      "contains_scan_animation": false
+    },
+    {
+      "id": "eo_turret_45",
+      "category": "sprites",
+      "label": "光电转塔 E01·斜俯视立牌",
+      "view": "iso",
+      "required": true,
+      "note": "光电转塔：双通道镜头、俯仰支架、方位底座。固定 45° 斜俯视，底座锚点用于与水面斜面贴地。",
+      "file": "public/water-security/assets/scenes-v2/sprites/eo_turret_45.png",
+      "url": "/water-security/assets/scenes-v2/sprites/eo_turret_45.png",
+      "width_px": 1254,
+      "height_px": 1254,
+      "transparent": true,
+      "opaque_bbox_px": [
+        162,
+        46,
+        1082,
+        1222
+      ],
+      "ground_anchor_uv": [
+        0.405,
+        0.985
+      ],
+      "anchor_uv": [
+        0.405,
+        0.985
+      ],
+      "display_height_px": 56,
+      "contains_scan_animation": false
+    },
+    {
+      "id": "coastal_radar_station_45",
+      "category": "sprites",
+      "label": "岸基雷达站 R01·斜俯视立牌",
+      "view": "iso",
+      "required": true,
+      "note": "岸基雷达站：水平开放式扫描天线、塔架、设备箱。固定 45° 斜俯视，底座锚点用于与水面斜面贴地；扫描扇区与距离环由代码单独绘制。",
+      "file": "public/water-security/assets/scenes-v2/sprites/coastal_radar_station_45.png",
+      "url": "/water-security/assets/scenes-v2/sprites/coastal_radar_station_45.png",
+      "width_px": 1024,
+      "height_px": 1536,
+      "transparent": true,
+      "opaque_bbox_px": [
+        69,
+        30,
+        922,
+        1520
+      ],
+      "ground_anchor_uv": [
+        0.495,
+        0.985
+      ],
+      "anchor_uv": [
+        0.495,
+        0.985
+      ],
+      "display_height_px": 102,
+      "contains_scan_animation": false
+    }
+  ],
+  "ships": [
+    {
+      "id": "cargo_90m_top",
+      "label": "90米通用货轮",
+      "file": "public/water-security/assets/scenes-v2/ships/cargo_90m_top.png",
+      "url": "/water-security/assets/scenes-v2/ships/cargo_90m_top.png",
+      "length_m": 90,
+      "beam_m": 14,
+      "required": true,
+      "width_px": 887,
+      "height_px": 1774,
+      "category": "ships",
+      "view": "top",
+      "transparent": true,
+      "opaque_bbox_px": [
+        295,
+        28,
+        593,
+        1741
+      ],
+      "anchor_uv": [
+        0.5,
+        0.5
+      ],
+      "bow_direction": "image_up",
+      "body_fraction_xy": [
+        0.3212890625,
+        0.9544270833333334
+      ],
+      "alpha_nonzero_bbox_px": [
+        0,
+        31,
+        970,
+        1536
+      ],
+      "opaque_bbox_threshold": 250,
+      "mode": "RGBA",
+      "visible_length_fraction": 0.9656144306651635
+    },
+    {
+      "id": "tanker_140m_top",
+      "label": "140米油轮",
+      "file": "public/water-security/assets/scenes-v2/ships/tanker_140m_top.png",
+      "url": "/water-security/assets/scenes-v2/ships/tanker_140m_top.png",
+      "length_m": 140,
+      "beam_m": 22,
+      "required": false,
+      "width_px": 1024,
+      "height_px": 1536,
+      "category": "ships",
+      "view": "top",
+      "transparent": true,
+      "opaque_bbox_threshold": 250,
+      "mode": "RGBA"
+    },
+    {
+      "id": "container_160m_top",
+      "label": "160米集装箱船",
+      "file": "public/water-security/assets/scenes-v2/ships/container_160m_top.png",
+      "url": "/water-security/assets/scenes-v2/ships/container_160m_top.png",
+      "length_m": 160,
+      "beam_m": 25,
+      "required": false,
+      "width_px": 1024,
+      "height_px": 1536,
+      "category": "ships",
+      "view": "top",
+      "transparent": true,
+      "opaque_bbox_threshold": 250,
+      "mode": "RGBA"
+    },
+    {
+      "id": "bulk_180m_top",
+      "label": "180米散货船",
+      "file": "public/water-security/assets/scenes-v2/ships/bulk_180m_top.png",
+      "url": "/water-security/assets/scenes-v2/ships/bulk_180m_top.png",
+      "length_m": 180,
+      "beam_m": 29,
+      "required": false,
+      "width_px": 1024,
+      "height_px": 1536,
+      "category": "ships",
+      "view": "top",
+      "transparent": true,
+      "opaque_bbox_threshold": 250,
+      "mode": "RGBA"
+    },
+    {
+      "id": "fishing_24m_top",
+      "label": "24米渔船",
+      "file": "public/water-security/assets/scenes-v2/ships/fishing_24m_top.png",
+      "url": "/water-security/assets/scenes-v2/ships/fishing_24m_top.png",
+      "length_m": 24,
+      "beam_m": 7,
+      "required": true,
+      "width_px": 887,
+      "height_px": 1774,
+      "category": "ships",
+      "view": "top",
+      "transparent": true,
+      "opaque_bbox_px": [
+        190,
+        45,
+        697,
+        1722
+      ],
+      "anchor_uv": [
+        0.5,
+        0.5
+      ],
+      "bow_direction": "image_up",
+      "body_fraction_xy": [
+        0.4130859375,
+        0.9381510416666666
+      ],
+      "alpha_nonzero_bbox_px": [
+        0,
+        17,
+        1010,
+        1536
+      ],
+      "opaque_bbox_threshold": 250,
+      "mode": "RGBA",
+      "visible_length_fraction": 0.9453213077790305
+    },
+    {
+      "id": "engineering_60m_top",
+      "label": "60米工程船",
+      "file": "public/water-security/assets/scenes-v2/ships/engineering_60m_top.png",
+      "url": "/water-security/assets/scenes-v2/ships/engineering_60m_top.png",
+      "length_m": 60,
+      "beam_m": 12,
+      "required": false,
+      "width_px": 1024,
+      "height_px": 1536,
+      "category": "ships",
+      "view": "top",
+      "transparent": true,
+      "opaque_bbox_threshold": 250,
+      "mode": "RGBA"
+    },
+    {
+      "id": "tug_32m_top",
+      "label": "32米拖轮",
+      "file": "public/water-security/assets/scenes-v2/ships/tug_32m_top.png",
+      "url": "/water-security/assets/scenes-v2/ships/tug_32m_top.png",
+      "length_m": 32,
+      "beam_m": 10,
+      "required": false,
+      "width_px": 1024,
+      "height_px": 1536,
+      "category": "ships",
+      "view": "top",
+      "transparent": true,
+      "opaque_bbox_threshold": 250,
+      "mode": "RGBA"
+    },
+    {
+      "id": "roro_180m_top",
+      "label": "180米客滚船",
+      "file": "public/water-security/assets/scenes-v2/ships/roro_180m_top.png",
+      "url": "/water-security/assets/scenes-v2/ships/roro_180m_top.png",
+      "length_m": 180,
+      "beam_m": 30,
+      "required": false,
+      "width_px": 1024,
+      "height_px": 1536,
+      "category": "ships",
+      "view": "top",
+      "transparent": true,
+      "opaque_bbox_threshold": 250,
+      "mode": "RGBA"
+    }
+  ],
+  "seam_notes": {
+    "sea_surface": {
+      "mean_abs_left_right_8bit": 1.68,
+      "mean_abs_top_bottom_8bit": 2.4,
+      "opposite_edges_identical": false,
+      "note": "边缘非严格逐像素相等；渲染时建议用四象限镜像 pattern 消除跳变"
+    },
+    "breakwater_tex": {
+      "mean_abs_left_right_8bit": 7.097,
+      "mean_abs_top_bottom_8bit": 28.155,
+      "opposite_edges_identical": false,
+      "note": "仅支持水平重复；垂直方向不适合直接无缝重复"
+    }
+  },
+  "registration": {
+    "verified": false,
+    "note": "world_bounds_enu 仅为候选放置范围，图片内无已核验 ENU 控制点；场景应标注为『示意』"
+  }
+}

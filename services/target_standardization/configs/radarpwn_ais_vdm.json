@@ -1,0 +1,19 @@
+{
+  "source_id": "radarpwn_ais_rostock_benign_03",
+  "source_type": "ais_vdm",
+  "session_id": "radarpwn-radarrostock-benign-03-20220603163049",
+  "data_root": "data/radarpwn",
+  "frame_id": "wgs84",
+  "simulation_date_binding": "zda_date",
+  "placeholder_positions": [
+    [0.0, 0.0]
+  ],
+  "notes": [
+    "来源为 RadarPWN 包内的 ais_with_capture_time.csv：7719 条 !AIVDM 报文，全部为位置报文（类型 1/2/3），校验和全部通过。",
+    "解码后得到 76 个 MMSI 的动态位置轨迹。",
+    "报文的 second 为分钟内秒数（0-59），跨分钟回绕；必须结合抓包时间所在分钟与同一数据流的 ZDA 日期才能还原完整仿真 UTC。",
+    "位置不可用按 AIS 标准编码（纬度 91°、经度 181°）判定，为通用规则。",
+    "(0, 0) 在本数据集中为疑似占位值（18 条），由 placeholder_positions 显式声明；通用适配器不把 (0,0) 一律判为不可用。",
+    "仿真时间与抓包时间分开保存，两条时间线不互相换算。"
+  ]
+}

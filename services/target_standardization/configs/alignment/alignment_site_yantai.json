@@ -1,0 +1,102 @@
+{
+  "alignment_config_id": "alignment_site_yantai_v1",
+  "parameter_version": "mtdsp_verified_v1",
+  "site_frame": {
+    "frame_id": "site_enu_yantai",
+    "datum": "WGS84",
+    "origin_latitude_deg": 37.53297,
+    "origin_longitude_deg": 121.4199,
+    "origin_height_m": 0.0,
+    "description": "现场局部 ENU，原点取雷达站位置（经度取 AIS 双重表达反算标定值）"
+  },
+  "radar_station": {
+    "station_latitude_deg": 37.53297,
+    "station_longitude_deg": 121.4199,
+    "station_height_m": 0.0,
+    "install_heading_deg": 344.0,
+    "reference_point_offset_east_m": 0.0,
+    "reference_point_offset_north_m": 0.0,
+    "reference_point_offset_up_m": 0.0,
+    "magnetic_variation_deg": null
+  },
+  "sources": [
+    {
+      "source_id": "mtdsp_radar_20250305103638",
+      "source_type": "radar_cutdata",
+      "time": {
+        "known_clock_offset_s": 0.0,
+        "time_resolution_s": 1.0,
+        "time_quantum_s": 0.0,
+        "known_quantum_bias_s": 0.0,
+        "use_state_time_utc": true,
+        "fallback_to_receive_time": true,
+        "use_relative_time_base": true,
+        "reference_local_datetime": "2025-03-05 10:35:38"
+      },
+      "encoding": {
+        "distance_lsb": null,
+        "distance_unit": null,
+        "bearing_lsb_deg": null,
+        "position_lsb_deg": null,
+        "decoded_position_lsb_deg": null
+      },
+      "error_model": {
+        "position_noise_std_m": 0.0,
+        "quantization_lsb_deg": 0.0,
+        "noise_sigma_multiplier": 3.0
+      },
+      "local_id_field": "local_track_id",
+      "notes": {
+        "error_model": "MTDSP 实测（静态目标，AIS 双重表达互检 260 条）：方位差中位 0.021°/最大 0.818°，径向差中位 -0.99 m/最大 7.26 m。测角误差随距离放大（切向误差 5.6 m @4.5 km → 77 m @7.3 km），故单一 position_noise_std_m 不足以描述，待第 4 步标定为距离相关模型。",
+        "station": "站址经度取标定值 121.41990。依据：逐目标反算 AIS 行内（经纬度 + 方位角 + 距离）三元组隐含的站址，5 个目标一致给出东向 -26.5 m、北向 -2 m。注：IF_*.csv 雷达帧头自记站址为 (37.53297, 121.42020)，即 AIS 极坐标列的参考站与雷达设备自记站相差约 26.5 m —— 二者是不同的参考点，不应混用。",
+        "time": "时区未确认，但雷达与 AIS 共享同一设备时钟（IF 帧时间与 AIS/雷达时间在同一采集流程内生成），因此启用相对时间基准：绝对 UTC 不可知，源间相对时差确定。产出时间标记带 (local) 后缀，不可与外部数据直接比较。",
+        "cdt_box_offset": "【已更正，2026-11-06 复核】原表述『CDT 检测框中心相对 AIS 位置系统性偏 165 m』是错的。(1) x_center/y_center 是归一化图像坐标（值域 0-1）不是米，检测框不存在『中心偏 165 m』；CDT 的『目标方位/目标距离』经检验是检测框中心（271/271 落在矩形区间内，相对位置中位 0.51），框本身自洽。(2) 165 m 的成因已查明：这是**两套坐标基准的系统性固定差异**，不是随机误差，也不是数据错误。证据链：IF_*.csv 帧头（123 帧一致）给出雷达自记站址 121.42020；AIS 行内三元组反解参考站为 121.41990；用 AIS 经纬度列 + CDT 极坐标反解所需站址为东移 +132 m（散布仅 11 m）；同文件内 CDT vs AT（光电确认关联）Δ方位 −2.42°（std 0.15°）；跨目标 Δ方位随方位角变号，符合站址偏移特征而非统一旋转。⇒ CDT 参考点比 AIS 参考点偏东约 159 m，3.9 km 处对应 2.4° 方位差，与实测吻合。处理要求：跨源比对前统一站址基准或显式扣除该系统差；当作随机噪声会让关联门限整体失效。",
+        "at_snapshot_caveat": "AT 行的方位/距离是 AIS 极坐标的**快照拷贝**（逐点残差 0.0000°/0.000 m），且在数分钟内冻结不变；挂靠的是该目标最后一次 AIS 报告，与 AT 行自身时间戳可相差 3215 s（412331720）、3730 s（413301480）。跨源时序比对必须先用极坐标反查对应 AIS 记录时刻，不能直接用 AT 行时间戳。"
+      }
+    },
+    {
+      "source_id": "mtdsp_ais_20250305103638",
+      "source_type": "ais",
+      "time": {
+        "known_clock_offset_s": 0.0,
+        "time_resolution_s": 1.0,
+        "time_quantum_s": 0.0,
+        "known_quantum_bias_s": 0.0,
+        "use_state_time_utc": true,
+        "fallback_to_receive_time": true,
+        "use_relative_time_base": true,
+        "reference_local_datetime": "2025-03-05 10:35:38"
+      },
+      "encoding": {
+        "distance_lsb": null,
+        "distance_unit": null,
+        "bearing_lsb_deg": null,
+        "position_lsb_deg": null,
+        "decoded_position_lsb_deg": null
+      },
+      "error_model": {
+        "position_noise_std_m": 0.0,
+        "quantization_lsb_deg": 0.0,
+        "noise_sigma_multiplier": 3.0
+      },
+      "local_id_field": "local_track_id",
+      "notes": {
+        "encoding": "AIS CSV 实测小数位：经度 0.001°、纬度 0.0001°。",
+        "time": "时区未确认，但与雷达共享同一设备时钟，启用相对时间基准（reference_local_datetime=2025-03-05 10:35:38）。"
+      }
+    }
+  ],
+  "output_time_step_s": 1.0,
+  "max_interpolation_gap_s": 10.0,
+  "own_ship_heading_deg": null,
+  "time_grid_start_seconds_of_day": 54000.0,
+  "platform_state": {
+    "enabled": true,
+    "if_directory": "data/mtdsp",
+    "if_filename": "IF_2003_AT_413203610.csv",
+    "match_tolerance_s": 10.0,
+    "applied_to_bearing_conversion": false,
+    "notes": "【平台自身状态，2026-11-08 接入】把 IF_*.csv 帧头的 `航向角(°)` 与 `速度(nm/h)` 关联到雷达记录上（字段 platform_heading_deg / platform_speed_mps）。这两个量描述**雷达平台自身**（固定岸基站的 GNSS 状态），不是被观测目标。\n⚠️ 平台航向**不参与**方位→ENU 换算。决定性判据：用**权威 AIS** 反算真方位（以 IF 帧头给出的雷达自记站址 37.53297, 121.42020 为参考点），与雷达上报的 `目标方位(°)` 比较 —— 『不修正』时残差中位数仅 0.446°(03-05) / 0.530°(03-12)；叠加平台航向则恶化到 6.60° / 6.43°；叠加 `角度修正(°)=344` 恶化到 15.55° / 15.87° ⇒ `目标方位(°)` 已是真方位基准，与平台艏向无关。残余 0.45°~0.53° 偏差源于目标运动与 AIS 上报时延（残差随距离放大），不是坐标基准错误。该判据完全独立于 IF 方位码，只依赖 AIS 与站址。\n关联方式：帧号优先、时间兜底。IF 与 Cut 帧率不同（IF 帧间隔 2–3 s，Cut 2–5 s），故帧号命中后不再用时间否决；时间兜底容差 10 s。\n实测：平台航向 352.0°..353.9°（03-05）、353.0°..353.9°（03-12）；平台速度 0~26 mm/s —— 即固定岸基站的 GNSS 定位抖动，不是真实位移。\n【.dat 补齐】CSV 的 `航向角(°)` 只在部分行填写（03-05 包 126/127 帧，03-12 包仅 6/152 帧），但 `.dat` 的每条脉冲记录都带完整帧头，且 CSV 行序与 .dat 记录序逐行一一对应、帧内状态恒定，因此用 .dat 补齐每帧缺失的航向角与速度。路径由配置显式给出，文件不存在时自动退回仅用 CSV（行为退化为不补齐）。",
+    "if_dat_path": "/tmp/mtdsp_raw/IF_2003_AT_413203610.dat"
+  }
+}

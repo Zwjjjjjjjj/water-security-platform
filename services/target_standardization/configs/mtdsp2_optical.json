@@ -1,0 +1,32 @@
+{
+  "source_id": "mtdsp_optical_20250312101233",
+  "source_type": "optical",
+  "session_id": "mtdsp-20250312101233",
+  "data_root": "data/mtdsp2",
+  "frame_id": "radar_local_polar",
+  "timezone_known": false,
+  "timezone_name": null,
+  "station_latitude_deg": 37.53295,
+  "station_longitude_deg": 121.4202,
+  "max_range_m": 20000.0,
+  "image_width_px": 1920,
+  "image_height_px": 1080,
+  "provenance": {
+    "program": "海上目标数据共享计划（MTDSP）——海上目标多源观测数据集",
+    "publisher": "海军航空大学",
+    "doi": "10.12000/JR25001",
+    "package_name": "20250312101233_2003_AT_413203610_1.zip",
+    "source_file": "Photo_ScreenShot_Inf|TV_*.txt + *_DLDete.txt"
+  },
+  "notes": [
+    "补充数据集（采集时间 2025-03-12 10:12:33），光电设备与 03-05 包相同：DS-2ZTD816CX-HB/YT（PHK003）。",
+    "本包光电文件 120 个（120 个元数据 txt + 106 个 DLDete + 120 张 jpg），光学目标 1-5 个/帧。",
+    "雷达站址取本包 IF_2003_AT_413203610.csv 帧头记录值 (37.53295, 121.42020)，与 03-05 包的 (37.53297, 121.42020) 略有差异，按各包自身记录值分别配置，不做跨包统一。",
+    "DLDete 字段语义与 03-05 包一致，已在两包上分别核验。",
+    "【重要】本包 .txt 的目标距离(M) 有 11 个档位：前 6 档（5262.91→4682.29）与 AIS_Trajectory_413203610.csv 的距离(m) 逐条精确相等（差<0.01m，属 AIS 快照拷贝）；后 5 档（4612.90→4303.34）在 AIS 数据结束时刻 10:15:03 之后，为光电独立测距。",
+    "光电独立测距段与 AIS 末速度线性外推的差值随时间线性增长（+4.6→+334m），已查明原因是该船在持续减速（AIS 报速 9.0-9.3kn，但由距离变化率反算的实际接近速度为 8.73→5.72kn，航向 160°→121° 持续右转）。跨源比对必须用速度矢量投影到视线方向，不能用报速直接外推距离。",
+    "本包有 37 条 CutDataTarget 记录带 光电匹配时间/匹配编号，其中 14 条 CDT 行的 目标编号 直接是 MMSI，构成数据集自带的跨源关联真值，可用于评估关联算法。",
+    "距离合理性过滤阈值同 03-05 包：实测 DLDete 测距散布至 28km/45-50km/234-350km，属误检且置信度不足以区分，超限记录保留但标记不可用于空间对齐。"
+  ],
+  "ais_range_index_dir": "data/mtdsp2"
+}
