@@ -44,6 +44,11 @@ out/
 result/
 results/
 logs/
+
+# 例外：场景基线是测试固定输入 + 参考真值，非生成物，需随仓库分发
+!services/target_standardization/output/
+!services/target_standardization/output/scenarios/
+!services/target_standardization/output/scenarios/**
 *.log
 npm-debug.log*
 yarn-debug.log*

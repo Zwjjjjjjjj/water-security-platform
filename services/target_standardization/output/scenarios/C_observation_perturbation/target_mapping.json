@@ -1,0 +1,13 @@
+{
+  "scenario_id": "C_observation_perturbation",
+  "purpose": "仅供评测使用，不参与任何观测生成过程",
+  "pairs": [
+    {
+      "radar_source_id": "sim_radar",
+      "radar_local_track_id": "00",
+      "ais_source_id": "sim_ais",
+      "ais_local_track_id": "228050803",
+      "sim_mmsi": 228050803
+    }
+  ]
+}

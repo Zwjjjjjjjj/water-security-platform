@@ -1,0 +1,137 @@
+{
+  "scenario_id": "C_observation_perturbation",
+  "description": "观测扰动：两路分别加入位置误差、坐标量化与短时漏报。用于检查对齐误差与缺失处理。误差参数已用 MTDSP 实测数据重标定（见 calibration/mtdsp_error_model.py 与 output/calibration/mtdsp_error_model.json）。",
+  "config": {
+    "scenario_id": "C_observation_perturbation",
+    "description": "观测扰动：两路分别加入位置误差、坐标量化与短时漏报。用于检查对齐误差与缺失处理。误差参数已用 MTDSP 实测数据重标定（见 calibration/mtdsp_error_model.py 与 output/calibration/mtdsp_error_model.json）。",
+    "sim_date": "2019-09-30",
+    "sim_start_time_of_day_s": 54000.0,
+    "radar_latitude_deg": 54.1082,
+    "radar_longitude_deg": 12.0568,
+    "radar_target_number": "00",
+    "radar_target_name": "TGT00",
+    "radar_unit": "N",
+    "sim_mmsi": 228050803,
+    "sim_heading_deg": 344.0,
+    "target_start_east_m": 400.0,
+    "target_start_north_m": 3000.0,
+    "template_source_csv": "/root/target_standardization/data/radarpwn/ais_with_capture_time.csv",
+    "template_mmsi": "228050803",
+    "template_placeholder_positions": [
+      [
+        0.0,
+        0.0
+      ]
+    ],
+    "reference_resample_dt_s": 1.0,
+    "reference_outlier_threshold_m": 60.0,
+    "reference_smooth_window": 5,
+    "radar_sensor": {
+      "name": "radar",
+      "enabled": true,
+      "sample_dt_s": 1.0,
+      "receive_delay_s": 0.2,
+      "clock_offset_s": 0.0,
+      "position_noise_std_m": 3.55,
+      "bearing_noise_std_deg": 0.02821,
+      "bearing_bias_deg": 0.0,
+      "quantization_deg": 0.0,
+      "dropout_duration_s": 3.0,
+      "dropout_probability": 0.004,
+      "speed_noise_std_mps": 0.15
+    },
+    "ais_sensor": {
+      "name": "ais",
+      "enabled": true,
+      "sample_dt_s": 2.0,
+      "receive_delay_s": 0.6,
+      "clock_offset_s": 0.0,
+      "position_noise_std_m": 3.55,
+      "bearing_noise_std_deg": 0.0,
+      "bearing_bias_deg": 0.0,
+      "quantization_deg": 0.0001,
+      "dropout_duration_s": 5.0,
+      "dropout_probability": 0.003,
+      "speed_noise_std_mps": 0.25
+    },
+    "capture_clock_epoch_utc": "2022-06-03T16:30:00+00:00",
+    "random_seed": 20240603,
+    "notes": {
+      "error_parameter_provenance": {
+        "source": "MTDSP-20250305103638-2003-AT-413203610-1（海上目标多源观测数据集，DOI 10.12000/JR25001）",
+        "method": "AIS CSV 双重表达互检（经纬度 vs 雷达极坐标），260 条样本，静止目标逐目标去偏",
+        "calibration_script": "calibration/mtdsp_error_model.py",
+        "previous_values": {
+          "radar_position_noise_std_m": 12.0,
+          "ais_position_noise_std_m": 25.0,
+          "note": "原值为拍脑袋设定，配置原注『模拟设定值，无独立真值支持』"
+        },
+        "new_values": {
+          "radar_position_noise_std_m": 3.55,
+          "radar_bearing_noise_std_deg": 0.02821,
+          "ais_position_noise_std_m": 3.55,
+          "basis": "MTDSP 静止目标逐目标去偏后的实测随机残差 std"
+        },
+        "structure_added": {
+          "bearing_noise_std_deg": "测角噪声作用在方位角上，切向影响随距离线性放大（切向误差 ≈ 方位残差 × 距离）。这是 MTDSP 实测到的真实结构，旧的各向同性 position_noise_std_m 无法描述。",
+          "bearing_bias_deg": "每传感器一个稳定方位偏置，模拟 MTDSP 各目标独立的稳定方位偏差（实测 +0.008° / +0.038° / +0.342° / +0.806°）。该量级已接近随机残差 std，若不显式建模会把系统量当噪声。"
+        },
+        "known_limitations": [
+          "MTDSP 的 AIS 编码量化实测为经度 0.001°（≈88.3 m）、纬度 0.0001°（≈11.1 m），远粗于本场景 AIS 的 0.0001°。此处沿用本场景原量化步长未改 —— 若要完全对齐 MTDSP，应改为 0.001°/0.0001° 双轴不同步长，但当前模拟器只支持单一量化步长。",
+          "MTDSP 各目标的系统方位偏差是个体量，无法用单一传感器常量代表；本场景按 0 处理，仅用 bearing_bias_deg 提供机制。",
+          "MTDSP 的测距随机残差 std 在不同去偏口径下为 3.55-6.10 m，此处取较保守的 3.55 m 并在报告中标注口径。"
+        ]
+      }
+    }
+  },
+  "reference_trajectory": {
+    "source_file": "/root/target_standardization/data/radarpwn/ais_with_capture_time.csv",
+    "source_mmsi": "228050803",
+    "source_points": 173,
+    "outliers_removed": [],
+    "outlier_threshold_m": 60.0,
+    "resample_dt_s": 1.0,
+    "smooth_window": 5,
+    "origin": {
+      "latitude_deg": 54.260303,
+      "longitude_deg": 12.048277
+    },
+    "reference_duration_s": 1085.0,
+    "reference_point_count": 1086,
+    "decode_stats": {
+      "total_sentences": 7719,
+      "decoded": 7719,
+      "decode_failed": 0,
+      "skipped_placeholder": 18,
+      "skipped_unavailable_encoding": 0,
+      "track_count": 73
+    },
+    "semantics": "共同参考轨迹代表新模拟场景中的设定运动，取自实测轨迹形态，不代表任何原始船舶的实测真值。",
+    "alignment": {
+      "template_start_east_m": 400.0,
+      "template_start_north_m": 3000.0,
+      "target_start_east_m": 400.0,
+      "target_start_north_m": 3000.0,
+      "offset_east_m": 401.32,
+      "offset_north_m": 2995.143,
+      "note": "模板轨迹整体平移以对齐场景起始位置；形态（采样间隔、速度变化、航向变化）来自实测轨迹，位置为场景设定值。"
+    },
+    "scenario_id": "C_observation_perturbation"
+  },
+  "counts": {
+    "radar_observations": 1080,
+    "radar_dropped": 6,
+    "ais_observations": 540,
+    "ais_dropped": 3,
+    "truth_rows": 1629,
+    "context_rows": 545
+  },
+  "files": {
+    "radar_ttm": "radar_ttm_with_capture_time.csv",
+    "ais_vdm": "ais_with_capture_time.csv",
+    "context": "all_incoming_nmea_with_capture_time.csv",
+    "truth": "reference_truth.csv",
+    "mapping": "target_mapping.json",
+    "manifest": "scenario_manifest.json"
+  }
+}

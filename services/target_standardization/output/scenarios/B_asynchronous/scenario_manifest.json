@@ -1,0 +1,111 @@
+{
+  "scenario_id": "B_asynchronous",
+  "description": "异步观测：雷达与 AIS 采用不同采样周期，并加入已知的时间偏移与接收延迟。用于检查时间整理与匹配。",
+  "config": {
+    "scenario_id": "B_asynchronous",
+    "description": "异步观测：雷达与 AIS 采用不同采样周期，并加入已知的时间偏移与接收延迟。用于检查时间整理与匹配。",
+    "sim_date": "2019-09-30",
+    "sim_start_time_of_day_s": 54000.0,
+    "radar_latitude_deg": 54.1082,
+    "radar_longitude_deg": 12.0568,
+    "radar_target_number": "00",
+    "radar_target_name": "TGT00",
+    "radar_unit": "N",
+    "sim_mmsi": 228050803,
+    "sim_heading_deg": 344.0,
+    "target_start_east_m": 400.0,
+    "target_start_north_m": 3000.0,
+    "template_source_csv": "/root/target_standardization/data/radarpwn/ais_with_capture_time.csv",
+    "template_mmsi": "228050803",
+    "template_placeholder_positions": [
+      [
+        0.0,
+        0.0
+      ]
+    ],
+    "reference_resample_dt_s": 1.0,
+    "reference_outlier_threshold_m": 60.0,
+    "reference_smooth_window": 5,
+    "radar_sensor": {
+      "name": "radar",
+      "enabled": true,
+      "sample_dt_s": 2.0,
+      "receive_delay_s": 0.4,
+      "clock_offset_s": 0.25,
+      "position_noise_std_m": 0.0,
+      "bearing_noise_std_deg": 0.0,
+      "bearing_bias_deg": 0.0,
+      "quantization_deg": 0.0,
+      "dropout_duration_s": 0.0,
+      "dropout_probability": 0.0,
+      "speed_noise_std_mps": 0.0
+    },
+    "ais_sensor": {
+      "name": "ais",
+      "enabled": true,
+      "sample_dt_s": 5.0,
+      "receive_delay_s": 1.2,
+      "clock_offset_s": -0.5,
+      "position_noise_std_m": 0.0,
+      "bearing_noise_std_deg": 0.0,
+      "bearing_bias_deg": 0.0,
+      "quantization_deg": 0.0,
+      "dropout_duration_s": 0.0,
+      "dropout_probability": 0.0,
+      "speed_noise_std_mps": 0.0
+    },
+    "capture_clock_epoch_utc": "2022-06-03T16:30:00+00:00",
+    "random_seed": 20240603,
+    "notes": {}
+  },
+  "reference_trajectory": {
+    "source_file": "/root/target_standardization/data/radarpwn/ais_with_capture_time.csv",
+    "source_mmsi": "228050803",
+    "source_points": 173,
+    "outliers_removed": [],
+    "outlier_threshold_m": 60.0,
+    "resample_dt_s": 1.0,
+    "smooth_window": 5,
+    "origin": {
+      "latitude_deg": 54.260303,
+      "longitude_deg": 12.048277
+    },
+    "reference_duration_s": 1085.0,
+    "reference_point_count": 1086,
+    "decode_stats": {
+      "total_sentences": 7719,
+      "decoded": 7719,
+      "decode_failed": 0,
+      "skipped_placeholder": 18,
+      "skipped_unavailable_encoding": 0,
+      "track_count": 73
+    },
+    "semantics": "共同参考轨迹代表新模拟场景中的设定运动，取自实测轨迹形态，不代表任何原始船舶的实测真值。",
+    "alignment": {
+      "template_start_east_m": 400.0,
+      "template_start_north_m": 3000.0,
+      "target_start_east_m": 400.0,
+      "target_start_north_m": 3000.0,
+      "offset_east_m": 401.32,
+      "offset_north_m": 2995.143,
+      "note": "模板轨迹整体平移以对齐场景起始位置；形态（采样间隔、速度变化、航向变化）来自实测轨迹，位置为场景设定值。"
+    },
+    "scenario_id": "B_asynchronous"
+  },
+  "counts": {
+    "radar_observations": 543,
+    "radar_dropped": 0,
+    "ais_observations": 218,
+    "ais_dropped": 0,
+    "truth_rows": 761,
+    "context_rows": 220
+  },
+  "files": {
+    "radar_ttm": "radar_ttm_with_capture_time.csv",
+    "ais_vdm": "ais_with_capture_time.csv",
+    "context": "all_incoming_nmea_with_capture_time.csv",
+    "truth": "reference_truth.csv",
+    "mapping": "target_mapping.json",
+    "manifest": "scenario_manifest.json"
+  }
+}
