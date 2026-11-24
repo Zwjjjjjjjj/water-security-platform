@@ -1,6 +1,23 @@
 # sonar_pipeline — 统一声呐航迹系统（原始数据 → 单声呐跟踪 → 航迹关联 → 融合）
 
-唯一入口：`python3 /root/sonar_pipeline/run_pipeline.py`
+唯一入口：`python3 run_pipeline.py`（本目录内执行）
+
+> **路径说明**：本工程以自身位置为准（基于 `__file__` 推导），可放置在任意目录。
+> 外部依赖（Tritech / two_sonar 工程、GLF 原始数据、DFKI 数据集、输出根目录）
+> 通过环境变量覆盖，默认值见下表；配置文件 `config/pipeline.json` 为次级来源。
+
+| 环境变量 | 用途 | 默认值 |
+|---|---|---|
+| `TRITECH_ROOT` | Tritech 单声呐跟踪工程 | `/root/Tritech_GLF_Track_Project` |
+| `TWO_SONAR_ROOT` | 多声呐关联/融合引擎工程 | `/root/two_sonar_association` |
+| `GLF_PATH` | GLF 原始数据 | `/root/data/log_2025-06-19-203913.glf` |
+| `GLF_PROFILE` | GLF 传感器剖面配置 | `$TRITECH_ROOT/config/tanana_203913_profile.json` |
+| `DFKI_ROOT` | DFKI 数据集根目录 | `/root/Diver Tracking - Sonar` |
+| `PIPELINE_OUT` | 输出根目录 | 仓库根 `outputs/` |
+| `LEGACY_E2E_ROOT` | Stage 2/3 只读缓存回退目录 | `/root/outputs_e2e` |
+| `DFKI_OUTPUT_V15` | SIM 分支参考航迹回退目录 | `/root/dfki_output_v15` |
+
+优先级：**环境变量 > `config/pipeline.json` > 内置默认值**。
 
 ```
 原始数据 ──► Stage 1/2/3 单声呐跟踪/标准化 ──► Stage 4 本地航迹 ──► Stage 5 关联 ──► Stage 6 融合 ──► Stage 7/8 评估
@@ -17,16 +34,16 @@
 
 ```bash
 # REAL 全量 N=2（GLF + DFKI 1-4，含评估）
-python3 /root/sonar_pipeline/run_pipeline.py --mode real --datasets all --stages 4,5,6,7,8 --out /root/outputs
+python3 run_pipeline.py --mode real --datasets all --stages 4,5,6,7,8 --out /root/outputs
 # REAL N=3（输出到独立目录，避免覆盖 N=2）
-python3 /root/sonar_pipeline/run_pipeline.py --mode real --datasets all --stages 4,5,6 --sensors SONAR_A,SONAR_B,SONAR_C --out /root/outputs_n3
+python3 run_pipeline.py --mode real --datasets all --stages 4,5,6 --sensors SONAR_A,SONAR_B,SONAR_C --out /root/outputs_n3
 # REAL N=4 抽查
-python3 /root/sonar_pipeline/run_pipeline.py --mode real --datasets dfki_set_1 --stages 4,5,6 --sensors SONAR_A,SONAR_B,SONAR_C,SONAR_D --out /tmp/n4test
+python3 run_pipeline.py --mode real --datasets dfki_set_1 --stages 4,5,6 --sensors SONAR_A,SONAR_B,SONAR_C,SONAR_D --out /tmp/n4test
 # SIM（N 虚拟声呐，默认 easy）
-python3 /root/sonar_pipeline/run_pipeline.py --mode sim --n-sonars 2 --out /tmp/simtest
-python3 /root/sonar_pipeline/run_pipeline.py --mode sim --n-sonars 4 --out /tmp/simtest4
+python3 run_pipeline.py --mode sim --n-sonars 2 --out /tmp/simtest
+python3 run_pipeline.py --mode sim --n-sonars 4 --out /tmp/simtest4
 # 全部（real all + sim N=2）
-python3 /root/sonar_pipeline/run_pipeline.py --mode all --out /root/outputs
+python3 run_pipeline.py --mode all --out /root/outputs
 ```
 
 常用参数：`--mode real|sim|all`、`--datasets all|glf,dfki_set_1...`、
@@ -37,7 +54,7 @@ python3 /root/sonar_pipeline/run_pipeline.py --mode all --out /root/outputs
 ## 2. 目录结构
 
 ```
-/root/sonar_pipeline/
+services/sonar_pipeline/
   run_pipeline.py              # 唯一 CLI 入口（real / sim / all）
   config/pipeline.json         # 唯一可信配置（见 §4）
   sonar_pipeline/

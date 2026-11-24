@@ -79,11 +79,26 @@ python -m pytest tests/ -v
 
 ### 2. 声纳流水线
 
+本工程是**编排层**：Stage 1–3 复用 Tritech 单声呐跟踪工程，Stage 5/6 复用 two_sonar 的官方关联/融合引擎，
+这些依赖位于本仓库之外，需通过环境变量指定位置。
+
 ```bash
 cd services/sonar_pipeline
 pip install numpy scipy matplotlib
-python run_pipeline.py
+
+# 指向外部依赖（不设置则使用下方默认值）
+export TRITECH_ROOT=/root/Tritech_GLF_Track_Project
+export TWO_SONAR_ROOT=/root/two_sonar_association
+export DFKI_ROOT="/root/Diver Tracking - Sonar"
+export GLF_PATH=/root/data/log_2025-06-19-203913.glf
+
+python3 run_pipeline.py --mode sim --n-sonars 2 --out /tmp/simtest
+python3 run_pipeline.py --mode real --datasets all --stages 4,5,6,7,8 --out /root/outputs
 ```
+
+配置优先级：**环境变量 > `config/pipeline.json` > 内置默认值**。
+支持的变量：`TRITECH_ROOT`、`TWO_SONAR_ROOT`、`GLF_PATH`、`GLF_PROFILE`、
+`DFKI_ROOT`、`PIPELINE_OUT`、`LEGACY_E2E_ROOT`、`DFKI_OUTPUT_V15`。
 
 ### 3. 大屏可视化
 
@@ -126,7 +141,9 @@ npm run preview      # 预览构建产物
 ## 数据说明
 
 仓库内 `services/target_standardization/data/` 保留了 MTDSP / MTDSP2 / RadarPWN 的样例数据，
-用于复现实验与测试。**完整的原始数据集（GLF、雷达原始帧等）不入库**，
+`services/target_standardization/output/scenarios/` 保留了 A/B/C 三场景基线
+（固定输入 + 参考真值，pytest 的测试固定装置）。
+**完整的原始数据集（GLF、雷达原始帧等）不入库**，
 请通过项目文档中记录的获取途径单独下载，并按 `.gitignore` 中的规则放置到对应目录。
 
 ---
