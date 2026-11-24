@@ -19,10 +19,10 @@ Usage:
     python run_pipeline.py --mode all
 """
 from __future__ import annotations
-import argparse, json, sys, time, traceback
+import argparse, json, os, sys, time, traceback
 from pathlib import Path
 
-ROOT = Path("/root/sonar_pipeline")
+ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 
 from sonar_pipeline.common import (
@@ -30,6 +30,10 @@ from sonar_pipeline.common import (
     TRITECH_ROOT,
 )
 from sonar_pipeline import stages as ST
+
+# Legacy cache roots used as read-only fallbacks for stage 2/3.
+# Overridable so the pipeline can run against relocated datasets.
+LEGACY_E2E_ROOT = Path(os.environ.get("LEGACY_E2E_ROOT", "/root/outputs_e2e"))
 
 
 def parse_list(s: str):
@@ -64,12 +68,12 @@ def run_real_dataset(dataset: str, stage_list: list[int] | None, cfg: dict,
             n = dfki_set_num(dataset)
             if dataset_kind(dataset) == "glf":
                 cands = [cand / "02_tracking" / "tracks_raw.csv",
-                         Path("/root/outputs_e2e/glf/stage_2_tracking/02_tracking/tracks_raw.csv"),
+                         LEGACY_E2E_ROOT / "glf" / "stage_2_tracking" / "02_tracking" / "tracks_raw.csv",
                          TRITECH_ROOT / "outputs" / "02_tracking" / "tracks_raw.csv"]
             else:
                 cands = [cand / f"dfki_set_{n}" / "tracks_raw.csv",
-                         Path(f"/root/outputs_e2e/{dataset}/stage_2_tracking/dfki_set_{n}/tracks_raw.csv"),
-                         Path(f"/root/Tritech_GLF_Track_Project/outputs_dfki/dfki_set_{n}/tracks_raw.csv")]
+                         LEGACY_E2E_ROOT / dataset / "stage_2_tracking" / f"dfki_set_{n}" / "tracks_raw.csv",
+                         TRITECH_ROOT / "outputs_dfki" / f"dfki_set_{n}" / "tracks_raw.csv"]
             for c in cands:
                 if c.exists():
                     raw = c; summ = c.parent / c.name.replace("tracks_raw.csv", "track_summary_all.csv")
@@ -84,10 +88,10 @@ def run_real_dataset(dataset: str, stage_list: list[int] | None, cfg: dict,
         else:
             n = dfki_set_num(dataset)
             cands = ([ds_out / "stage_3_standardized" / "glf_standardized.csv",
-                      Path("/root/outputs_e2e/glf/stage_3_standardized/glf_standardized.csv")]
+                      LEGACY_E2E_ROOT / "glf" / "stage_3_standardized" / "glf_standardized.csv"]
                      if dataset_kind(dataset) == "glf" else
                      [ds_out / "stage_3_standardized" / f"{dataset}_standardized.csv",
-                      Path(f"/root/outputs_e2e/{dataset}/stage_3_standardized/{dataset}_standardized.csv")])
+                      LEGACY_E2E_ROOT / dataset / "stage_3_standardized" / f"{dataset}_standardized.csv"])
             for c in cands:
                 if c.exists():
                     std_csv = c; print(f"  [stage 3] cached → {c}"); break
@@ -127,9 +131,9 @@ def run_sim(cfg: dict, out_root: Path, n_sonars: int, experiment: str) -> dict:
     from sonar_pipeline.sim_branch import run_sim_branch
     # default reference: dfki_set_1 PRIMARY track (real single-sonar output)
     ref_cands = [out_root / "real" / "dfki_set_1" / "stage_2_tracking" / "dfki_set_1" / "tracks_raw.csv",
-                 Path("/root/outputs_e2e/dfki_set_1/stage_2_tracking/dfki_set_1/tracks_raw.csv"),
-                 Path("/root/Tritech_GLF_Track_Project/outputs_dfki/dfki_set_1/tracks_raw.csv"),
-                 Path("/root/dfki_output_v15/dfki_set_1/tracks_raw.csv")]
+                 LEGACY_E2E_ROOT / "dfki_set_1" / "stage_2_tracking" / "dfki_set_1" / "tracks_raw.csv",
+                 TRITECH_ROOT / "outputs_dfki" / "dfki_set_1" / "tracks_raw.csv",
+                 Path(os.environ.get("DFKI_OUTPUT_V15", "/root/dfki_output_v15")) / "dfki_set_1" / "tracks_raw.csv"]
     ref = next((c for c in ref_cands if c.exists()), None)
     if ref is None:
         return {"error": "no reference tracks_raw.csv found for sim branch"}
@@ -151,7 +155,7 @@ def main():
     ap.add_argument("--n-sonars", type=int, default=2)
     ap.add_argument("--experiment", default="easy", choices=["easy", "difficult", "default"])
     ap.add_argument("--config", default=str(ROOT / "config" / "pipeline.json"))
-    ap.add_argument("--out", default="/root/outputs")
+    ap.add_argument("--out", default=os.environ.get("PIPELINE_OUT", str(ROOT.parent.parent / "outputs")))
     ap.add_argument("--sensors", default="SONAR_A,SONAR_B")
     args = ap.parse_args()
 

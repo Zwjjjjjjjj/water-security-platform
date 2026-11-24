@@ -11,21 +11,24 @@ It merges:
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 from typing import Dict, Any
 
-PIPELINE_ROOT = Path("/root/sonar_pipeline")
+PIPELINE_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_CONFIG_PATH = PIPELINE_ROOT / "config" / "pipeline.json"
 
 # Legacy roots (kept, not moved — unified layer imports them, never copies)
-TRITECH_ROOT = Path("/root/Tritech_GLF_Track_Project")
-TWO_SONAR_ROOT = Path("/root/two_sonar_association")
+# These point at sibling projects / raw datasets outside this repository.
+# Override via environment variables to relocate them on another machine.
+TRITECH_ROOT = Path(os.environ.get("TRITECH_ROOT", "/root/Tritech_GLF_Track_Project"))
+TWO_SONAR_ROOT = Path(os.environ.get("TWO_SONAR_ROOT", "/root/two_sonar_association"))
 TWO_SONAR_SRC = TWO_SONAR_ROOT / "src"
 
-DEFAULT_OUT = Path("/root/outputs")          # unified output root
-DEFAULT_GLF = Path("/root/data/log_2025-06-19-203913.glf")
+DEFAULT_OUT = Path(os.environ.get("PIPELINE_OUT", "/root/outputs"))          # unified output root
+DEFAULT_GLF = Path(os.environ.get("GLF_PATH", "/root/data/log_2025-06-19-203913.glf"))
 DEFAULT_GLF_PROFILE = TRITECH_ROOT / "config" / "tanana_203913_profile.json"
-DEFAULT_DFKI_ROOT = Path("/root/Diver Tracking - Sonar")
+DEFAULT_DFKI_ROOT = Path(os.environ.get("DFKI_ROOT", "/root/Diver Tracking - Sonar"))
 
 
 def load_pipeline_config(path: str | Path | None = None) -> Dict[str, Any]:
@@ -35,15 +38,22 @@ def load_pipeline_config(path: str | Path | None = None) -> Dict[str, Any]:
 
 
 def resolve_paths(cfg: Dict[str, Any] | None = None) -> Dict[str, Path]:
-    """Resolve every external dependency to an absolute Path."""
+    """Resolve every external dependency to an absolute Path.
+
+    Environment variables take precedence over the values in pipeline.json so
+    the pipeline can be pointed at relocated datasets without editing config.
+    """
+    cfg = cfg or {}
     return {
         "tritech_root": TRITECH_ROOT,
         "two_sonar_root": TWO_SONAR_ROOT,
         "two_sonar_src": TWO_SONAR_SRC,
-        "default_out": Path((cfg or {}).get("output_root", str(DEFAULT_OUT))),
-        "default_glf": Path((cfg or {}).get("glf_path", str(DEFAULT_GLF))),
-        "default_glf_profile": DEFAULT_GLF_PROFILE,
-        "default_dfki_root": DEFAULT_DFKI_ROOT,
+        "default_out": Path(os.environ.get("PIPELINE_OUT", cfg.get("output_root", str(DEFAULT_OUT)))),
+        "default_glf": Path(os.environ.get("GLF_PATH", cfg.get("glf_path", str(DEFAULT_GLF)))),
+        "default_glf_profile": Path(
+            os.environ.get("GLF_PROFILE", cfg.get("glf_profile", str(DEFAULT_GLF_PROFILE)))
+        ),
+        "default_dfki_root": Path(os.environ.get("DFKI_ROOT", cfg.get("dfki_root", str(DEFAULT_DFKI_ROOT)))),
     }
 
 
