@@ -31,7 +31,11 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
-from tritech_paths import OUTPUT_ROOT, TWO_SONAR_ROOT
+# tritech_paths 位于 src/ 下；包内导入与顶层导入两种方式都要支持。
+try:  # 包内导入（src.tritech_paths）
+    from .tritech_paths import OUTPUT_ROOT, TWO_SONAR_ROOT
+except ImportError:  # 顶层导入（tritech_paths）
+    from tritech_paths import OUTPUT_ROOT, TWO_SONAR_ROOT
 
 
 def _safe_div(a, b, fill=np.nan):

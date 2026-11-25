@@ -29,7 +29,11 @@ import json
 from pathlib import Path
 import numpy as np
 import pandas as pd
-from tritech_paths import LEGACY_E2E_ALL_ROOT, LEGACY_E2E_ROOT
+# tritech_paths 位于 src/ 下；包内导入与顶层导入两种方式都要支持。
+try:  # 包内导入（src.tritech_paths）
+    from .tritech_paths import LEGACY_E2E_ALL_ROOT, LEGACY_E2E_ROOT
+except ImportError:  # 顶层导入（tritech_paths）
+    from tritech_paths import LEGACY_E2E_ALL_ROOT, LEGACY_E2E_ROOT
 
 GT_RADIUS_PX = 25.0
 # v<175 (image y) and range<175 (Euclidean from sonar) are different.

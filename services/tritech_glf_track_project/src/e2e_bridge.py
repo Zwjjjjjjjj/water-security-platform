@@ -45,7 +45,13 @@ from typing import Dict, List, Optional, Tuple
 
 import numpy as np
 import pandas as pd
-from tritech_paths import DFKI_ROOT, TWO_SONAR_ROOT
+
+# tritech_paths 位于 src/ 下。本模块既可能被作为包导入（from src.e2e_bridge），
+# 也可能被当作顶层模块导入（sys.path 含 src/），两种方式都要能取到。
+try:  # 包内导入（src.tritech_paths）
+    from .tritech_paths import DFKI_ROOT, TWO_SONAR_ROOT
+except ImportError:  # 顶层导入（tritech_paths）
+    from tritech_paths import DFKI_ROOT, TWO_SONAR_ROOT
 
 
 # ---------------------------------------------------------------------------

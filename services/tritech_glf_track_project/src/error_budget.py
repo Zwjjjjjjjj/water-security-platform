@@ -14,6 +14,10 @@ Usage:
 """
 
 import argparse
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from tritech_paths import DFKI_OUTPUT_V5
 import json
 import math
 from pathlib import Path
@@ -315,7 +319,7 @@ def print_budget(budget: dict):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--out", default="/root/dfki_output_v5", type=str)
+    parser.add_argument("--out", default=str(DFKI_OUTPUT_V5), type=str)
     args = parser.parse_args()
 
     out_dir = Path(args.out)

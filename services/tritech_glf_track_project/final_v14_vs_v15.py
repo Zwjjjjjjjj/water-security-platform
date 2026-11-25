@@ -3,7 +3,11 @@ import json, matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
+import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent / 'src'))
+from tritech_paths import DFKI_OUTPUT_V14, DFKI_OUTPUT_V15, DFKI_ROOT
 
 OUT = Path(str(DFKI_OUTPUT_V15 / "visualizations"))
 OUT.mkdir(parents=True, exist_ok=True)
@@ -11,9 +15,9 @@ OUT.mkdir(parents=True, exist_ok=True)
 sets = [1, 2, 3, 4]
 v14, v15 = {}, {}
 for s in sets:
-    with open(fstr(DFKI_OUTPUT_V14 / f"dfki_set_{s}" / "gt_evaluation_summary.json")) as f:
+    with open(str(DFKI_OUTPUT_V14 / f"dfki_set_{s}" / "gt_evaluation_summary.json")) as f:
         v14[s] = json.load(f)
-    with open(fstr(DFKI_OUTPUT_V15 / f"dfki_set_{s}" / "gt_evaluation_summary.json")) as f:
+    with open(str(DFKI_OUTPUT_V15 / f"dfki_set_{s}" / "gt_evaluation_summary.json")) as f:
         v15[s] = json.load(f)
 
 # ----- Figure 1: bar chart of error metrics --------------------------------
@@ -53,9 +57,6 @@ print(f"Saved: {OUT}/v14_vs_v15_metrics.png")
 
 # ----- Figure 2: trajectory comparison for set_2 ----------------------------
 import pandas as pd
-import sys
-sys.path.insert(0, str(Path(__file__).resolve().parent / 'src'))
-from tritech_paths import DFKI_OUTPUT_V14, DFKI_OUTPUT_V15, DFKI_ROOT
 gt = pd.read_csv(str(DFKI_ROOT / "set_2" / "tracking_sonar_coordinates_2.csv"))
 gt["ts"] = gt["image_name"].str.replace(".jpg","",regex=False).astype(float)
 gt = gt.sort_values("ts").reset_index(drop=True)

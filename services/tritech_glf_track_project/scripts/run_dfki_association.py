@@ -17,7 +17,15 @@ Final:
 
 from __future__ import annotations
 import json
+import sys
 from pathlib import Path
+
+# `src.associate_tracks` 是包内导入，需要把工程根目录放进 sys.path，
+# src/ 本身只够让 `associate_tracks` 作为顶层模块被找到。
+_PROJECT_ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(_PROJECT_ROOT))
+sys.path.insert(0, str(_PROJECT_ROOT / 'src'))
+from tritech_paths import OUTPUT_ROOT
 import numpy as np
 import pandas as pd
 
@@ -41,7 +49,7 @@ CFG_PER_SET = {
 }
 
 
-ASSOC_DIR = Path("/root/Tritech_GLF_Track_Project/outputs/06_association")
+ASSOC_DIR = OUTPUT_ROOT / "06_association"
 
 
 def run_one_set(set_num: int) -> dict:

@@ -3,9 +3,9 @@
         回填为 selected 中的 public_id (PRIMARY_DIVER / CANDIDATE_XX)."""
 import pandas as pd
 import sys
+from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent / 'src'))
 from tritech_paths import DFKI_OUTPUT_V14
-from pathlib import Path
 
 SRC = Path(str(DFKI_OUTPUT_V14))
 SETS = ["set_1", "set_2", "set_3", "set_4"]

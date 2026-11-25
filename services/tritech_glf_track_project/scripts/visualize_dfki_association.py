@@ -12,7 +12,10 @@ Final output:
 
 from __future__ import annotations
 import json
+import sys
 from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / 'src'))
+from tritech_paths import OUTPUT_ROOT
 import numpy as np
 import pandas as pd
 import matplotlib
@@ -20,7 +23,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 
-ASSOC_DIR = Path("/root/Tritech_GLF_Track_Project/outputs/06_association")
+ASSOC_DIR = OUTPUT_ROOT / "06_association"
 
 
 def _load_set(set_num):

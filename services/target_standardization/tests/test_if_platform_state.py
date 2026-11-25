@@ -37,8 +37,10 @@ DATA_DIR2 = os.path.join(ROOT, "data", "mtdsp2")
 IF_CSV = os.path.join(DATA_DIR, "IF_2003_AT_413203610.csv")
 IF_CSV2 = os.path.join(DATA_DIR2, "IF_2003_AT_413203610.csv")
 
-# 03-12 的 .dat 在工程目录之外（原始数据集解压位置）
-DAT12 = "/root/data_mtdsp2/IF_2003_AT_413203610.dat"
+# 03-12 的 .dat 在工程目录之外（原始数据集解压位置），可用环境变量覆盖。
+DAT12 = os.environ.get(
+    "IF_DAT_20030312", "/root/data_mtdsp2/IF_2003_AT_413203610.dat"
+)
 
 HEADER = (
     "帧序号,脉冲序号,时间,航向角(°),方位码(0-449999),速度(nm/h),"

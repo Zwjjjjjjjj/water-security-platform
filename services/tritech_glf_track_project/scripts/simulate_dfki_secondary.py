@@ -32,7 +32,10 @@ Output
 
 from __future__ import annotations
 import json
+import sys
 from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / 'src'))
+from tritech_paths import DFKI_OUTPUT_V14, OUTPUT_ROOT
 
 import numpy as np
 import pandas as pd
@@ -94,8 +97,8 @@ BURST_LENGTH_RANGE   = (2, 5)    # bursts drop 2..5 consecutive frames
 OCCLUSION_GAP_RANGE_S = (1.0, 3.0)
 
 
-DFKI_TRACKS_ROOT = Path("/root/dfki_output_v14")
-OUT_DIR          = Path("/root/Tritech_GLF_Track_Project/outputs/06_association")
+DFKI_TRACKS_ROOT = DFKI_OUTPUT_V14
+OUT_DIR          = OUTPUT_ROOT / "06_association"
 
 
 # ---------------------------------------------------------------------------

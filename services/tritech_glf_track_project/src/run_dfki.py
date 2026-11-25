@@ -43,7 +43,11 @@ from pathlib import Path
 import cv2
 import numpy as np
 import pandas as pd
-from tritech_paths import DFKI_ROOT, OUTPUT_ROOT
+# tritech_paths 位于 src/ 下；包内导入与顶层导入两种方式都要支持。
+try:  # 包内导入（src.tritech_paths）
+    from .tritech_paths import DFKI_ROOT, OUTPUT_ROOT
+except ImportError:  # 顶层导入（tritech_paths）
+    from tritech_paths import DFKI_ROOT, OUTPUT_ROOT
 from scipy.optimize import linear_sum_assignment
 
 # ---- import from existing project (NOT modified) -------------------------

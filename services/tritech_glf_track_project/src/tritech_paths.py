@@ -73,3 +73,4 @@ LEGACY_E2E_ALL_ROOT = Path(os.environ.get("LEGACY_E2E_ALL_ROOT", "/root/outputs_
 #: Legacy per-set output directories.
 DFKI_OUTPUT_V15 = Path(os.environ.get("DFKI_OUTPUT_V15", "/root/dfki_output_v15"))
 DFKI_OUTPUT_V14 = Path(os.environ.get("DFKI_OUTPUT_V14", "/root/dfki_output_v14"))
+DFKI_OUTPUT_V5 = Path(os.environ.get("DFKI_OUTPUT_V5", "/root/dfki_output_v5"))

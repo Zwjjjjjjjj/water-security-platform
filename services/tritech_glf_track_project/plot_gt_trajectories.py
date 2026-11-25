@@ -11,12 +11,12 @@ Outputs:
 import numpy as np
 import pandas as pd
 import sys
+from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent / 'src'))
 from tritech_paths import DFKI_OUTPUT_V14, DFKI_ROOT
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from pathlib import Path
 from matplotlib.collections import LineCollection
 from matplotlib.colors import LinearSegmentedColormap
 

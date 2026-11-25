@@ -46,7 +46,11 @@ from typing import Dict, List, Optional, Tuple
 import cv2
 import numpy as np
 import pandas as pd
-from tritech_paths import DFKI_ROOT, GLF_PROFILE, LEGACY_E2E_ALL_ROOT
+# tritech_paths 位于 src/ 下；包内导入与顶层导入两种方式都要支持。
+try:  # 包内导入（src.tritech_paths）
+    from .tritech_paths import DFKI_ROOT, GLF_PROFILE, LEGACY_E2E_ALL_ROOT
+except ImportError:  # 顶层导入（tritech_paths）
+    from tritech_paths import DFKI_ROOT, GLF_PROFILE, LEGACY_E2E_ALL_ROOT
 
 # =========================================================================
 # Constants
