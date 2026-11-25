@@ -43,6 +43,38 @@ def parse_list(s: str):
     return [x.strip() for x in s.split(",") if x.strip()]
 
 
+def _resolve_stage2_cache(dataset: str, ds_out: Path) -> tuple[Path | None, Path | None]:
+    """Locate a cached stage-2 (single-sonar tracking) result.
+
+    Search order — first hit wins:
+      1. unified layout inside the current output root
+      2. legacy ``outputs_e2e`` cache
+      3. the Tritech project's own ``outputs`` / ``outputs_dfki*`` directories
+      4. the DFKI v15 reference output (``dfki_output_v15``)
+
+    The Tritech project ships only ``outputs/06_association`` in the monorepo,
+    so path 3 resolves to nothing for DFKI.  The v15 directory is the one that
+    actually holds a DFKI stage-2 result and is also the sim branch's reference
+    track source, so it is searched last.
+    """
+    n = dfki_set_num(dataset)
+    rel = Path("02_tracking") if dataset_kind(dataset) == "glf" else Path(f"dfki_set_{n}")
+    cands: list[Path] = [
+        ds_out / "stage_2_tracking" / rel / "tracks_raw.csv",
+        LEGACY_E2E_ROOT / dataset / "stage_2_tracking" / rel / "tracks_raw.csv",
+        TRITECH_ROOT / "outputs" / rel / "tracks_raw.csv",
+        TRITECH_ROOT / "outputs_dfki" / rel / "tracks_raw.csv",
+        TRITECH_ROOT / "outputs_dfki_v2" / rel / "tracks_raw.csv",
+        TRITECH_ROOT / "outputs_dfki_v3" / rel / "tracks_raw.csv",
+        Path(os.environ.get("DFKI_OUTPUT_V15", "/root/dfki_output_v15")) / rel / "tracks_raw.csv",
+    ]
+    for c in cands:
+        if c.exists():
+            summ = c.parent / c.name.replace("tracks_raw.csv", "track_summary_all.csv")
+            return c, (summ if summ.exists() else None)
+    return None, None
+
+
 def run_real_dataset(dataset: str, stage_list: list[int] | None, cfg: dict,
                      out_root: Path, sensor_ids: list[str]) -> dict:
     ds_out = out_root / "real" / dataset
@@ -64,29 +96,22 @@ def run_real_dataset(dataset: str, stage_list: list[int] | None, cfg: dict,
             t_stage[2] = time.time() - t0; summary["stages_run"].append(2)
         else:
             # reuse cache: new unified layout first, then legacy outputs_e2e
-            cand = ds_out / "stage_2_tracking"
-            n = dfki_set_num(dataset)
-            if dataset_kind(dataset) == "glf":
-                cands = [cand / "02_tracking" / "tracks_raw.csv",
-                         LEGACY_E2E_ROOT / "glf" / "stage_2_tracking" / "02_tracking" / "tracks_raw.csv",
-                         TRITECH_ROOT / "outputs" / "02_tracking" / "tracks_raw.csv"]
+            raw, summ = _resolve_stage2_cache(dataset, ds_out)
+            if raw is None:
+                # No cache anywhere — recompute stage 2 from the raw dataset so
+                # the run still produces a complete downstream result.
+                print("  [stage 2] no cache found → recomputing from raw data")
+                t0 = time.time()
+                raw, summ = ST.stage2_tracking(dataset, ds_out, cfg)
+                t_stage[2] = time.time() - t0
+                summary["stages_run"].append(2)
             else:
-                cands = [cand / f"dfki_set_{n}" / "tracks_raw.csv",
-                         LEGACY_E2E_ROOT / dataset / "stage_2_tracking" / f"dfki_set_{n}" / "tracks_raw.csv",
-                         TRITECH_ROOT / "outputs_dfki" / f"dfki_set_{n}" / "tracks_raw.csv"]
-            for c in cands:
-                if c.exists():
-                    raw = c; summ = c.parent / c.name.replace("tracks_raw.csv", "track_summary_all.csv")
-                    if not summ.exists():
-                        # GLF legacy summary may live next to raw under different name; keep raw anyway
-                        pass
-                    print(f"  [stage 2] cached → {c}"); break
+                print(f"  [stage 2] cached → {raw}")
         if (stage_list is None or 3 in stage_list) and raw is not None:
             t0 = time.time()
             std_csv = ST.stage3_standardize(dataset, raw, summ, ds_out / "stage_3_standardized")
             t_stage[3] = time.time() - t0; summary["stages_run"].append(3)
         else:
-            n = dfki_set_num(dataset)
             cands = ([ds_out / "stage_3_standardized" / "glf_standardized.csv",
                       LEGACY_E2E_ROOT / "glf" / "stage_3_standardized" / "glf_standardized.csv"]
                      if dataset_kind(dataset) == "glf" else
@@ -95,7 +120,25 @@ def run_real_dataset(dataset: str, stage_list: list[int] | None, cfg: dict,
             for c in cands:
                 if c.exists():
                     std_csv = c; print(f"  [stage 3] cached → {c}"); break
+            if std_csv is None:
+                if raw is None:
+                    raise FileNotFoundError(
+                        f"stage 3 standardized output not found for {dataset}; "
+                        f"looked in {[str(c) for c in cands]}"
+                    )
+                # A cached stage-2 result was found but its standardized output
+                # is missing (e.g. the cache lives outside the unified layout).
+                # Standardize from the cached raw tracks instead of failing.
+                print("  [stage 3] no cached standardized output → standardizing from stage 2")
+                t0 = time.time()
+                std_csv = ST.stage3_standardize(dataset, raw, summ, ds_out / "stage_3_standardized")
+                t_stage[3] = time.time() - t0
         need4567 = (stage_list is None) or any(s in stage_list for s in (4, 5, 6, 7, 8))
+        if raw is None and need4567:
+            raise FileNotFoundError(
+                f"stage 2 tracking output not found for {dataset}; "
+                f"cannot run stages 4-8 without tracks_raw.csv"
+            )
         if need4567 and std_csv is not None:
             t0 = time.time()
             stage4_dir = ds_out / "stage_4_local_tracks"

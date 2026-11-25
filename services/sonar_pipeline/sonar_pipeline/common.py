@@ -35,11 +35,43 @@ DEFAULT_GLF = Path(os.environ.get("GLF_PATH", "/root/data/log_2025-06-19-203913.
 DEFAULT_GLF_PROFILE = TRITECH_ROOT / "config" / "tanana_203913_profile.json"
 DEFAULT_DFKI_ROOT = Path(os.environ.get("DFKI_ROOT", "/root/Diver Tracking - Sonar"))
 
+# Legacy (pre-monorepo) absolute roots that may still appear inside
+# pipeline.json.  When such a path is still present on disk it is honoured
+# as-is; otherwise it is remapped onto the in-repo location so the config
+# stays valid after the projects were moved into this monorepo.
+_LEGACY_ROOTS = {
+    "/root/Tritech_GLF_Track_Project": TRITECH_ROOT,
+    "/root/two_sonar_association": TWO_SONAR_ROOT,
+    "/root/sonar_pipeline": PIPELINE_ROOT,
+}
+
+
+def remap_legacy_path(value: str | Path) -> Path:
+    """Map a legacy absolute project root onto its monorepo location.
+
+    Existing paths win: if the legacy location still exists on disk it is
+    returned unchanged, so a deployment that keeps the original layout is
+    unaffected.  Only when the legacy root is absent do we fall back to the
+    in-repo equivalent.
+    """
+    p = Path(value)
+    s = str(p)
+    for legacy, current in _LEGACY_ROOTS.items():
+        if s == legacy or s.startswith(legacy + "/"):
+            if Path(legacy).exists():
+                return p
+            return current / p.relative_to(legacy)
+    return p
+
 
 def load_pipeline_config(path: str | Path | None = None) -> Dict[str, Any]:
     p = Path(path) if path else DEFAULT_CONFIG_PATH
     with open(p, "r", encoding="utf-8") as f:
-        return json.load(f)
+        cfg = json.load(f)
+    for key in ("glf_path", "glf_profile", "dfki_root", "output_root"):
+        if isinstance(cfg.get(key), str):
+            cfg[key] = str(remap_legacy_path(cfg[key]))
+    return cfg
 
 
 def resolve_paths(cfg: Dict[str, Any] | None = None) -> Dict[str, Path]:

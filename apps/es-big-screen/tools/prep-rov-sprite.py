@@ -34,7 +34,10 @@ SRC = ("/root/.cursor/projects/root/assets/"
        "c__Users_______AppData_Roaming_Cursor_User_workspaceStorage_"
        "23bd325825c8dd394cf1c5e6db0a7820_images_"
        "image-d76cae99-0f8e-4416-9f58-19f9d2067cb9.jpg")
-OUT_DIR = "/root/es-big-screen/public/water-security/assets/sprites"
+OUT_DIR = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+    "public/water-security/assets/sprites",
+)
 OUT = os.path.join(OUT_DIR, "rov_top.png")
 
 os.makedirs(OUT_DIR, exist_ok=True)

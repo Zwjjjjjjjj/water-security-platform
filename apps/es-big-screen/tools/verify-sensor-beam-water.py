@@ -26,7 +26,7 @@ import json
 
 from PIL import Image
 
-ROOT = "/root/es-big-screen"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OBLIQUE = os.path.join(
     ROOT, "public/water-security/assets/scenes-v2/terrain/campus_oblique_v3.png"
 )
