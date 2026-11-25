@@ -2,13 +2,35 @@
 
 多源海上目标观测数据的**标准化 → 关联 → 融合 → 可视化**一体化工程。
 
-本仓库为 Monorepo，整合了三个核心工程：
+本仓库为 Monorepo，整合了五个核心工程：
 
 | 子项目 | 路径 | 技术栈 | 职责 |
 |--------|------|--------|------|
-| **目标标准化** | `services/target_standardization/` | Python 3.12 | 雷达 / AIS / 光电多源数据解析、统一 schema 标准化、时空对齐、目标关联、航迹重建与验收 |
-| **声纳流水线** | `services/sonar_pipeline/` | Python 3.12 | 声纳信号级处理流水线（仿真分支 → 关联融合），统一配置与阶段编排 |
 | **大屏可视化** | `apps/es-big-screen/` | Vue 3 + TypeScript + Vite + ECharts + Element Plus | 水域安防数字孪生大屏，水下潜器/水面船舶/传感器态势渲染 |
+| **目标标准化** | `services/target_standardization/` | Python 3.12 | 雷达 / AIS / 光电多源数据解析、统一 schema 标准化、时空对齐、目标关联、航迹重建与验收 |
+| **声纳流水线** | `services/sonar_pipeline/` | Python 3.12 | 声纳流水线编排层：Stage 1–8 调度，串联下列两个工程 |
+| **单声纳处理** | `services/tritech_glf_track_project/` | Python 3.12 + Java | GLF/DFKI 单声纳检测、Kalman 跟踪、SONAR_FAN 标准化、B 声呐合成 |
+| **声纳关联融合** | `services/two_sonar_association/` | Python 3.12 | 多声纳时间对齐、航迹关联、N 路聚类、信息形式融合 |
+
+### 依赖关系
+
+```
+                     apps/es-big-screen  （大屏）
+                              ▲
+                              │ 读取处理结果
+        ┌─────────────────────┴─────────────────────┐
+        │            services/sonar_pipeline         │  ← 编排层
+        │   Stage 1-3            Stage 5-6           │
+        └───────▲────────────────────▲───────────────┘
+                │                    │
+  tritech_glf_track_project   two_sonar_association
+  （单声纳跟踪）                （关联 + 融合）
+
+  另: target_standardization  （多源标准化，独立可运行）
+```
+
+`sonar_pipeline` 通过 `TRITECH_ROOT` / `TWO_SONAR_ROOT` 定位这两个工程，
+默认按 monorepo 内同级目录推导，环境变量可覆盖。
 
 ---
 
@@ -44,10 +66,21 @@ water-security-platform/
 │   │   ├── configs/              # 各数据集与场景配置
 │   │   ├── data/                 # 样例数据集（mtdsp / mtdsp2 / radarpwn）
 │   │   └── tests/                # pytest 测试套件
-│   └── sonar_pipeline/           # 声纳处理流水线
-│       ├── sonar_pipeline/       # stages / common / sim_branch / association_fusion
-│       ├── config/pipeline.json
-│       └── run_pipeline.py
+│   ├── sonar_pipeline/           # 声纳流水线编排层
+│   │   ├── sonar_pipeline/       # stages / common / sim_branch / association_fusion
+│   │   ├── config/pipeline.json
+│   │   └── run_pipeline.py
+│   ├── tritech_glf_track_project/    # 单声纳处理（声纳流水线的 Stage 1-3 依赖）
+│   │   ├── src/                  # detect_track / standardize / run_dfki / e2e_bridge ...
+│   │   ├── java/ExportGLF.java   # GLF 导出器
+│   │   ├── libs/                 # TritechFiles-local.jar
+│   │   ├── vendor/TritechFiles/  # 上游源码 + LICENSE（LGPL 2.1）
+│   │   ├── config/               # default_config / dfki_config / tanana 剖面
+│   │   └── run_all.py            # GLF → 跟踪 → 标准化 一键入口
+│   └── two_sonar_association/        # 声纳关联与融合（Stage 5-6 依赖）
+│       ├── src/                  # align_tracks / track_association / track_fusion / n_way_*
+│       ├── config/                # two_sonar_association / n_sonar_association / fusion
+│       └── run_*.py              # 关联 / 多目标 / N 路 / 回归基准
 ├── docs/                         # 架构与设计文档
 └── .gitignore
 ```
@@ -79,16 +112,15 @@ python -m pytest tests/ -v
 
 ### 2. 声纳流水线
 
-本工程是**编排层**：Stage 1–3 复用 Tritech 单声呐跟踪工程，Stage 5/6 复用 two_sonar 的官方关联/融合引擎，
-这些依赖位于本仓库之外，需通过环境变量指定位置。
+本工程是**编排层**：Stage 1–3 调用单声纳跟踪工程，Stage 5/6 调用多声纳关联/融合引擎。
+这两个依赖已纳入本仓库（`services/tritech_glf_track_project` 与 `services/two_sonar_association`），
+默认按同级目录自动定位；仅当原始数据集不在标准位置时才需要设置环境变量。
 
 ```bash
 cd services/sonar_pipeline
 pip install numpy scipy matplotlib
 
-# 指向外部依赖（不设置则使用下方默认值）
-export TRITECH_ROOT=/root/Tritech_GLF_Track_Project
-export TWO_SONAR_ROOT=/root/two_sonar_association
+# 原始数据路径（视本机情况调整）
 export DFKI_ROOT="/root/Diver Tracking - Sonar"
 export GLF_PATH=/root/data/log_2025-06-19-203913.glf
 
@@ -111,6 +143,39 @@ npm run dev          # 本地开发
 npm run build        # 生产构建 → dist/
 npm run preview      # 预览构建产物
 ```
+
+### 4. 单声纳处理
+
+```bash
+cd services/tritech_glf_track_project
+pip install -r requirements.txt
+
+# GLF → 检测 → Kalman 跟踪 → SONAR_FAN 标准化
+python3 run_all.py --glf /root/data/log_2025-06-19-203913.glf --out /tmp/glf_out
+
+# DFKI JPG 序列跟踪
+python3 -m src.run_dfki --set 1 --dfki-root "/root/Diver Tracking - Sonar" --out /tmp/dfki_out
+```
+
+GLF 解析依赖 `java/ExportGLF.java` 与 `libs/TritechFiles-local.jar`（需 JDK 17+，
+`javac` / `java` 在 PATH 中）。首次运行会自行编译 Java 导出器。
+
+### 5. 声纳关联与融合
+
+```bash
+cd services/two_sonar_association
+
+# 双声纳关联
+python3 run_two_sonar_association.py --experiment easy
+# 多目标 / N 路
+python3 run_multi_target_association.py --experiment easy
+python3 run_n_sonar_association.py --n-sonars 3
+# 回归基准
+python3 run_regression_benchmark.py
+```
+
+关联/融合的官方引擎位于 `src/`：`TrackAligner` / `TrackAssociation` /
+`CovarianceWeightedFusion` / `NWayAligner` / `NPartiteAssociator` / `InformationFusionN`。
 
 ---
 
@@ -151,3 +216,13 @@ npm run preview      # 预览构建产物
 ## License
 
 内部研究项目，版权归项目所有者所有。
+
+### 第三方组件
+
+`services/tritech_glf_track_project/` 内含 `TritechFiles-local.jar`，
+由 `douggillespie/TritechFiles` 源码编译而来，上游采用 **GNU LGPL 2.1**。
+按 LGPL 要求，完整源码与许可证副本随仓库一并分发，位于
+`services/tritech_glf_track_project/vendor/TritechFiles/`。
+详见该目录下的 `LICENSE` 与工程根目录的 `LICENSE_NOTICE.md`。
+
+本项目自身的 Python / Java 代码与上游 TritechFiles 代码相互独立。
