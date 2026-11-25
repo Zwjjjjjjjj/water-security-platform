@@ -304,8 +304,11 @@ function toggleSceneVersion() {
   left: 50%;
   width: var(--es-screen-width);
   height: var(--es-screen-height);
-  margin-left: calc(var(--es-screen-width) * 0.5 - var(--es-screen-width));
-  margin-top: calc(var(--es-screen-height) * 0.5 - var(--es-screen-height));
+  /* 居中由 transform 完成（translate(-50%,-50%) 与 scale 合并在同一次变换里）。
+     若改用负 margin 抵消 left/top:50%，缩放后会出现偏移：
+     变换原点为 top left 时，负 margin 是按未缩放尺寸计算的，
+     缩放后画布会整体偏移（1600x900 溢出左侧 160px / 上方 90px）。 */
+  transform-origin: center center;
 }
 .world-viewport #world :deep(.ws-scene),
 .world-viewport #world :deep(.ws-chart-wrap) {

@@ -40,10 +40,14 @@ export const useResize = (options: ResizeType = {}) => {
 
 		if (fullScreen) {
 			// 如果不在乎缩放失真的情况，可以设置全屏
-			screenRef.value.style.transform = `scale(${scaleW}, ${scaleH})`
+			screenRef.value.style.transform = `translate(-50%, -50%) scale(${scaleW}, ${scaleH})`
 		} else {
 			// 否则选择适配比例缩放
-			screenRef.value.style.transform = 'scale(' + scale.value + ')'
+			// translate(-50%,-50%) 必须与 scale 写在同一条 transform 里：
+			// 元素用 left/top:50% 定位，translate 负责居中，scale 负责适配。
+			// transform-origin 设为 center 时，先 scale 再 translate 才能让
+			// 缩放后的画布仍以视口中心为基准（否则会整体偏移）。
+			screenRef.value.style.transform = 'translate(-50%, -50%) scale(' + scale.value + ')'
 		}
   }
 
