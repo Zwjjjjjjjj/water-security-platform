@@ -1,0 +1,62 @@
+{
+  "tracking": {
+    "detection_threshold": 45.0,
+    "background_alpha": 0.02,
+    "warmup_frames": 8,
+    "min_area_px": 6,
+    "max_area_px": 800,
+    "min_range_m": 2.0,
+    "edge_margin_m": 0.4,
+    "max_abs_bearing_deg": 55.0,
+    "merge_range_m": 0.55,
+    "merge_bearing_deg": 5.0,
+    "mahalanobis_gate": 5.0,
+    "euclidean_gate_m": 2.0,
+    "max_misses": 10,
+    "min_hits": 8,
+    "min_duration_s": 1.2,
+    "min_displacement_m": 2.0,
+    "min_speed_mps": 0.25,
+    "max_speed_mps": 4.0,
+    "use_event_gating": true,
+    "event_window_pre_s": 0.5,
+    "event_window_post_s": 60.0,
+    "event_profile_path": "config/tanana_203913_profile.json"
+  },
+  "sensor": {
+    "sensor_id": "Gemini_1200ikd_2612",
+    "coordinate_frame": "SONAR_FAN",
+    "swath_orientation": "Vertical",
+    "mount_location": "Bow",
+    "boresight_direction": "looking upstream",
+    "tilt_down_deg": 6.0,
+    "sonar_depth_m": 0.6096,
+    "horizontal_xy_valid": false,
+    "enu_valid": false,
+    "enu_invalid_reason": "Vertical fan sign/absolute heading/translation unresolved"
+  },
+  "simulation": {
+    "source_track_id": null,
+    "translation_common_m": [
+      4.0,
+      2.0
+    ],
+    "yaw_deg": 12.0,
+    "sample_rate_hz": 4.0,
+    "time_offset_s": 0.08,
+    "timestamp_jitter_std_s": 0.015,
+    "position_std_m": 0.18,
+    "velocity_std_mps": 0.12,
+    "drop_rate": 0.12,
+    "random_seed": 20260919,
+    "source_target_label": "4in_ABS_pipe"
+  },
+  "association": {
+    "time_tolerance_s": 0.35,
+    "mahalanobis_gate": 4.0,
+    "position_gate_m": 1.5,
+    "velocity_gate_mps": 1.2,
+    "position_weight": 0.7,
+    "velocity_weight": 0.3
+  }
+}

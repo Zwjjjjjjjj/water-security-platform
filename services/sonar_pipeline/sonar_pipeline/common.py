@@ -18,14 +18,19 @@ from typing import Dict, Any
 PIPELINE_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_CONFIG_PATH = PIPELINE_ROOT / "config" / "pipeline.json"
 
-# Legacy roots (kept, not moved — unified layer imports them, never copies)
-# These point at sibling projects / raw datasets outside this repository.
-# Override via environment variables to relocate them on another machine.
-TRITECH_ROOT = Path(os.environ.get("TRITECH_ROOT", "/root/Tritech_GLF_Track_Project"))
-TWO_SONAR_ROOT = Path(os.environ.get("TWO_SONAR_ROOT", "/root/two_sonar_association"))
+# Sibling project roots.  Both are part of this monorepo, so the defaults are
+# derived from this file's location; environment variables allow relocating
+# them when the projects are deployed separately.
+SERVICES_ROOT = PIPELINE_ROOT.parent
+TRITECH_ROOT = Path(
+    os.environ.get("TRITECH_ROOT", str(SERVICES_ROOT / "tritech_glf_track_project"))
+)
+TWO_SONAR_ROOT = Path(
+    os.environ.get("TWO_SONAR_ROOT", str(SERVICES_ROOT / "two_sonar_association"))
+)
 TWO_SONAR_SRC = TWO_SONAR_ROOT / "src"
 
-DEFAULT_OUT = Path(os.environ.get("PIPELINE_OUT", "/root/outputs"))          # unified output root
+DEFAULT_OUT = Path(os.environ.get("PIPELINE_OUT", str(SERVICES_ROOT.parent / "outputs")))
 DEFAULT_GLF = Path(os.environ.get("GLF_PATH", "/root/data/log_2025-06-19-203913.glf"))
 DEFAULT_GLF_PROFILE = TRITECH_ROOT / "config" / "tanana_203913_profile.json"
 DEFAULT_DFKI_ROOT = Path(os.environ.get("DFKI_ROOT", "/root/Diver Tracking - Sonar"))

@@ -1,0 +1,133 @@
+{
+  "_comment": "N-sonar config used by run_n_sonar_association.py. N is determined by the length of `sonars`. For N=2, results should match the legacy experiment.",
+  "random_seed": 42,
+  "coordinate_mode": "pixel_simulation",
+  "coordinate_note": "DFKI pixel coordinates. 1 pixel ~ 0.015m.",
+
+  "sonars": [
+    {
+      "id": "SONAR_A",
+      "short": "A",
+      "x_m": 0.0,
+      "y_m": 0.0,
+      "heading_deg": 0.0,
+      "sample_rate_hz": 5.0,
+      "time_offset_s": 0.0,
+      "sigma_range_m": 2.5,
+      "sigma_bearing_deg": 1.0,
+      "miss_probability": 0.03
+    },
+    {
+      "id": "SONAR_B",
+      "short": "B",
+      "x_m": 50.0,
+      "y_m": 0.0,
+      "heading_deg": 180.0,
+      "sample_rate_hz": 4.7,
+      "time_offset_s": 0.08,
+      "sigma_range_m": 3.0,
+      "sigma_bearing_deg": 1.2,
+      "miss_probability": 0.05
+    },
+    {
+      "id": "SONAR_C",
+      "short": "C",
+      "x_m": 25.0,
+      "y_m": 30.0,
+      "heading_deg": 270.0,
+      "sample_rate_hz": 4.5,
+      "time_offset_s": 0.12,
+      "sigma_range_m": 2.8,
+      "sigma_bearing_deg": 1.1,
+      "miss_probability": 0.04
+    },
+    {
+      "id": "SONAR_D",
+      "short": "D",
+      "x_m": 25.0,
+      "y_m": -30.0,
+      "heading_deg": 90.0,
+      "sample_rate_hz": 5.2,
+      "time_offset_s": 0.04,
+      "sigma_range_m": 2.6,
+      "sigma_bearing_deg": 1.05,
+      "miss_probability": 0.04
+    }
+  ],
+
+  "distractors_per_sonar": {
+    "SONAR_A": {
+      "A_DIST_01": {"start_offset_s": 2.0, "base_speed_mps": 25.0, "heading_offset_deg": 30.0, "noise_multiplier": 1.2},
+      "A_DIST_02": {"start_offset_s": 5.0, "base_speed_mps": 35.0, "heading_offset_deg": -45.0, "noise_multiplier": 1.5, "crossing_behavior": true, "crossing_start_s": 20.0, "crossing_duration_s": 8.0, "crossing_proximity_m": 8.0}
+    },
+    "SONAR_B": {
+      "B_DIST_01": {"start_offset_s": 2.5, "base_speed_mps": 22.0, "heading_offset_deg": -25.0, "noise_multiplier": 1.1},
+      "B_DIST_02": {"start_offset_s": 6.0, "base_speed_mps": 30.0, "heading_offset_deg": 50.0, "noise_multiplier": 1.4, "crossing_behavior": true, "crossing_start_s": 22.0, "crossing_duration_s": 6.0, "crossing_proximity_m": 6.0}
+    },
+    "SONAR_C": {
+      "C_DIST_01": {"start_offset_s": 3.0, "base_speed_mps": 28.0, "heading_offset_deg": 60.0, "noise_multiplier": 1.3}
+    },
+    "SONAR_D": {
+      "D_DIST_01": {"start_offset_s": 4.0, "base_speed_mps": 26.0, "heading_offset_deg": -60.0, "noise_multiplier": 1.25}
+    }
+  },
+
+  "association": {
+    "max_time_gap_s": 0.15,
+    "position_gate_m": 30.0,
+    "velocity_gate_mps": 15.0,
+    "heading_gate_deg": 60.0,
+    "mahalanobis_gate_threshold": 9.21,
+    "min_temporal_overlap_ratio": 0.3,
+    "min_gate_pass_ratio": 0.5,
+    "cost_weights": {"wp": 0.35, "wv": 0.25, "wh": 0.15, "wm": 0.15, "wt": 0.10},
+    "cost_normalization": {"position_threshold_m": 20.0, "velocity_threshold_mps": 10.0, "heading_threshold_deg": 45.0, "mahalanobis_threshold": 5.0},
+    "association_threshold": 0.6,
+    "confirmation_hits": 4,
+    "lost_hits": 3,
+    "coasting_frames": 2,
+    "max_cost_for_tentative": 0.7,
+    "max_cost_for_confirmation": 0.5,
+    "allow_reassociation": true,
+    "min_hits_for_reassociation": 2,
+    "reassociation_cost_penalty": 0.05
+  },
+
+  "n_way_association": {
+    "_comment": "Tunables for the N-partite clique search. N=2 falls back to a single pair cost.",
+    "max_clique_candidates": 256,
+    "pair_gate_soft_factor": 1.2,
+    "cluster_min_pair_pass_ratio": 0.7,
+    "anchor_sensor_id": "SONAR_A"
+  },
+
+  "fusion": {
+    "regularization_eps": 1e-6,
+    "min_determinant": 1e-8,
+    "max_dt_for_fusion_s": 0.5,
+    "innovation_outlier_sigma": 3.0,
+    "fallback_strategy": "lower_trace",
+    "process_noise_pos": 1.0,
+    "process_noise_vel": 0.5,
+    "extrapolation_enabled": true,
+    "max_extrapolation_s": 0.06,
+    "position_inflation": 1.0,
+    "outlier_sigma_threshold": 3.0,
+    "outlier_pick_min_p": false,
+    "n_way_outlier_sigma": 2.5,
+    "n_way_min_sensors_for_outlier_reject": 3
+  },
+
+  "global_track": {
+    "match_distance_threshold": 20.0,
+    "match_velocity_threshold": 10.0,
+    "max_coasting_duration": 5.0
+  },
+
+  "kalman_filter": {
+    "process_noise_position_mps2": 1.0,
+    "process_noise_velocity_mps2": 0.5,
+    "measurement_noise_position_m": 2.0,
+    "initial_state_covariance": 10.0
+  }
+}

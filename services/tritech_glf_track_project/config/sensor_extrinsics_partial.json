@@ -1,0 +1,40 @@
+{
+  "sensor_id": "Gemini_1200ikd_2612",
+  "recording": "log_2025-06-19-203913.glf",
+  "source_recording_start_utc": "2025-06-19T20:39:13Z",
+  "source_log_metadata": {
+    "instrument": "Gemini",
+    "location_text": "Bow, looking upstream",
+    "sample_method": "CHIRP",
+    "swath_orientation": "Vertical",
+    "frequency_khz": 720,
+    "range_m": "30 then 45",
+    "angle_deg": 65,
+    "sonar_depth_in": 24,
+    "sonar_depth_m": 0.6096,
+    "sonar_tilt": "6 deg down"
+  },
+  "coordinate_convention": {
+    "source_frame": "SONAR_FAN",
+    "fan_u_definition": "u=-range*sin(bearing), cross-fan axis",
+    "fan_v_definition": "v=range*cos(bearing), acoustic-boresight axis"
+  },
+  "known_extrinsics": {
+    "pitch_down_deg": 6.0,
+    "mount_location_text": "Bow",
+    "boresight_direction_text": "looking upstream",
+    "swath_orientation": "Vertical"
+  },
+  "unknown_extrinsics": {
+    "fan_roll_deg": "required: +90 or -90 sign not specified by 'Vertical'",
+    "absolute_heading_deg": null,
+    "roll_deg": null,
+    "translation_x_m": null,
+    "translation_y_m": null,
+    "translation_z_m": null,
+    "enu_origin_lat_deg": null,
+    "enu_origin_lon_deg": null,
+    "enu_origin_alt_m": null
+  },
+  "enu_conversion_status": "NOT_AVAILABLE_UNTIL_UNKNOWN_EXTRINSICS_ARE_SUPPLIED"
+}

@@ -1,0 +1,16 @@
+{
+  "fusion": {
+    "regularization_eps": 1e-06,
+    "min_determinant": 1e-08,
+    "max_dt_for_fusion_s": 0.5,
+    "innovation_outlier_sigma": 3.0,
+    "fallback_strategy": "lower_trace",
+    "extrapolation_enabled": false,
+    "max_extrapolation_s": 0.06,
+    "process_noise_pos": 1.0,
+    "process_noise_vel": 0.5,
+    "position_inflation": 1.0,
+    "outlier_sigma_threshold": 3.0,
+    "outlier_pick_min_p": false
+  }
+}

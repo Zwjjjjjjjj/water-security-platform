@@ -1,0 +1,11 @@
+{
+  "profile_name": "Tanana River 2025 - log_2025-06-19-203913.glf",
+  "events": [
+    {"event_time_utc": "2025-06-19T12:39:30.671Z", "label": "4in_ABS_pipe", "count": 1, "max_start_delay_s": 30, "first_visible_range_m": 30.0, "expected_min_range_m": 12.0, "expected_max_range_m": 45.0, "expected_min_bearing_deg": -32.0, "expected_max_bearing_deg": 32.0},
+    {"event_time_utc": "2025-06-19T12:40:08.167Z", "label": "5/8in_plywood", "count": 1, "max_start_delay_s": 30, "first_visible_range_m": 35.0, "expected_min_range_m": 12.0, "expected_max_range_m": 45.0, "expected_min_bearing_deg": -32.0, "expected_max_bearing_deg": 32.0},
+    {"event_time_utc": "2025-06-19T12:40:39.690Z", "label": "2in_PVC_pipe", "count": 1, "max_start_delay_s": 25, "first_visible_range_m": 25.0, "expected_min_range_m": 8.0, "expected_max_range_m": 45.0, "expected_min_bearing_deg": -32.0, "expected_max_bearing_deg": 32.0},
+    {"event_time_utc": "2025-06-19T12:41:25.129Z", "label": "rainstick_pair", "count": 2, "max_start_delay_s": 30, "first_visible_range_m": 30.0, "expected_min_range_m": 8.0, "expected_max_range_m": 45.0, "expected_min_bearing_deg": -32.0, "expected_max_bearing_deg": 32.0}
+  ],
+  "label_basis": "collection_log_AKT_event_times",
+  "note": "Event times are in Alaska Time (AKT = UTC-8). Frame timestamps from GLF are also AKT-local epoch seconds, so direct comparison is valid. The ISO Z suffix is a label-only convention; values themselves are AKT epoch seconds."
+}

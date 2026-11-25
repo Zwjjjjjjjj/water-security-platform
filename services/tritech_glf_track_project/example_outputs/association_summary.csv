@@ -1,0 +1,2 @@
+pairs_tested,accepted_pairs,acceptance_rate,mean_position_difference_m,median_position_difference_m,mean_mahalanobis_distance,global_track_id
+65,64,0.9846153846153847,0.26022479552468697,0.2287355496986611,0.7832470444028234,G001

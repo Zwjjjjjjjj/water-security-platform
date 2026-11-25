@@ -1,0 +1,113 @@
+{
+  "random_seed": 42,
+  "coordinate_mode": "pixel_simulation",
+  "coordinate_note": "Data is in DFKI pixel coordinates. Coordinate system: x increases right, y increases down. 1 pixel ~= 0.015m in original DFKI system.",
+
+  "sonar_A": {
+    "name": "Sonar_A",
+    "x_m": 0.0,
+    "y_m": 0.0,
+    "heading_deg": 0.0,
+    "sample_rate_hz": 5.0,
+    "time_offset_s": 0.0,
+    "sigma_range_m": 2.5,
+    "sigma_bearing_deg": 1.0,
+    "miss_probability": 0.03
+  },
+
+  "sonar_B": {
+    "name": "Sonar_B",
+    "x_m": 50.0,
+    "y_m": 0.0,
+    "heading_deg": 180.0,
+    "sample_rate_hz": 4.7,
+    "time_offset_s": 0.08,
+    "sigma_range_m": 3.0,
+    "sigma_bearing_deg": 1.2,
+    "miss_probability": 0.05
+  },
+
+  "distractors": {
+    "A_DIST_01": {
+      "start_offset_s": 2.0,
+      "base_speed_mps": 25.0,
+      "heading_offset_deg": 30.0,
+      "noise_multiplier": 1.2
+    },
+    "A_DIST_02": {
+      "start_offset_s": 5.0,
+      "base_speed_mps": 35.0,
+      "heading_offset_deg": -45.0,
+      "noise_multiplier": 1.5,
+      "crossing_behavior": true,
+      "crossing_start_s": 20.0,
+      "crossing_duration_s": 8.0,
+      "crossing_proximity_m": 8.0
+    },
+    "B_DIST_01": {
+      "start_offset_s": 2.5,
+      "base_speed_mps": 22.0,
+      "heading_offset_deg": -25.0,
+      "noise_multiplier": 1.1
+    },
+    "B_DIST_02": {
+      "start_offset_s": 6.0,
+      "base_speed_mps": 30.0,
+      "heading_offset_deg": 50.0,
+      "noise_multiplier": 1.4,
+      "crossing_behavior": true,
+      "crossing_start_s": 22.0,
+      "crossing_duration_s": 6.0,
+      "crossing_proximity_m": 6.0
+    }
+  },
+
+  "association": {
+    "max_time_gap_s": 0.15,
+    "position_gate_m": 30.0,
+    "velocity_gate_mps": 15.0,
+    "heading_gate_deg": 60.0,
+    "mahalanobis_gate_threshold": 9.21,
+    "min_temporal_overlap_ratio": 0.3,
+    "min_gate_pass_ratio": 0.5,
+
+    "cost_weights": {
+      "wp": 0.35,
+      "wv": 0.25,
+      "wh": 0.15,
+      "wm": 0.15,
+      "wt": 0.10
+    },
+
+    "cost_normalization": {
+      "position_threshold_m": 20.0,
+      "velocity_threshold_mps": 10.0,
+      "heading_threshold_deg": 45.0,
+      "mahalanobis_threshold": 5.0
+    },
+
+    "association_threshold": 0.6,
+    "confirmation_hits": 4,
+    "lost_hits": 3,
+    
+    "coasting_frames": 2,
+    "max_cost_for_tentative": 0.7,
+    "max_cost_for_confirmation": 0.5,
+    "allow_reassociation": true,
+    "min_hits_for_reassociation": 2,
+    "reassociation_cost_penalty": 0.05
+  },
+
+  "global_track": {
+    "match_distance_threshold": 20.0,
+    "match_velocity_threshold": 10.0,
+    "max_coasting_duration": 5.0
+  },
+
+  "kalman_filter": {
+    "process_noise_position_mps2": 1.0,
+    "process_noise_velocity_mps2": 0.5,
+    "measurement_noise_position_m": 2.0,
+    "initial_state_covariance": 10.0
+  }
+}

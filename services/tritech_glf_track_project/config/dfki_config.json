@@ -1,0 +1,60 @@
+{
+  "_comment": "DFKI Diver Tracking \u2014 per-set tracker configuration",
+  "_principle": "Pixel-coordinate gates; no physical units.  Thresholds calibrated on set_1.",
+  "tracking": {
+    "background_alpha": 0.02,
+    "warmup_frames": 5,
+    "diff_threshold": 12.0,
+    "use_adaptive_threshold": false,
+    "min_area_px": 15,
+    "max_area_px": 5000,
+    "merge_radius_px": 30.0,
+    "max_radius_px": 450.0,
+    "min_radius_px": 140.0,
+    "mahalanobis_gate": 8.0,
+    "euclidean_gate_px": 60.0,
+    "max_misses": 8,
+    "min_hits": 5,
+    "min_duration_s": 0.5,
+    "min_displacement_px": 15.0,
+    "min_speed_pxps": 1.0,
+    "max_speed_pxps": 80.0,
+    "use_event_gating": false,
+    "abs_threshold": 55.0
+  },
+  "sensor": {
+    "sensor_id": "Oculus_M1200d",
+    "coordinate_frame": "dfki_pixel",
+    "intensity_type": "relative_display_intensity",
+    "image_width": 932,
+    "image_height": 514,
+    "sonar_origin_px": [
+      465.5,
+      513.0
+    ],
+    "bearing_span_deg": [
+      -26.0,
+      26.0
+    ],
+    "max_radius_px": 490.0,
+    "note": "No calibrated physical range; all tracker state in pixel units."
+  },
+  "sets": {
+    "1": {
+      "frames": 209,
+      "description": "slow-moving diver, clear background"
+    },
+    "2": {
+      "frames": 185,
+      "description": "moderate-speed diver, platform visible"
+    },
+    "3": {
+      "frames": 425,
+      "description": "long sequence, diver near platform"
+    },
+    "4": {
+      "frames": 374,
+      "description": "fast movement, partial occlusion"
+    }
+  }
+}

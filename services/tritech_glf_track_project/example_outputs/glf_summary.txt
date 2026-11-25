@@ -1,0 +1,11 @@
+input=/mnt/data/log_2025-06-19-203913.glf
+catalog_class=tritechgemini.fileio.GLFFileCatalog
+records=869
+sonars=1
+sonar_ids=[2612]
+first_time=2025-06-19T20:39:13.121Z
+last_time=2025-06-19T20:42:06.721Z
+duration_seconds=173.600
+mean_fps=5.000000
+frames_binary=frames_u8.bin
+bearings_binary=bearings_f64le.bin
