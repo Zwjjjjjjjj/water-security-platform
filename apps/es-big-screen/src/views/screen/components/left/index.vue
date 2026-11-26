@@ -48,5 +48,8 @@
 <script setup lang='ts'>
 import { useWaterDemo } from '@/water-security/useWaterDemo'
 const { store, data, snapshot, error } = useWaterDemo()
-const icon = (kind: string) => `/water-security/assets/icons/${kind === 'camera' ? 'camera' : kind === 'ais' ? 'ais' : kind === 'sonar' ? 'sonar' : kind === 'radar' ? 'radar' : 'layers'}.svg`
+/* 设备类型 → 图标。
+ * 光电的类型标记有两种写法：`devices.json` 里是 "eo"，
+ * 而旧版数据里曾写成 "camera" —— 两者都指向 camera.svg。 */
+const icon = (kind: string) => `/water-security/assets/icons/${kind === 'eo' || kind === 'camera' ? 'camera' : kind === 'ais' ? 'ais' : kind === 'sonar' ? 'sonar' : kind === 'radar' ? 'radar' : 'layers'}.svg`
 </script>

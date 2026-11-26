@@ -49,6 +49,12 @@ logs/
 !services/target_standardization/output/
 !services/target_standardization/output/scenarios/
 !services/target_standardization/output/scenarios/**
+# 但流水线跑出来的中间产物（标准化/对齐/航迹/关联）都是可再生的，不入库：
+#   services/target_standardization/output/system/   —— multisensor_system.py 输出
+#   services/target_standardization/output/mtdsp_*/   —— run_standardization.py 单源输出
+services/target_standardization/output/system/
+services/target_standardization/output/mtdsp_*/
+services/target_standardization/output/radarpwn_*/
 *.log
 npm-debug.log*
 yarn-debug.log*

@@ -330,11 +330,14 @@ const progressPct = computed(() => {
  * 设备档案：接入信息（devices.json）× 装备信息（SENSOR_ARCHIVE）
  * ------------------------------------------------------------------ */
 
-/** 设备类型 → 中文标签 */
+/** 设备类型 → 中文标签。
+ * 光电有 "eo" 与 "camera" 两种写法（`devices.json` 用 "eo"，
+ * 旧版数据用 "camera"），两个都要能显示出来。 */
 const KIND_LABEL: Record<string, string> = {
   radar: '雷达',
   ais: 'AIS',
   sonar: '声纳',
+  eo: '光电',
   camera: '光电',
 }
 

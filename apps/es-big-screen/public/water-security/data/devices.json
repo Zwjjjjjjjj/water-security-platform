@@ -96,7 +96,7 @@
   {
    "source_id": "E01",
    "label": "光电 E01",
-   "kind": "camera",
+   "kind": "eo",
    "status": "active",
    "state_label": "在用",
    "view_u": 0.505,

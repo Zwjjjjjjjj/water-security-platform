@@ -1044,7 +1044,12 @@ export function buildRecognitionModule(data: any, timeMs: number): RecogModule {
     classes,
     model: data?.sonar_frames?.meta?.model ?? null,
     eo: (() => {
-      const cam = (data?.devices?.items ?? []).find((d: any) => d.kind === 'camera')
+      /* 光电设备的类型标记：`devices.json` 里历史上写过 "camera"，
+       * 而 `KIND_LABEL` / `KIND_COLOR` / `ModuleStd` 用的是 "eo"。
+       * 两个都认，避免因为命名不一致就找不到光电设备。 */
+      const cam = (data?.devices?.items ?? []).find(
+        (d: any) => d.kind === 'eo' || d.kind === 'camera',
+      )
       if (!cam) return null
       return {
         sourceId: cam.source_id,

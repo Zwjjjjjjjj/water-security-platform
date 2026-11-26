@@ -1064,3 +1064,108 @@ python3 run_associate.py --alignment-dir output/alignment/mtdsp2_yantai_optical
 `tests/test_association.py`：旋转恒等/往返、零距、重叠不足、
 修正前后、锚泊跳过航向、运动航向否决、多对一、快照过滤）。
 
+
+---
+
+# 第六部分：光电观测导出到前端场景数据集（2026-11-26）
+
+## 问题
+
+前端 `apps/es-big-screen/public/water-security/data/` 里
+`devices.json` 声明了光电设备 E01，但 `tracks.json` 里**没有任何 E01 的源航迹**。
+于是「数据标准化」模块里光电永远显示 **0 条**，
+而「目标识别」模块与场景画面却把光电画成在正常工作的样子
+（视场锥在转、云台在跟），造成**演示层与数据层口径不一致**。
+
+根因不在前端渲染，而在**导出环节漏了光电这一路**：
+后端三源流水线（雷达 / AIS / 光电）本就���光电算得出来，
+前端数据集是当初只导雷达 + AIS（+ 声纳）时留下的子集。
+
+## 后端本来就有的光电数据
+
+| 环节 | 位置 | 规模 |
+|---|---|---|
+| 原始截图 | `data/mtdsp/Photo_ScreenShot_Inf_*.txt` | 276 个 |
+| AI 检测结果 | `data/mtdsp/*_DLDete.txt` | 92 个 |
+| 标准化 | `standardization/optical_photo_adapter.py` | 279 条记录 |
+| 空间可用 | `valid_for_spatial_alignment` | 141 条 |
+| 关联结论 | `output/.../optical_ais_accepted.csv` | Inf/TV 主轨 + det_1@TV 均 high |
+
+## 三项关键处理
+
+### 1. 方位系统差修正（+5.28°）
+
+光电设备有**恒定的方位零点偏差**：03-05 包 +5.681°、03-12 包 +5.439°，
+跨数据集极差仅 0.24° ⇒ 设备级常量。
+
+适配器**刻意不隐式补偿**（`optical_azimuth_bias_applied=false`），
+把这件事留给下游显式处理 —— 不修正的话，光电点迹会稳定偏在真值东侧约 350 m，
+页面上的光电航迹会与雷达/AIS 明显分叉，看起来就像「光电坏了」。
+
+`verify_optical_bias.py` 用**权威 AIS** 作真值参照实测该偏差：
+
+```
+实测方位偏差    : 中位 +5.292°  最小 +5.292°  最大 +5.292°
+平均残差：未修正 357.6 m → 修正后 5.1 m （改善 352.5 m）
+```
+
+### 2. Inf / TV 双设备并列观测
+
+光电转塔有 **Inf（红外）/ TV（可见光）两台相机**，共享同一个 `local_track_id`
+与同一时间戳，但**位置不同**（03-05 实测 138 组同时刻记录中 48 组位置不同，
+最大相距 727 m）。这是两次独立测量，不是重复记录。
+
+导出时按 `local_track_id` 分组，同一时刻取**离站心更近**的一条
+（距离量测相对误差更小），并按目标合并成一条 E01 源航迹
+（前端 `source_tracks` 的语义是「一个感知源在一个目标下的观测」，
+同一 `source_id` 只能有一条）。
+
+### 3. 超量程误检的剔除
+
+DLDete 的 AI 检测结果里有大量误检：距离散布到 28/45/234–350 km，
+置信度高达 0.81–0.94 **无法用置信度区分**。
+后端已按 `max_range_m = 20000 m` 标记 `optical_detection_out_of_range`，
+导出时只取 `alignment_status == "ok"` 的记录，误检在这里被自然过滤。
+
+## 运行
+
+```bash
+# 1) 跑三源流水线（标准化 → 对齐 → 航迹 → 重建 → 关联 → 主目标）
+python3 multisensor_system.py --scenario mtdsp_0305 --output-root output/system
+
+# 2) 实测方位偏差（可选，导出脚本的修正参数依据）
+python3 verify_optical_bias.py
+
+# 3) 导出到前端数据集
+python3 export_optical_to_frontend.py --dry-run   # 先看统计
+python3 export_optical_to_frontend.py             # 实际写入
+```
+
+脚本**幂等**：重复执行不会产生重复条目。
+
+## 效果
+
+| 指标 | 修复前 | 修复后 |
+|---|---|---|
+| 数据标准化 · 光电 | 0 条 | **46 条**（有效 46 / 异常 0） |
+| 时空对齐 · 光电 E01 | 无 | **1 段**，与雷达/AIS 同轨 |
+| 航迹关联 | 无光电列 | **光电航迹 E001**，R01-E01 距离 **1 m**（confirmed） |
+| 系统管理 · 当前关联目标 | 无 | **T001**，凝视链路 73% |
+| 场景画面 | 视场锥在转但无数据 | **EO 跟踪 T001** + 锁定框 + 视线 |
+
+光电与雷达在同一时刻的 ENU 坐标差 **0.8 m**（3.9 km 处），
+说明方位偏差修正到位。
+
+## 附带修复：设备类型命名不一致
+
+`devices.json` 里光电的类型写的是 `camera`，
+而前端 `pipeline.ts` / `chart-utils.ts` / `ModuleStd.vue` 用的是 `eo`
+（`KIND_LABEL` / `KIND_COLOR` 都没有 `camera` 这一项）。
+
+导出脚本统一改为 `eo`；前端三处也改为**同时接受** `eo` 与 `camera`，
+避免旧数据或第三方数据因命名不一致而丢失显示。
+
+## 附带确认：`t₀` 统一时刻仍单调
+
+新增光电源航迹后重新验证：303 个采样点上 `t₀` **回退 0 次**，
+保持单调不减 —— 之前修复的「按 (targetId, sourceId) 分组计数」依然有效。

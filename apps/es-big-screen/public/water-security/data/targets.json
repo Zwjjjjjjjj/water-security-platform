@@ -41,7 +41,8 @@
       "domain": "surface",
       "sources": [
         "R01",
-        "A01"
+        "A01",
+        "E01"
       ],
       "association_status": "confirmed",
       "active_from_ms": 0,
