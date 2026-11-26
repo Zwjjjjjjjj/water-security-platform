@@ -570,12 +570,28 @@ export function buildAlignModule(data: any, timeMs: number): AlignModule {
     }
   }
 
-  /* 每源每 12 条取 1 条做明细，控制渲染量 */
-  const perSource = new Map<string, number>()
+  /* 每源每 12 条取 1 条做明细，控制渲染量。
+   *
+   * 【为什么必须按「目标+源」分组计数】
+   * 早期实现只按 sourceId 计数（全局计数器），
+   * 于是「同一个源在不同目标下的样本」被混在同一条计数序列里。
+   * 当某个目标刚开始出现时，它的第 1 条样本是否被保留，
+   * 取决于该源此前**其它目标**累计了多少条 —— 是随机的。
+   *
+   * 后果：时间轴上「统一时刻 t₀」取的是子采样后各源样本时刻的中位数，
+   * 而这个中位数的样本集合每帧都在变（有的目标刚进来就被采掉、
+   * 有的目标刚好被采进来），于是中位数会**忽大忽小**，
+   * 表现为那条橙色竖线有时候往左跳几格、有时候又跳回来。
+   *
+   * 按 (targetId, sourceId) 计数后，每条源航迹的采样节奏相互独立且稳定，
+   * 采样集合只随时间单调增长，中位数随之单调不减。
+   */
+  const perGroup = new Map<string, number>()
   const sampled: AlignRow[] = []
   for (const r of rows) {
-    const c = perSource.get(r.sourceId) ?? 0
-    perSource.set(r.sourceId, c + 1)
+    const key = `${r.targetId}::${r.sourceId}`
+    const c = perGroup.get(key) ?? 0
+    perGroup.set(key, c + 1)
     if (c % 12 !== 0) continue
     sampled.push(r)
   }
